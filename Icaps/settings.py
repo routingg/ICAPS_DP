@@ -13,12 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
-OPENAI_API_KEY = local_settings.OPENAI_API_KEY
+DEBUG = False
+SECRET_KEY = 'django-insecure-for-development-only'
+OPENAI_API_KEY = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = local_settings.SECRET_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = local_settings.DEBUG
-
-ALLOWED_HOSTS = local_settings.ALLOWED_HOSTS
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railway.app',  # Railway 도메인
+    '.up.railway.app',  # Railway 새 도메인 형식
+]
 
 
 # Application definition
@@ -141,3 +137,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 보안 설정 (Railway 배포시에만)
+if not DEBUG and os.environ.get('RAILWAY_ENVIRONMENT'):
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
