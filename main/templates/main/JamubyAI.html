@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jamu by AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      background-color: #fdfcf8;
+    }
+
+    nav {
+      background-color: #0C1214;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
+      font-family: 'Alkatra', cursive;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+
+    /* AI Recommendation Form */
+    section#ai-recommendation {
+      max-width: 700px;
+      margin: 3em auto;
+      padding: 2em;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .field-group {
+      margin-bottom: 2em;
+    }
+
+    .field-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em;
+    }
+
+    .tag {
+      padding: 0.6em 1.2em;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background-color: #f8f8f8;
+      color: #333;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .tag.selected {
+      background-color: #ffa500;
+      color: white;
+      border-color: #ffa500;
+    }
+
+    button {
+      margin-top: 1em;
+      padding: 1em;
+      background-color: #ffa500;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #e59400;
+    }
+
+    #jamu-result {
+      margin-top: 2em;
+      text-align: center;
+      padding: 1.5em;
+      border-radius: 12px;
+      background-color: #fff9e8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    #jamu-result img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1em;
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ffa500;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 2em auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Order</a></li>
+      <li><a href="#">About Jamu</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Language</a></li>
+    </ul>
+  </nav>
+
+  <!-- Jamu by AI Section -->
+  <section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
+    <h2>🌿 Jamu by AI</h2>
+    <p>Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
+
+    <form id="jamu-form">
+      <div class="field-group">
+        <label>How do you feel today?</label>
+        <div class="tag-container" data-name="mood">
+          <div class="tag">Tired</div>
+          <div class="tag">Too Hot</div>
+          <div class="tag">A bit Sick</div>
+          <div class="tag">Energized</div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>What's your travel style?</label>
+        <div class="tag-container" data-name="style">
+          <div class="tag">Relaxing</div>
+          <div class="tag">Adventurous</div>
+          <div class="tag">Cultural</div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>What's the weather like?</label>
+        <div class="tag-container" data-name="weather">
+          <div class="tag">Hot</div>
+          <div class="tag">Cool</div>
+          <div class="tag">Rainy</div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Symptoms or Interests</label>
+        <div class="tag-container" data-name="symptom">
+          <div class="tag">Cold Symptoms</div>
+          <div class="tag">Low Energy</div>
+          <div class="tag">Women's Health</div>
+          <div class="tag">Better Sleep</div>
+          <div class="tag">Indigestion</div>
+          <div class="tag">Stress Relief</div>
+          <div class="tag">Jamu History</div>
+          <div class="tag">Beras Kencur</div>
+        </div>
+      </div>
+
+      <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Jamu</button>
+    </form>
+
+    <div id="jamu-result"></div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    const tagContainers = document.querySelectorAll('.tag-container');
+
+    tagContainers.forEach(container => {
+      const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+      container.querySelectorAll('.tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          if (isSingleChoice) {
+            container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+          }
+          tag.classList.toggle('selected');
+        });
+      });
+    });
+
+    function recommendJamu() {
+      const resultDiv = document.getElementById("jamu-result");
+      resultDiv.innerHTML = `<div class="loader"></div>`;
+
+      setTimeout(() => {
+        const jamuList = [
+          {
+            name: "Beras Kencur",
+            desc: "Boost your energy with this sweet and spicy rice-herb jamu.",
+            img: "{% static 'c2/images/BerasKencur.jpg' %}"
+          },
+          {
+            name: "Kunyit Asam",
+            desc: "Turmeric & tamarind jamu to refresh your body and mind.",
+            img: "{% static 'c2/images/KunyitAsem.png' %}"
+          },
+          {
+            name: "Temulawak",
+            desc: "A classic jamu for digestion and immunity.",
+            img: "{% static 'c2/images/Temulawak.jpg' %}"
+          }
+        ];
+
+        const randomIndex = Math.floor(Math.random() * jamuList.length);
+        const jamu = jamuList[randomIndex];
+
+        resultDiv.innerHTML = `
+          <img src="${jamu.img}" alt="${jamu.name}">
+          <h3>✨ Your Recommended Jamu: ${jamu.name}</h3>
+          <p>${jamu.desc}</p>
+          <button style="font-family: 'Alkatra', cursive;">Order Now</button>
+        `;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Your Blend</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      background-color: #fdfcf8;
+    }
+
+    nav {
+      background-color: #0C1214;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
+      font-family: 'Alkatra', cursive;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+
+    section#custom-blend {
+      max-width: 1000px;
+      margin: 4em auto;
+      padding: 2em;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-family: 'Alkatra', cursive;
+    }
+
+    h2, p {
+      text-align: center;
+    }
+
+    #ingredient-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2em;
+      margin-top: 2em;
+    }
+
+    .ingredient-card {
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .ingredient-card.selected {
+      border-color: #ffa500;
+    }
+
+    .ingredient-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .ingredient-card .content {
+      padding: 1em;
+    }
+
+    .ingredient-card h4 {
+      margin: 0 0 0.5em;
+    }
+
+    .ingredient-card .blend-label {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background-color: #ffa500;
+      color: white;
+      padding: 0.3em 0.8em;
+      border-radius: 20px;
+      font-size: 0.8em;
+      display: none;
+    }
+
+    .ingredient-card.selected .blend-label {
+      display: inline-block;
+    }
+
+    #blend-name-input {
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    #blend-name-input input {
+      padding: 0.7em;
+      width: 70%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Playfair Display', serif;
+    }
+
+    button {
+      margin-top: 1.5em;
+      padding: 1em 2em;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      cursor: pointer;
+      font-family: 'Alkatra', cursive;
+    }
+
+    #blend-result {
+      text-align: center;
+      margin-top: 2.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Order</a></li>
+      <li><a href="#">About Jamu</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Language</a></li>
+    </ul>
+  </nav>
+
+  <!-- Create Your Blend Section -->
+  <section id="custom-blend">
+    <h2>🌺 Create Your Blend</h2>
+    <p>Choose your favorite Jamu ingredients and name your own travel-inspired blend.</p>
+
+    <div id="ingredient-list"></div>
+
+    
+
+    <div style="text-align: center;">
+      <button onclick="createBlend()">Create My Jamu</button>
+    </div>
+
+    <div id="blend-result"></div>
+  </section>
+
+  <script>
+    const ingredients = [
+      { name: "Turmeric", desc: "Anti-inflammatory and antioxidant.", img: "{% static 'c2/images/Turmeric.png' %}" },
+      { name: "Ginger", desc: "Cold relief and digestive aid.", img: "{% static 'c2/images/ginger.jpg' %}" },
+      { name: "Galangal", desc: "Relieves cough and body aches.", img: "{% static 'c2/images/Galangal.jpg' %}" },
+      { name: "Tamarind", desc: "Sourness & digestive help.", img: "{% static 'c2/images/Tamarind.jpg' %}" },
+      { name: "Temulawak", desc: "Liver and immunity support.", img: "{% static 'c2/images/Temulawak_low.jpg' %}" },
+      { name: "Palm Sugar", desc: "Natural sweetness & minerals.", img: "{% static 'c2/images/PalmSugar.png' %}" },
+      { name: "Lime", desc: "Vitamin C & freshness.", img: "{% static 'c2/images/Lime.jpg' %}" },
+      { name: "Lemongrass", desc: "Aroma and digestion benefits.", img: "{% static 'c2/images/Lemongrass.jpg' %}" },
+      { name: "Cinnamon", desc: "Regulates sugar, adds warmth.", img: "{% static 'c2/images/Cinnamon.jpg' %}" },
+      { name: "Cardamom", desc: "Digestive spice with rich aroma.", img: "{% static 'c2/images/Cardamom.jpg' %}" },
+    ];
+
+    const selected = [];
+
+    function renderIngredients() {
+      const container = document.getElementById("ingredient-list");
+      container.innerHTML = "";
+      ingredients.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "ingredient-card";
+        card.setAttribute("data-name", item.name);
+        card.innerHTML = `
+          <div class="blend-label">${item.name}</div>
+          <img src="${item.img}" alt="${item.name}">
+          <div class="content">
+            <h4>${item.name}</h4>
+            <p>${item.desc}</p>
+          </div>
+        `;
+        card.addEventListener("click", () => toggleIngredient(item.name, card));
+        container.appendChild(card);
+      });
+    }
+
+    function toggleIngredient(name, card) {
+      const index = selected.indexOf(name);
+      if (index > -1) {
+        selected.splice(index, 1);
+        card.classList.remove("selected");
+      } else {
+        if (selected.length >= 5) {
+          alert("You can select up to 5 ingredients only.");
+          return;
+        }
+        selected.push(name);
+        card.classList.add("selected");
+      }
+    }
+
+    function createBlend() {
+      const result = document.getElementById("blend-result");
+      if (selected.length === 0) {
+        result.innerHTML = "<p>Please select at least one ingredient.</p>";
+        return;
+      }
+      result.innerHTML = `
+        <h3>🌸 My Signature Jamu</h3>
+        <p>Includes: <strong>${selected.join(", ")}</strong></p>
+        <p>Enjoy your personalized Jamu for your next journey!</p>
+        <img src="{% static 'c2/images/jamuup.png' %}" alt="My Jamu" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
+      `;
+    }
+
+
+    
+
+    renderIngredients();
+  </script>
+</body>
+</html>

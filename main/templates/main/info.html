@@ -1,0 +1,568 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jamu by AI</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+
+  <!-- Style -->
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      background-color: #fdfcf8;
+      color: #333;
+    }
+
+    nav {
+      background-color: #0C1214;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
+      font-family: 'Alkatra', cursive;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+
+    section {
+      padding: 4em 2em;
+    }
+
+    /* 모든 섹션 제목을 통일된 크기로 설정 */
+    h2, h3, h4 {
+      font-family: 'Alkatra', cursive;
+      color: #0C1214;
+    }
+
+    /* 메인 섹션 제목들 통일 */
+    #main h2,
+    .carousel h2,
+    .top-drinks-header h2 {
+      font-family: 'Alkatra', cursive;
+      font-size: 2.5em;
+      color: #0C1214;
+      margin-bottom: 0.5em;
+    }
+
+    .wrapper {
+      background-color: #ffffff;
+      border-radius: 16px;
+      margin: 2em auto;
+      padding: 2em;
+      max-width: 1000px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .image.featured img {
+      border-radius: 20px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    a.button {
+      background-color: #ffa500;
+      color: white;
+      padding: 0.8em 1.4em;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    a.button:hover {
+      background-color: #e59400;
+    }
+
+    footer {
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    /* 캐러셀 스타일 */
+    .carousel {
+      position: relative;
+      padding: 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .carousel .reel {
+      display: flex;
+      gap: 1.5em;
+      padding: 1em 0;
+      transition: transform 0.5s ease;
+      width: max-content;
+    }
+
+    .carousel article {
+      background-color: #ffffff;
+      border-radius: 16px;
+      min-width: 260px;
+      max-width: 260px;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 1.2em;
+      text-align: center;
+    }
+
+    .carousel article img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1em;
+    }
+
+    .carousel article h3 {
+      font-family: 'Alkatra', cursive;
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+      color: #0C1214;
+    }
+
+    .carousel article p {
+      font-size: 0.95em;
+      line-height: 1.5em;
+      color: #666;
+    }
+
+    .carousel-wrapper button.prev,
+    .carousel-wrapper button.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 0.8em 1em;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-wrapper button.prev:hover,
+    .carousel-wrapper button.next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .carousel-wrapper button.prev {
+      left: 10px;
+    }
+
+    .carousel-wrapper button.next {
+      right: 10px;
+    }
+
+    /* Top 3 Representative Jamu Drinks 새로운 스타일 */
+    .top-drinks-section {
+      padding: 4em 2em;
+      background-color: #fdfcf8;
+    }
+
+    .top-drinks-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .top-drinks-header {
+      margin-bottom: 3em;
+    }
+
+    .top-drinks-header p {
+      font-size: 1.2em;
+      color: #666;
+      font-style: italic;
+    }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2em;
+      margin-top: 3em;
+    }
+
+    .drink-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .drink-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .drink-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .drink-card:hover .drink-image {
+      transform: scale(1.05);
+    }
+
+    .drink-info {
+      padding: 2em;
+      text-align: left;
+    }
+
+    .drink-info h3 {
+      font-family: 'Alkatra', cursive;
+      font-size: 1.8em;
+      color: #0C1214;
+      margin-bottom: 1em;
+    }
+
+    .drink-info p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 1.5em;
+    }
+
+    .drink-benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+      margin-bottom: 1.5em;
+    }
+
+    .benefit-tag {
+      background-color: #ffa500;
+      color: white;
+      padding: 0.3em 0.8em;
+      border-radius: 15px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    .drink-description {
+      font-size: 1em;
+      line-height: 1.5;
+      color: #666;
+      text-align: justify;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      .drinks-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5em;
+      }
+      
+      .drink-card {
+        margin: 0 1em;
+      }
+      
+      /* 모바일에서 제목 크기 조정 */
+      #main h2,
+      .carousel h2,
+      .top-drinks-header h2 {
+        font-size: 2em;
+      }
+      
+      .carousel article {
+        min-width: 220px;
+        max-width: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/order">Order</a></li>
+      <li><a href="/info">About Jamu</a></li>
+      <li><a href="/ourstory">Our Story</a></li>
+      <li><a href="#">Language</a></li>
+    </ul>
+  </nav>
+
+  <!-- Banner -->
+  <section id="banner" style="text-align:center; margin: 0 0;">
+    <header>
+      <h2 style="font-size: 2.5em;">Hi. <br>You're looking at <strong>Jamu</strong>.</h2>
+      <p>Discover more about Jamu</p>
+    </header>
+  </section>
+
+  <!-- Main: Introduction -->
+  <div class="wrapper" style="margin-top: 1px;">
+    <article id="main" class="container special" style="text-align:center;">
+      <a href="#" class="image featured">
+        <img src="{% static 'c2/images/jamu_main.png' %}" alt="Main Jamu Image" width="300" height="200"/>
+      </a>
+      <header>
+        <h2>Indonesian Traditional Medicine: Jamu</h2>
+        <p>Jamu culture represents precious family heritage passed down from grandmother to mother, and mother to daughter.</p>
+      </header>
+      <p>
+        Jamu is a form of herbal medicine and treatment that has been practiced in Indonesia since the eighth century,
+        inscribed in 2023 on the Representative List of the Intangible Cultural Heritage of Humanity by UNESCO.
+        It is based on the belief of curing hot diseases with medicines of a cold nature,
+        and cold diseases with medicines of a hot nature, with a healthy condition being a balance between hot and cold elements in the body.
+        Jamu aims to increase immunity and maintain health.
+      </p>
+      <footer>
+        <a href="/order" class="button">Order Jamu</a>
+      </footer>
+    </article>
+  </div>
+
+  <!-- Carousel: Jamu Components -->
+  <section class="carousel">
+    <header>
+      <h2 style="text-align:center;">Nature's Pharmacy: Jamu Components</h2>
+    </header>
+    <div class="carousel-wrapper">
+      <button class="prev">&#10094;</button>
+      <div class="reel">
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Turmeric.png' %}" alt="Turmeric" /></a>
+          <header><h3>Turmeric (Kunyit)</h3></header>
+          <p>The golden rhizome that serves as Jamu's core ingredient with excellent anti-inflammatory and antioxidant.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/ginger.jpg' %}" alt="Ginger" /></a>
+          <header><h3>Ginger (Jahe)</h3></header>
+          <p>A warming spice effective for cold relief, digestive stimulation, and body temperature regulation.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Galangal.jpg' %}" alt="Galangal" /></a>
+          <header><h3>Galangal (Kencur)</h3></header>
+          <p>Traditional Indonesian herb that shows excellent effectiveness in relieving cough and body aches.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Tamarind.jpg' %}" alt="Tamarind" /></a>
+          <header><h3>Tamarind (Asem)</h3></header>
+          <p>Tropical fruit that provides digestive improvement and refreshing sourness, balancing the Jamu flavors.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Temulawak_low.jpg' %}" alt="Temulawak" /></a>
+          <header><h3>Temulawak</h3></header>
+          <p>A type of Javanese traditional turmeric that supports liver health and immunity enhancement.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/PalmSugar.png' %}" alt="Palm Sugar" /></a>
+          <header><h3>Palm Sugar (Gula Merah)</h3></header>
+          <p>Natural sweetener and mineral source that adds authentic sweetness to Jamu preparations.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Lime.jpg' %}" alt="Lime" /></a>
+          <header><h3>Lime (Jeruk Nipis)</h3></header>
+          <p>Rich in vitamin C and freshness, completing the taste and nutritional profile of Jamu drinks.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Lemongrass.jpg' %}" alt="Lemongrass" /></a>
+          <header><h3>Lemongrass (Serai)</h3></header>
+          <p>Herb that provides subtle aroma and digestive benefits, giving Jamu a clean and refreshing aftertaste.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cinnamon.jpg' %}" alt="Cinnamon" /></a>
+          <header><h3>Cinnamon (Kayu Manis)</h3></header>
+          <p>Offers blood sugar regulation and antioxidant effects while adding warm, sweet fragrance to Jamu.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cardamom.jpg' %}" alt="Cardamom" /></a>
+          <header><h3>Cardamom (Kapulaga)</h3></header>
+          <p>Effective spice for digestive stimulation and breath freshening, providing premium aroma to Jamu blends.</p>
+        </article>
+      </div>
+      <button class="next">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Top 3 Representative Jamu Drinks - 새로운 스타일 -->
+  <section class="top-drinks-section">
+    <div class="top-drinks-container">
+      <div class="top-drinks-header">
+        <h2>Top 3 Representative Jamu Drinks</h2>
+        <p>Discover the balance of body and mind through nature's healing power</p>
+      </div>
+      
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="Beras Kencur" class="drink-image" />
+          <div class="drink-info">
+            <h3>Beras Kencur</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Energy Boost</span>
+              <span class="benefit-tag">Fatigue Relief</span>
+              <span class="benefit-tag">Pain Relief</span>
+            </div>
+            <p class="drink-description">Beras Kencur is an energizing Indonesian herbal drink made from rice, galangal, ginger, and turmeric that provides natural energy boost and relieves fatigue, cough, and body aches with its sweet, refreshing taste and mild spicy kick.</p>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="Kunyit Asem" class="drink-image" />
+          <div class="drink-info">
+            <h3>Kunyit Asem</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Digestive Health</span>
+              <span class="benefit-tag">Menstrual Relief</span>
+              <span class="benefit-tag">Detox</span>
+            </div>
+            <p class="drink-description">Kunyit Asem is a digestive harmony drink featuring turmeric, tamarind, and palm sugar that improves digestion, regulates menstruation, and relieves stomach issues with its perfectly balanced tangy-sweet flavor enhanced by subtle turmeric aroma.</p>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="Temulawak" class="drink-image" />
+          <div class="drink-info">
+            <h3>Temulawak</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Liver Health</span>
+              <span class="benefit-tag">Immunity Boost</span>
+              <span class="benefit-tag">Relaxation</span>
+            </div>
+            <p class="drink-description">Temulawak is a relaxation and recovery drink made from Javanese turmeric, regular turmeric, and ginger that promotes stress relief, better sleep, and immunity boost with its complex bitter-sweet flavor that embodies nature's healing power.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const reel = document.querySelector('.carousel .reel');
+      const prevBtn = document.querySelector('.carousel-wrapper .prev');
+      const nextBtn = document.querySelector('.carousel-wrapper .next');
+      
+      let currentIndex = 0;
+      const itemWidth = 280; // 카드 너비 + 여백
+      const itemsToShow = Math.floor(window.innerWidth / itemWidth);
+      const totalItems = reel.children.length;
+      const maxIndex = Math.max(0, totalItems - itemsToShow);
+
+      function updateCarousel() {
+        const translateX = -currentIndex * itemWidth;
+        reel.style.transform = `translateX(${translateX}px)`;
+        
+        // 버튼 상태 업데이트
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+      }
+
+      // 이전 버튼 클릭
+      prevBtn.addEventListener("click", function () {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      // 다음 버튼 클릭
+      nextBtn.addEventListener("click", function () {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      // 자동 슬라이드
+      let autoSlideInterval = setInterval(function() {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+        } else {
+          currentIndex = 0;
+        }
+        updateCarousel();
+      }, 3000);
+
+      // 마우스 hover 시 자동 슬라이드 정지
+      reel.addEventListener("mouseenter", () => {
+        clearInterval(autoSlideInterval);
+      });
+
+      reel.addEventListener("mouseleave", () => {
+        autoSlideInterval = setInterval(function() {
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+          } else {
+            currentIndex = 0;
+          }
+          updateCarousel();
+        }, 3000);
+      });
+
+      // 반응형 대응
+      window.addEventListener('resize', function() {
+        currentIndex = 0;
+        updateCarousel();
+      });
+
+      // 초기 설정
+      updateCarousel();
+    });
+  </script>
+
+  <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
+
+</body>
+</html>

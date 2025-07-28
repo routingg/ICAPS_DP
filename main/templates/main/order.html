@@ -1,0 +1,511 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    	<link
+      		rel="stylesheet"
+      		as="style"
+      		onload="this.rel='stylesheet'"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+      		<!-- <!-- href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"/>  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+			<title>Helios by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+		<style>
+  			.custom-jamu-btn {
+  			  font-family: 'Alkatra', sans-serif;
+  			  font-weight: bold;
+  			  background-color: #EB6E12;
+  			  color: white;
+  			  transition: background-color 0.3s ease;
+  		}
+	
+  			.custom-jamu-btn:hover {
+  			  background-color: #0C1214;
+  			  color: #EB6E12;
+  			  text-decoration: none;
+  			
+  		}
+		</style>
+
+		<style>
+
+    section#order {
+      text-align: center;
+      padding: 3em 1em;
+	  background-color: #fdfcf8;
+    }
+
+    section#order h2 {
+      font-size: 2.5em;
+      margin-bottom: 2em;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .grid-item.full {
+      background: #fff;
+      border-radius: 16px;
+      padding: 6em;
+      font-size: 1.3em;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .grid-item.full:hover {
+      transform: scale(1.02);
+      background-color: #f7f3ed;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+    }
+
+    .grid-item {
+      background: #fff;
+      border-radius: 16px;
+      padding: 4em;
+      font-size: 1.1em;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+	  position: relative;       /* 오버레이 위치 기준 */
+  	  overflow: hidden;         /* 이미지 넘침 방지 */
+  	  z-index: 0;               /* 텍스트가 위로 오도록 */
+  	  color: white;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.03);
+      background-color: #f7f3ed;
+    }
+
+	.grid-item::before {
+ 	 content: '';
+ 	 position: absolute;
+ 	 inset: 0;
+ 	 background-color: rgba(0, 0, 0, 0.4); /* 어둡게 덮는 투명 검정 */
+ 	 z-index: -1; /* 텍스트보다 아래 */
+	}
+
+
+	.grid-item:hover::before {
+	  background-color: rgba(0, 0, 0, 0.6); /* 호버 시 더 어둡게 */
+	}
+    @media (max-width: 768px) {
+      .row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+	.grid-item.full {
+	  background-image: url('{% static "c2/images/jamu2.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-recommend {
+	  background-image: url('{% static "c2/images/recommend.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-custom {
+	  background-image: url('{% static "c2/images/custom.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-fortune {
+	  background-image: url('{% static "c2/images/fortune.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+
+
+  </style>
+
+    <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      background-color: #fdfcf8;
+    }
+
+    nav {
+      background-color: #0C1214;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
+      font-family: 'Alkatra', cursive;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+
+    /* AI Recommendation Form */
+    section#ai-recommendation {
+      max-width: 700px;
+      margin: 3em auto;
+      padding: 2em;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .field-group {
+      margin-bottom: 2em;
+    }
+
+    .field-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em;
+    }
+
+    .tag {
+      padding: 0.6em 1.2em;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background-color: #f8f8f8;
+      color: #333;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .tag.selected {
+      background-color: #ffa500;
+      color: white;
+      border-color: #ffa500;
+    }
+
+    button {
+      margin-top: 1em;
+      padding: 1em;
+      background-color: #ffa500;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #e59400;
+    }
+
+    #jamu-result {
+      margin-top: 2em;
+      text-align: center;
+      padding: 1.5em;
+      border-radius: 12px;
+      background-color: #fff9e8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    #jamu-result img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1em;
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ffa500;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 2em auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+
+		
+		
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper"
+		>
+
+			
+
+				
+
+
+
+					  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/order">Order</a></li>
+      <li><a href="/info">About Jamu</a></li>
+      <li><a href="/ourstory">Our Story</a></li>
+      <li><a href="#">Language</a></li>
+    </ul>
+  </nav>
+
+			
+
+
+				<section id="order">
+    		<h2 style="font-family: 'Alkatra', sans-serif; font-weight: bold;" >Order</h2>
+
+    		<div class="grid-container" style="font-family: 'Alkatra', sans-serif;">
+    		  <div class="grid-item full"><a href="/order">How To Order</a></div>
+
+    		  <div class="row-3">
+    		    <div class="grid-item card-recommend"><a href="/JamubyAI">Jamu By AI</a></div>
+    		    <div class="grid-item card-custom"><a href="/CreateYourBlend">Create Your Blend</a></div>
+    		    <div class="grid-item card-fortune"><a href="/chatbot">Jamu Chatbot</a></div>
+    		  </div>
+    		</div>
+
+			<br><br><br><br><br><br><br><br>
+		</section>
+
+
+
+
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+
+							<!-- Tweets -->
+								<section class="col-4 col-12-mobile">
+									<header>
+										<h2 class="icon brands fa-twitter circled"><span class="label">Tweets</span></h2>
+									</header>
+									<ul class="divided">
+										<li>
+											<article class="tweet">
+												Amet nullam fringilla nibh nulla convallis tique ante sociis accumsan.
+												<span class="timestamp">5 minutes ago</span>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												Hendrerit rutrum quisque.
+												<span class="timestamp">30 minutes ago</span>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												Curabitur donec nulla massa laoreet nibh. Lorem praesent montes.
+												<span class="timestamp">3 hours ago</span>
+											</article>
+										</li>
+										<li>
+											<article class="tweet">
+												Lacus natoque cras rhoncus curae dignissim ultricies. Convallis orci aliquet.
+												<span class="timestamp">5 hours ago</span>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+							<!-- Posts -->
+								<section class="col-4 col-12-mobile">
+									<header>
+										<h2 class="icon solid fa-file circled"><span class="label">Posts</span></h2>
+									</header>
+									<ul class="divided">
+										<li>
+											<article class="post stub">
+												<header>
+													<h3><a href="#">Nisl fermentum integer</a></h3>
+												</header>
+												<span class="timestamp">3 hours ago</span>
+											</article>
+										</li>
+										<li>
+											<article class="post stub">
+												<header>
+													<h3><a href="#">Phasellus portitor lorem</a></h3>
+												</header>
+												<span class="timestamp">6 hours ago</span>
+											</article>
+										</li>
+										<li>
+											<article class="post stub">
+												<header>
+													<h3><a href="#">Magna tempus consequat</a></h3>
+												</header>
+												<span class="timestamp">Yesterday</span>
+											</article>
+										</li>
+										<li>
+											<article class="post stub">
+												<header>
+													<h3><a href="#">Feugiat lorem ipsum</a></h3>
+												</header>
+												<span class="timestamp">2 days ago</span>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+							<!-- Photos -->
+								<section class="col-4 col-12-mobile">
+									<header>
+										<h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>
+									</header>
+									<div class="row gtr-25">
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic10.jpg' %}" alt="" /></a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic11.jpg' %}" alt="" /></a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic12.jpg' %}" alt="" /></a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic13.jpg' %}" alt="" /></a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic14.jpg' %}" alt="" /></a>
+										</div>
+										<div class="col-6">
+											<a href="#" class="image fit"><img src="{% static 'c2/images/pic15.jpg' %}" alt="" /></a>
+										</div>
+									</div>
+								</section>
+
+						</div>
+						<hr />
+						<div class="row">
+							<div class="col-12">
+
+								<!-- Contact -->
+									<section class="contact">
+										<header>
+											<h3>Nisl turpis nascetur interdum?</h3>
+										</header>
+										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+										<ul class="icons">
+											<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
+											<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+											<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+										</ul>
+									</section>
+
+								<!-- Copyright -->
+									<div class="copyright">
+										<ul class="menu">
+											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/util.js' %}"></script>
+			<script src="{% static 'c2/assets/js/main.js' %}"></script>
+
+
+			<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"
+    />
+
+    
+</html>
+
+
+	</body>
+</html>
