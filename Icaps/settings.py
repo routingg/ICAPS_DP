@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import local_settings
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
 
 OPENAI_API_KEY = local_settings.OPENAI_API_KEY
 
