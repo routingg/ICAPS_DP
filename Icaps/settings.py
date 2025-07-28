@@ -132,10 +132,7 @@ STATIC_URL = '/static/'
 # 정적 파일 루트 (collectstatic 용)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # 배포용
 
-# 개발 중 사용할 정적 파일 경로들
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # 여기에 assets, c1~c4 전부 포함됨
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main', 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
