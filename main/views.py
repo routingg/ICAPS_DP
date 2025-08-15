@@ -214,7 +214,7 @@ Response Guidelines:
 - Recommend medical consultation when necessary
 - Use a friendly and helpful tone in conversation
 - Explain cultural background and significance of jamu
-- Please respond in English and do not use emojis
+- Ask for it, and answer it in the language you use
 
 Response Format Guidelines:
 - Use clear paragraphs with line breaks for readability
