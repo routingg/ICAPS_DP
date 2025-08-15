@@ -12,23 +12,21 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
-DEBUG = True
-SECRET_KEY = 'django-insecure-wtbq^s!phvholku2i8*9@!&5gac65e#op-@l5la$y632a-&*n)'
-OPENAI_API_KEY = None
+# 환경변수에서 설정값 읽기
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-wtbq^s!phvholku2i8*9@!&5gac65e#op-@l5la$y632a-&*n)')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.railway.app',  # Railway 도메인
-    '.up.railway.app',  # Railway 새 도메인 형식
+    '.railway.app',
+    '.up.railway.app',
 ]
 
 
@@ -83,12 +81,17 @@ WSGI_APPLICATION = 'Icaps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

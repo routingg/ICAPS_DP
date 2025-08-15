@@ -192,48 +192,44 @@ def chatbot_api(request):
                     'status': 'error'
                 }, status=400)
             
-            # API 키 확인
-            if not settings.OPENAI_API_KEY or settings.OPENAI_API_KEY == 'your-api-key-here':
-                # API 키가 없으면 테스트용 응답 사용
+            # API 키 및 클라이언트 확인
+            if not settings.OPENAI_API_KEY or not client:
+                logger.warning("OpenAI API key not available, using fallback")
                 return chatbot_api_fallback_response(user_message)
             
             # 자무 전문 시스템 프롬프트 (지식베이스 포함)
             jamu_system_prompt = f"""You are an expert in Jamu, traditional Indonesian herbal medicine.
 Please provide accurate and helpful answers based on the Jamu knowledge below.
 {JAMU_KNOWLEDGE_BASE}
+
 Response Guidelines:
-
-Provide accurate information based on the knowledge above
-When recommending jamu, ONLY suggest one of these three main options:
-
-Beras Kencur (for energy, cough, fatigue, morning boost)
-Kunyit Asem (for digestion, women's health, stomach issues, menstruation)
-Temulawak (for stress, sleep, liver health, recovery)
-
-
-Choose the most appropriate one from these three based on user's symptoms
-Include both Indonesian and English names for ingredients
-Provide practical preparation and consumption methods
-Recommend medical consultation when necessary
-Use a friendly and helpful tone in conversation
-Explain cultural background and significance of jamu
-Please respond in English and do not use emojis
+- Provide accurate information based on the knowledge above
+- When recommending jamu, ONLY suggest one of these three main options:
+  * Beras Kencur (for energy, cough, fatigue, morning boost)
+  * Kunyit Asem (for digestion, women's health, stomach issues, menstruation)
+  * Temulawak (for stress, sleep, liver health, recovery)
+- Choose the most appropriate one from these three based on user's symptoms
+- Include both Indonesian and English names for ingredients
+- Provide practical preparation and consumption methods
+- Recommend medical consultation when necessary
+- Use a friendly and helpful tone in conversation
+- Explain cultural background and significance of jamu
+- Please respond in English and do not use emojis
 
 Response Format Guidelines:
-
-Use clear paragraphs with line breaks for readability
-Avoid using markdown formatting like **, ##, or bullet points
-Present information in flowing, conversational sentences
-Group related information together in short paragraphs
-Use simple text formatting without special characters
-Make responses easy to read in a chat interface
+- Use clear paragraphs with line breaks for readability
+- Avoid using markdown formatting like **, ##, or bullet points
+- Present information in flowing, conversational sentences
+- Group related information together in short paragraphs
+- Use simple text formatting without special characters
+- Make responses easy to read in a chat interface
 
 IMPORTANT: Always recommend only one of the three main jamu drinks (Beras Kencur, Kunyit Asem, or Temulawak) regardless of the user's question. Do not suggest other jamu varieties.
 Always provide polite and helpful responses."""
             
-            # 새로운 OpenAI v1.0+ API 호출 방식
+            # OpenAI API 호출
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",  # 또는 "gpt-4"
+                model="gpt-3.5-turbo",
                 messages=[
                     {
                         "role": "system", 
@@ -244,14 +240,14 @@ Always provide polite and helpful responses."""
                         "content": user_message
                     }
                 ],
-                max_tokens=300,  # 더 긴 답변을 위해 토큰 수 증가
+                max_tokens=300,
                 temperature=0.7,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
             )
             
-            # API 응답에서 메시지 추출 (새로운 방식)
+            # API 응답에서 메시지 추출
             ai_response = response.choices[0].message.content.strip()
             
             return JsonResponse({
@@ -260,16 +256,15 @@ Always provide polite and helpful responses."""
             })
             
         except Exception as e:
-            # v1.0+에서는 에러 처리 방식이 변경됨
             error_message = str(e)
             logger.error(f"OpenAI API 오류: {error_message}")
             
-            # API 키 문제인 경우 테스트용 응답 사용
+            # API 키 인증 문제인 경우
             if "401" in error_message or "authentication" in error_message.lower() or "api_key" in error_message.lower():
                 logger.warning("API 키 문제 발생, 테스트용 응답 사용")
                 return chatbot_api_fallback_response(user_message)
             
-            # 구체적인 에러 타입별 처리
+            # 요청 제한 또는 할당량 문제
             if "rate_limit" in error_message.lower() or "quota" in error_message.lower():
                 response_msg = '현재 요청이 많아 잠시 후에 다시 시도해주세요.'
             else:
@@ -284,9 +279,11 @@ Always provide polite and helpful responses."""
             return JsonResponse({
                 'response': '잘못된 요청 형식입니다.',
                 'status': 'error'
-            })
+            }, status=400)
     
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+    return JsonResponse({
+        'error': 'Invalid request method'
+    }, status=405)
 
 
 def chatbot_api_fallback_response(user_message):
