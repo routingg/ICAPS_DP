@@ -223,6 +223,7 @@ Response Format Guidelines:
 - Group related information together in short paragraphs
 - Use simple text formatting without special characters
 - Make responses easy to read in a chat interface
+- Any response is within five lines
 
 IMPORTANT: Always recommend only one of the three main jamu drinks (Beras Kencur, Kunyit Asem, or Temulawak) regardless of the user's question. Do not suggest other jamu varieties.
 Always provide polite and helpful responses."""
