@@ -3,51 +3,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jamu by AI</title>
+  <title>About Jamu</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
 
+  
+
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
+
   <!-- Style -->
   <style>
     body {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Alkatra', serif;
       margin: 0;
       background-color: #fdfcf8;
       color: #333;
     }
 
-    nav {
-      background-color: #0C1214;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70px;
-      font-family: 'Alkatra', cursive;
-      font-weight: bold;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: #ffa500;
-    }
+    
 
     section {
       padding: 4em 2em;
@@ -193,6 +174,8 @@
       right: 10px;
     }
 
+    
+
     /* Top 3 Representative Jamu Drinks 새로운 스타일 */
     .top-drinks-section {
       padding: 4em 2em;
@@ -222,13 +205,37 @@
       margin-top: 3em;
     }
 
-    .drink-card {
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(12px, 3vw, 24px);
+          
+      /* 좌우 대칭 패딩 + 가운데 정렬 */
+      max-width: 1500px;
+      margin-inline: auto;                  /* 수평 중앙 */
+      padding-inline: clamp(16px, 4vw, 24px);
+    }
+
+    /* .drink-card {
       background-color: #ffffff;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+    } */
+
+    .drink-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+    
+      width: 100%;
+      max-width: 360px;                     /* 상한만 주고 */
+      margin-inline: auto;                  /* 단일 컬럼일 때도 가운데 */
     }
 
     .drink-card:hover {
@@ -315,21 +322,33 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/order">Order</a></li>
-      <li><a href="/info">About Jamu</a></li>
-      <li><a href="/ourstory">Our Story</a></li>
-      <li><a href="#">Language</a></li>
-    </ul>
-  </nav>
+
+
+  <!-- Nav -->
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li>
+									<a href="/order">Order</a>
+									
+								</li>
+								<li><a href="/info">About Jamu</a></li>
+								<li><a href="/ourstory">Our Story</a></li>
+								<li><a href="#">Language</a>
+									<ul>
+										<li style="font-family: Alkatra;"><a href="/info">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/info_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/info_kor">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
 
   <!-- Banner -->
-  <section id="banner" style="text-align:center; margin: 0 0;">
+  <section style="text-align:center; margin: 0 0;">
     <header>
-      <h2 style="font-size: 2.5em;">Hi. <br>You're looking at <strong>Jamu</strong>.</h2>
+      <br><br>
+      <h2 style="font-size: 2.5em;"><br>Hi. <br>You're looking at <strong>Jamu</strong>.</h2>
       <p>Discover more about Jamu</p>
     </header>
   </section>

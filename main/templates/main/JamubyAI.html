@@ -11,139 +11,147 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+	<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
   <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      margin: 0;
-      background-color: #fdfcf8;
-    }
+/* 공통 스타일 */
+body {
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  background-color: #fdfcf8;
+  color: #333;
+}
 
-    nav {
-      background-color: #0C1214;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70px;
-      font-family: 'Alkatra', cursive;
-      font-weight: bold;
-    }
+/* 전체 섹션 */
+section#ai-recommendation {
+  max-width: 1000px;
+  margin: 3em clamp(12px, 4vw, 40px) auto;
+  padding: 5vw; /* 반응형 여백 */
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 
-    nav ul {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+h2 {
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 화면에 따라 글자 크기 자동조절 */
+  margin-bottom: 1em;
+}
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: color 0.3s;
-    }
+p {
+  text-align: center;
+  margin-bottom: 2em;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+}
 
-    nav ul li a:hover {
-      color: #ffa500;
-    }
+/* 태그 선택 그룹 */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
 
-    /* AI Recommendation Form */
-    section#ai-recommendation {
-      max-width: 700px;
-      margin: 3em auto;
-      padding: 2em;
-      background-color: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+.tag {
+  flex: 0 0 auto; /* 자동 크기 조정 */
+  text-align: center;
+  padding: 0.6em 1em;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  max-width: 100%;
+  white-space: nowrap;         /* 한 줄로 */
+  text-overflow: ellipsis;     /* 너무 길면 … */
+  overflow: hidden;
+}
 
-    h2 {
-      text-align: center;
-      font-size: 1.8em;
-      margin-bottom: 1em;
-    }
 
-    p {
-      text-align: center;
-      margin-bottom: 2em;
-    }
+.tag.selected {
+  background-color: #ffa500;
+  color: white;
+  border-color: #ffa500;
+}
 
-    .field-group {
-      margin-bottom: 2em;
-    }
+/* 버튼 */
+button {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #ffa500;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
 
-    .field-group label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 0.5em;
-    }
+button:hover {
+  background-color: #e59400;
+}
 
-    .tag-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6em;
-    }
+/* 결과창 */
+#jamu-result {
+  margin-top: 2em;
+  text-align: center;
+  padding: 1.5em;
+  border-radius: 12px;
+  background-color: #fff9e8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
-    .tag {
-      padding: 0.6em 1.2em;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      background-color: #f8f8f8;
-      color: #333;
-      font-size: 0.95em;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
+#jamu-result img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1em;
+}
 
-    .tag.selected {
-      background-color: #ffa500;
-      color: white;
-      border-color: #ffa500;
-    }
+/* 로딩 애니메이션 */
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #ffa500;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 2em auto;
+}
 
-    button {
-      margin-top: 1em;
-      padding: 1em;
-      background-color: #ffa500;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 10px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-    }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-    button:hover {
-      background-color: #e59400;
-    }
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+  section#ai-recommendation {
+    padding: 1.5em;
+    align-items: center;
+  }
 
-    #jamu-result {
-      margin-top: 2em;
-      text-align: center;
-      padding: 1.5em;
-      border-radius: 12px;
-      background-color: #fff9e8;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;      /* 가로로 나열 + 줄바꿈 */
+  gap: 0.5em;
+}
 
-    #jamu-result img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 1em;
-    }
+.tag {
+  flex: 0 0 auto;       /* 글자 길이만큼 */
+  padding: 0.6em 1em;
+  border-radius: 999px;
+  font-size: clamp(0.9rem, 2.5vw, 1rem); /* 화면 줄어들면 글자도 살짝 줄임 */
+  white-space: nowrap;  /* 줄바꿈 방지 */
+}
+}
 
-    .loader {
-      border: 6px solid #f3f3f3;
-      border-top: 6px solid #ffa500;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin: 2em auto;
-    }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
@@ -153,22 +161,33 @@
 </head>
 
 <body>
-  <!-- Navigation -->
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/order">Order</a></li>
-      <li><a href="/info">About Jamu</a></li>
-      <li><a href="/ourstory">Our Story</a></li>
-      <li><a href="#">Language</a></li>
-    </ul>
-  </nav>
+  
+  <!-- Nav -->
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li>
+									<a href="/order">Order</a>
+									
+								</li>
+								<li><a href="/info">About Jamu</a></li>
+								<li><a href="/ourstory">Our Story</a></li>
+								<li><a href="#">Language</a>
+									<ul>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI_kor">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
 
-  <!-- Jamu by AI Section -->
+  <!-- Jamu by AI Section --> 
+   <br><br><br><br>
+    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu by AI</h2>
+    <p style="font-family: 'Alkatra', sans-serif;">Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
+
   <section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
-    <h2>🌿 Jamu by AI</h2>
-    <p>Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
-
     <form id="jamu-form">
       <div class="field-group">
         <label>How do you feel today?</label>
@@ -179,7 +198,7 @@
           <div class="tag">Energized</div>
         </div>
       </div>
-
+<br>
       <div class="field-group">
         <label>What's your travel style?</label>
         <div class="tag-container" data-name="style">
@@ -188,7 +207,7 @@
           <div class="tag">Cultural</div>
         </div>
       </div>
-
+<br>
       <div class="field-group">
         <label>What's the weather like?</label>
         <div class="tag-container" data-name="weather">
@@ -197,7 +216,7 @@
           <div class="tag">Rainy</div>
         </div>
       </div>
-
+<br>
       <div class="field-group">
         <label>Symptoms or Interests</label>
         <div class="tag-container" data-name="symptom">
@@ -211,7 +230,7 @@
           <div class="tag">Beras Kencur</div>
         </div>
       </div>
-
+<br>
       <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Jamu</button>
     </form>
 
@@ -220,19 +239,27 @@
 
   <!-- JavaScript -->
   <script>
-    const tagContainers = document.querySelectorAll('.tag-container');
+    document.querySelectorAll('.tag-container').forEach(container => {
+    const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
 
-    tagContainers.forEach(container => {
-      const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
-      container.querySelectorAll('.tag').forEach(tag => {
-        tag.addEventListener('click', () => {
-          if (isSingleChoice) {
+    container.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        if (isSingleChoice) {
+          // 이미 선택된 걸 다시 클릭한 경우 → 해제
+          if (tag.classList.contains('selected')) {
+            tag.classList.remove('selected');
+          } else {
+            // 새 선택 → 나머지 해제 후 본인만 선택
             container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+            tag.classList.add('selected');
           }
+        } else {
+          // 다중 선택 허용 (symptom 그룹)
           tag.classList.toggle('selected');
-        });
+        }
       });
     });
+  });
 
     function recommendJamu() {
       const resultDiv = document.getElementById("jamu-result");
@@ -268,6 +295,17 @@
         `;
       }, 1000);
     }
+
   </script>
+
+    <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
 </body>
 </html>

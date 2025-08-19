@@ -17,31 +17,65 @@ client = OpenAI(
 def home(request):
     return render(request, 'main/home.html') # Home page
 
+def home_kor(request):
+    return render(request, 'main/home_kor.html') # Home page in Korean
+
+def home_ind(request):
+    return render(request, 'main/home_ind.html') # Home page in Indonesian
+
 def order(request):
     return render(request, 'main/order.html') # Order 1 page
+
+def order_kor(request):
+    return render(request, 'main/order_kor.html') # Order 1 page in Korean
+
+def order_ind(request):
+    return render(request, 'main/order_ind.html') # Order 1 page in Indonesian
 
 def info(request):
     return render(request, 'main/info.html') # info page
 
+def info_kor(request):
+    return render(request, 'main/info_kor.html') # info page in Korean
+
+def info_ind(request):
+    return render(request, 'main/info_ind.html') # info page in Indonesian
+
 def chatbot(request):
     return render(request, 'main/chatbot.html') # Chatbot page
+
+def chatbot_kor(request):
+    return render(request, 'main/chatbot_kor.html') # Chatbot page in Korean
+
+def chatbot_ind(request):
+    return render(request, 'main/chatbot_ind.html') # Chatbot page in Indonesian
 
 def ourstory(request):
     return render(request, 'main/ourstory.html') # Our story page
 
+def ourstory_kor(request):
+    return render(request, 'main/ourstory_kor.html') # Our story page in Korean
+
+def ourstory_ind(request):
+    return render(request, 'main/ourstory_ind.html') # Our story page in Indonesian
 
 def JamubyAI(request):
     return render(request, 'main/JamubyAI.html') # Jamu by AI page
+
+def JamubyAI_kor(request):
+    return render(request, 'main/JamubyAI_kor.html') # Jamu by AI page in Korean
+
+def JamubyAI_ind(request):
+    return render(request, 'main/JamubyAI_ind.html') # Jamu by AI page in Indonesian
+
 def CreateYourBlend(request):
     return render(request, 'main/CreateYourBlend.html') # Create Your Blend page
 
-def home_kor(request):
-    return render(request, 'candidate/c2/home_kor.html') # Home page in Korean
-def home_indonesian(request):
-    return render(request, 'candidate/c2/home_indonesian.html') # Home page in Indonesian
-def home_eng(request):
-    return render(request, 'candidate/c2/home_eng.html') # Home page in English
+def CreateYourBlend_kor(request):
+    return render(request, 'main/CreateYourBlend_kor.html') # Create Your Blend page in Korean
 
+def CreateYourBlend_ind(request):
+    return render(request, 'main/CreateYourBlend_ind.html') # Create Your Blend page in Indonesian
 
 
 JAMU_KNOWLEDGE_BASE = """

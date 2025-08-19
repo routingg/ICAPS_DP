@@ -7,10 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create Your Blend</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display&display=swap" rel="stylesheet"/>
 
+   <!-- Fonts -->
+   
+    <!-- Fonts (중복 제거 후 단일 링크 유지) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
+    
+    
   <style>
     body {
       font-family: 'Playfair Display', serif;
@@ -18,34 +30,13 @@
       background-color: #fdfcf8;
     }
 
-    nav {
-      background-color: #0C1214;
+    /* #ingredient-list 다음에 오는 버튼 래퍼 div */
+    #custom-blend > div:nth-of-type(2){
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 70px;
-      font-family: 'Alkatra', cursive;
-      font-weight: bold;
     }
 
-    nav ul {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: #ffa500;
-    }
 
     section#custom-blend {
       max-width: 1000px;
@@ -54,7 +45,8 @@
       background-color: #ffffff;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-family: 'Alkatra', cursive;
+      font-family: 'Alkatra', sans-serif;
+      align-items: center;
     }
 
     h2, p {
@@ -140,38 +132,176 @@
       text-align: center;
       margin-top: 2.5em;
     }
+
+
+
+/* ===== Section 컨테이너: 완전 반응형 ===== */
+#custom-blend{
+  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
+  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
+  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
+  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+/* 제목/설명도 유동 타이포 */
+#custom-blend h2{
+  text-align: center;
+  font-size: clamp(22px, 3.2vw, 34px);
+  margin: 0 0 clamp(8px, 1.6vw, 12px);
+}
+#custom-blend > p{
+  text-align: center;
+  font-size: clamp(14px, 1.8vw, 18px);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== 그리드: 기본 4열 → 화면 줄면 자동 ↓ ===== */
+#ingredient-list{
+  display: grid;
+  gap: clamp(12px, 2.5vw, 20px);
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 기본 4열 */
+  margin-top: clamp(16px, 3vw, 24px);
+}
+@media (max-width: 1024px){
+  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); } /* 3열 */
+}
+@media (max-width: 720px){
+  #ingredient-list{ grid-template-columns: repeat(2, minmax(0,1fr)); } /* 2열 */
+}
+/* 필요 시 480px 이하에서 3열 강제하려면 아래 주석 해제
+@media (max-width: 480px){
+  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+*/
+
+/* 카드와 이미지도 유동 크기 */
+.ingredient-card{
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .2s ease, border-color .3s ease;
+  position: relative;
+}
+.ingredient-card img{
+  width: 100%;
+  height: clamp(110px, 22vw, 160px);  /* 뷰포트에 따라 이미지 높이 유동 */
+  object-fit: cover;
+}
+.ingredient-card .content{ padding: clamp(10px, 2.2vw, 16px); }
+.ingredient-card h4{
+  margin: 0 0 .5em;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.25;
+}
+.ingredient-card p{
+  font-size: clamp(12px, 1.2vw, 16px);
+  line-height: 1.55;
+}
+
+/* 작은 화면에서 설명 2줄로 고정(레이아웃 안정화) */
+@media (max-width: 720px){
+  .ingredient-card p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
+/* 선택 라벨 */
+.ingredient-card .blend-label{
+  position: absolute; top: 8px; left: 8px;
+  background: #ffa500; color: #fff;
+  padding: .3em .8em; border-radius: 20px;
+  font-size: clamp(11px, 1.1vw, 13px);
+  display: none;
+}
+.ingredient-card.selected{ border-color: #ffa500; }
+.ingredient-card.selected .blend-label{ display: inline-block; }
+
+/* 버튼 중앙 정렬(마크업에 .btn-row 있으면 이게 우선) */
+#custom-blend .btn-row{ display:flex; justify-content:center; }
+button{
+  margin-top: 1.2em;
+  padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 28px);
+  background:#ffa500; color:#fff; border:0; border-radius:12px;
+  font-size: clamp(14px, 1.4vw, 18px);
+  cursor:pointer;
+}
+/* .btn-row가 없다면 기존 div를 대상으로 폴백 센터링 */
+#custom-blend > div:nth-of-type(2){ display:flex; justify-content:center; }
+/* 모바일에선 버튼 폭도 유동 */
+@media (max-width: 480px){
+  button{ width:100%; max-width: 340px; }
+}
+
+/* 결과 이미지도 반응형 */
+#blend-result{ text-align:center; margin-top: clamp(20px, 4vw, 40px); }
+#blend-result img{
+  max-width: min(300px, 80vw);
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+
+
+
+
+
   </style>
 </head>
 
 <body>
-  <!-- Navigation -->
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/order">Order</a></li>
-      <li><a href="/info">About Jamu</a></li>
-      <li><a href="/ourstory">Our Story</a></li>
-      <li><a href="#">Language</a></li>
-    </ul>
-  </nav>
+  
+  <!-- Nav -->
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li>
+									<a href="/order">Order</a>
+									
+								</li>
+								<li><a href="/info">About Jamu</a></li>
+								<li><a href="/ourstory">Our Story</a></li>
+								<li><a href="#">Language</a>
+									<ul>
+										<li style="font-family: Alkatra;"><a href="/CreateYourBlend">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/CreateYourBlend_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/CreateYourBlend_kor">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+
 
   <!-- Create Your Blend Section -->
+   <br><br><br><br>
+
+   <h2 style="font-family: 'Alkatra', sans-serif;">🌺 Create Your Blend</h2>
+    <p style="font-family: 'Alkatra', sans-serif;">Choose your favorite Jamu ingredients and name your own travel-inspired blend.</p>
+
+
   <section id="custom-blend">
-    <h2>🌺 Create Your Blend</h2>
-    <p>Choose your favorite Jamu ingredients and name your own travel-inspired blend.</p>
 
     <div id="ingredient-list"></div>
 
     
 
-    <div style="text-align: center;">
-      <button onclick="createBlend()">Create My Jamu</button>
+    <div>
+      <button onclick="createBlend()">Create Your Own Jamu</button>
     </div>
 
     <div id="blend-result"></div>
   </section>
 
-  <script>
+  <script style="font-family: 'Playfair Display', serif;">
     const ingredients = [
       { name: "Turmeric", desc: "Anti-inflammatory and antioxidant.", img: "{% static 'c2/images/Turmeric.png' %}" },
       { name: "Ginger", desc: "Cold relief and digestive aid.", img: "{% static 'c2/images/ginger.jpg' %}" },
@@ -229,17 +359,28 @@
         return;
       }
       result.innerHTML = `
-        <h3>🌸 My Signature Jamu</h3>
+        <h3>🌸 Your Signature Jamu</h3>
         <p>Includes: <strong>${selected.join(", ")}</strong></p>
         <p>Enjoy your personalized Jamu for your next journey!</p>
-        <img src="{% static 'c2/images/jamuup.png' %}" alt="My Jamu" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
+        <img src="{% static 'c2/images/jamuup.png' %}" alt="Your Jamu" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
       `;
     }
 
 
-    
-
     renderIngredients();
+      
   </script>
+
+
+<!-- Scripts -->
+			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/util.js' %}"></script>
+			<script src="{% static 'c2/assets/js/main.js' %}"></script>
+
 </body>
 </html>

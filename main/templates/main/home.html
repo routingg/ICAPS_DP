@@ -14,12 +14,12 @@
       		as="style"
       		onload="this.rel='stylesheet'"
 			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
-      		<!-- <!-- href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"/>  -->
+      		<!-- href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"/>  -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
-			<title>Helios by HTML5 UP</title>
+			<title>2025 iCaps Team.16</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
@@ -44,6 +44,14 @@
 
 		<style>
 
+			/* 카드 자체를 클릭 영역으로 */
+.grid-item{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;         /* 손가락 커서 */
+}
+
     section#order {
       text-align: center;
       padding: 3em 1em;
@@ -52,7 +60,6 @@
 
     section#order h2 {
       font-size: 2.5em;
-      margin-bottom: 2em;
     }
 
     .grid-container {
@@ -148,7 +155,32 @@
 	  background-position: center;
 	}
 
+	/* 푸터 위의 회색 띠 제거 */
+#footer::before,
+#footer:before {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  background: transparent !important;
+}
 
+/* 푸터 내부 상단 보더/패딩도 제거(테마에 따라 있는 경우) */
+#footer,
+#footer .container {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 바로 윗 섹션이 남기는 여백/라인 제거(안전망) */
+#order::after,
+#order::before {
+  content: none !important;
+}
+#order {
+  margin-bottom: 0 !important;
+  padding-bottom: 0; /* 필요 시 */
+}
 
   </style>
 
@@ -194,8 +226,8 @@
 								<li><a href="/ourstory">Our Story</a></li>
 								<li><a href="#">Language</a>
 									<ul>
-										<li style="font-family: Alkatra;"><a href="/home_eng">English</a></li>
-										<li style="font-family: Alkatra;"><a href="/home_indonesian/">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/home_ind">Bahasa Indonesia</a></li>
 										<li style="font-family: Alkatra;"><a href="/home_kor/">한국어</a></li>
 									</ul>
 								</li>
@@ -206,160 +238,58 @@
 
 			
 
+				
+			<section id="order">
 
-				<section id="order">
-    		<h2 style="font-family: 'Alkatra', sans-serif; font-weight: bold;" >Order</h2>
-
-    		<div class="grid-container" style="font-family: 'Alkatra', sans-serif;">
-    		  <div class="grid-item full"><a href="/order">How To Order</a></div>
-
-    		  <div class="row-3">
-    		    <div class="grid-item card-recommend"><a href="/JamubyAI">Jamu By AI</a></div>
-    		    <div class="grid-item card-custom"><a href="/CreateYourBlend">Create Your Blend</a></div>
-    		    <div class="grid-item card-fortune"><a href="/chatbot">Jamu Chatbot</a></div>
-    		  </div>
-    		</div>
-
-			<br><br><br><br><br><br><br><br>
-		</section>
+               <br><br><br>
 
 
+               
 
+          <h2 style="font-family: 'Alkatra', sans-serif; font-weight: bold;" >Order</h2><br>
+         
 
+          <div class="grid-container" style="font-family: 'Alkatra', sans-serif;">
+           <a class="grid-item full" href="/order">How To Order</a>
+                  
+           <div class="row-3">
+             <a class="grid-item card-recommend" href="/JamubyAI">Jamu By AI</a>
+             <a class="grid-item card-custom" href="/CreateYourBlend">Create Your Blend</a>
+             <a class="grid-item card-fortune" href="/chatbot">Jamu Chatbot</a>
+           </div>
+		   <br>
+         </div>
+         
+      </section>
 
+		
 			<!-- Footer -->
 				<div id="footer">
 					<div class="container">
-						<div class="row">
 
-							<!-- Tweets -->
-								<section class="col-4 col-12-mobile">
-									<header>
-										<h2 class="icon brands fa-twitter circled"><span class="label">Tweets</span></h2>
-									</header>
-									<ul class="divided">
-										<li>
-											<article class="tweet">
-												Amet nullam fringilla nibh nulla convallis tique ante sociis accumsan.
-												<span class="timestamp">5 minutes ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Hendrerit rutrum quisque.
-												<span class="timestamp">30 minutes ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Curabitur donec nulla massa laoreet nibh. Lorem praesent montes.
-												<span class="timestamp">3 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Lacus natoque cras rhoncus curae dignissim ultricies. Convallis orci aliquet.
-												<span class="timestamp">5 hours ago</span>
-											</article>
-										</li>
-									</ul>
-								</section>
-
-							<!-- Posts -->
-								<section class="col-4 col-12-mobile">
-									<header>
-										<h2 class="icon solid fa-file circled"><span class="label">Posts</span></h2>
-									</header>
-									<ul class="divided">
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Nisl fermentum integer</a></h3>
-												</header>
-												<span class="timestamp">3 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Phasellus portitor lorem</a></h3>
-												</header>
-												<span class="timestamp">6 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Magna tempus consequat</a></h3>
-												</header>
-												<span class="timestamp">Yesterday</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Feugiat lorem ipsum</a></h3>
-												</header>
-												<span class="timestamp">2 days ago</span>
-											</article>
-										</li>
-									</ul>
-								</section>
-
-							<!-- Photos -->
-								<section class="col-4 col-12-mobile">
-									<header>
-										<h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>
-									</header>
-									<div class="row gtr-25">
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic10.jpg' %}" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic11.jpg' %}" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic12.jpg' %}" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic13.jpg' %}" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic14.jpg' %}" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="{% static 'c2/images/pic15.jpg' %}" alt="" /></a>
-										</div>
-									</div>
-								</section>
-
-						</div>
-						<hr />
 						<div class="row">
 							<div class="col-12">
 
 								<!-- Contact -->
-									<section class="contact">
-										<header>
-											<h3>Nisl turpis nascetur interdum?</h3>
-										</header>
-										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
-										<ul class="icons">
-											<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
-											<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-											<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										</ul>
-									</section>
+								 <br><br><br><br>
+                           <section class="contact">
+                              <header>
+                                 <h3>Are you interested in our products?</h3>
+                              </header>
+                              <p>please contact us for more information.</p>
+                              <ul class="icons">
+								<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+                              </ul>
+                           </section>
 
-								<!-- Copyright -->
-									<div class="copyright">
-										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-										</ul>
-									</div>
+                        <!-- Copyright -->
+                           <div class="copyright">
+                              <ul class="menu">
+                                 <li>&copy; All rights reserved.</li><li>Design: <a href="#">2025 ICaps Team.16</a></li>
+                              </ul>
+                           </div>
 
 							</div>
 

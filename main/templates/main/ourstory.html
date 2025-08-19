@@ -15,14 +15,39 @@
 		<noscript><link rel="stylesheet" href="{% static 'c3/assets/css/noscript.css' %}" /></noscript>
 
 		<style>
-			#thumbnails img {
-  				width: 100%;
-  				height: auto;
-  				object-fit: cover; /* 이미지 비율 맞추기 */
-  				aspect-ratio: 4 / 3; /* 비율 고정: 가로4:세로3 형태 */
+
+
+			#nav ul {
+			  list-style: none;  /* 동그라미 제거 */
+			  margin: 0;
+			  padding: 0;
+			  color: black;
 			}
 
 			
+
+			/* 썸네일은 일정한 높이에 맞춰서 cover */
+			#thumbnails article .thumbnail img {
+			  width: 100%;
+			  height: 220px;       /* 원하는 고정 높이 */
+			  object-fit: cover;   /* 꽉 채우되 비율 유지 (잘릴 수 있음) */
+			  border-radius: 6px;  /* 선택: 모서리 둥글게 */
+			}
+
+			/* 풀 이미지 (fulls) 는 contain 으로 전체 보이게 */
+			#main .viewer img,
+			#viewer .inner img {
+			  max-width: 95%;
+			  max-height: 85vh;
+			  width: auto;
+			  height: auto;
+			  margin: 0 auto;
+			  display: block;
+			}
+
+
+		
+
 
 			
 		</style>
@@ -34,6 +59,22 @@
 
 				<!-- Header -->
 					<header id="header">
+
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+						  <ul>
+						    <li><a href="/">Home</a></li>
+						    <li><a href="/order">Order</a></li>
+						    <li><a href="/info">About Jamu</a></li>
+						    <li><a href="/ourstory">Our Story</a></li>
+						    <li>
+						      <a href="/">English</a> |
+						      <a href="/home_ind">Bahasa Indonesia</a> |
+						      <a href="/home_kor/">한국어</a>
+						    </li>
+						  </ul>
+						</nav><br><br>
+
+
 						<h1 style="font-family: 'Alkatra', sans-serif;">Our Story</h1>
 						
 						<p style="font-family: 'Alkatra', sans-serif;">
@@ -57,74 +98,112 @@
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/01.jpg' %}"><img src="{% static 'c3/images/thumbs/01.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Building Friendship Over Egg Coffee</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">At Café Giảng in Hanoi, we enjoyed egg coffee together and began building the friendship that became the heart of our team.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">First Meeting in Hanoi</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">Our very first group photo taken in the city of Hanoi. A precious moment that marked the beginning of our project.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/02.jpg' %}"><img src="{% static 'c3/images/thumbs/02.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Deciding on Our Project Theme</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">This moment was captured during our intense but exciting brainstorming session where we finalized the core direction of our project.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Passionate Collaboration</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">During the camp, we sat together and shaped our ideas, working side by side with full energy.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/03.jpg' %}"><img src="{% static 'c3/images/thumbs/03.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Confident After D-Camp</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">With the DCamp complete, we stood together full of pride and confidence in what we had achieved as a team in just one week.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Confidence in Teamwork</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">A group photo in front of the camp building, striking confident poses that reflected our growing trust and strength as a team.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/04.jpg' %}"><img src="{% static 'c3/images/thumbs/04.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Closing Group Photo</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">Another final group photo after our presentation, capturing the smiles and satisfaction of a job well done together.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">A Record of Friendship and Cooperation</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">Another group photo taken at the end of the Hanoi camp, capturing the bond and collaboration we built throughout the week.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/05.jpg' %}"><img src="{% static 'c3/images/thumbs/05.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Evening at Hoàn Kiếm Lake</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">We took this photo during a relaxing walk by the lake — a peaceful ending to our journey in Hanoi filled with memories.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Memories at a Hanoi Café</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">Enjoying egg coffee together at Café Giảng, creating joyful memories beyond the project itself.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/06.jpg' %}"><img src="{% static 'c3/images/thumbs/06.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Focused and Fun Collaboration</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">Snacks, laptops, and teamwork – this was our daily routine during DCamp, where laughter and coding went hand in hand.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">At Hoàn Kiếm Lake</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">A night photo in front of Hanoi’s landmark, symbolizing not only our project but also the cultural experiences we shared.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/07.jpg' %}"><img src="{% static 'c3/images/thumbs/07.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Working Side by Side</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">Through discussion and cooperation, our ideas took shape. The energy and synergy of working in one space made it special.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Lively Project Meeting</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">A cheerful moment of sharing ideas and actively discussing our project progress.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/08.jpg' %}"><img src="{% static 'c3/images/thumbs/08.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Weekly Zoom Check-ins</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">After returning to our home countries, we continued our project with weekly Zoom calls to stay aligned and connected.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Dedication Until the End</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">Even during long meetings, we never lost our smiles and continued working passionately.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/09.jpg' %}"><img src="{% static 'c3/images/thumbs/09.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">Virtual Collaboration Continues</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">Our Canva slides and Zoom screen reflect the way we prepared for our presentation — remotely but united in spirit.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">First Online Meeting</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">Our very first Zoom session after the Hanoi camp, marking the start of our remote collaboration.</p>
 						</article>
 						
 						<article>
 						  <a class="thumbnail" href="{% static 'c3/images/fulls/10.jpg' %}"><img src="{% static 'c3/images/thumbs/10.jpg' %}" alt="" /></a>
-						  <h2 style="font-family: 'Alkatra', sans-serif;">One Table, One Team</h2>
-						  <p style="font-family: 'Alkatra', sans-serif;">It was around this table that our ideas came alive. Working together in one place reminded us that collaboration makes creativity possible.</p>
+						  <h2 style="font-family: 'Alkatra', sans-serif;">Presentation Preparation</h2>
+						  <p style="font-family: 'Alkatra', sans-serif;">A serious and focused meeting to finalize details for our interim presentation, raising the quality of our project step by step.</p>
 						</article>
 						
 						<article>
 							<a class="thumbnail" href="{% static 'c3/images/fulls/11.jpg' %}"><img src="{% static 'c3/images/thumbs/11.jpg' %}" alt="" /></a>
-							<h2 style="font-family: 'Alkatra', sans-serif;">Pharetra ex non faucibus</h2>
-							<p style="font-family: 'Alkatra', sans-serif;">Ut sed magna euismod leo laoreet congue. Fusce congue enim ultricies.</p>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Spontaneous Communication</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Beyond Zoom, we often used WhatsApp to connect anytime, anywhere. Even from different places, our teamwork stayed strong.</p>
 						</article>
 						<article>
 							<a class="thumbnail" href="{% static 'c3/images/fulls/12.jpg' %}"><img src="{% static 'c3/images/thumbs/12.jpg' %}" alt="" /></a>
-							<h2 style="font-family: 'Alkatra', sans-serif;">Mattis lorem sodales</h2>
-							<p style="font-family: 'Alkatra', sans-serif;">Feugiat auctor leo massa, nec vestibulum nisl erat faucibus, rutrum nulla.</p>
+							<h2 style="font-family: 'Alkatra', sans-serif;">The Bond We Built</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Despite busy schedules, we carried on with laughter. Simply being together gave us strength.</p>
 						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/13.jpg' %}"><img src="{% static 'c3/images/thumbs/13.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Using Collaboration Tools</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Actively working on Canva throughout meetings, shaping our interface design and storytelling ideas together.</p>
+						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/14.jpg' %}"><img src="{% static 'c3/images/thumbs/14.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Developing Ideas</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Exchanging opinions and refining our project topics with lively discussions.</p>
+						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/15.jpg' %}"><img src="{% static 'c3/images/thumbs/15.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Final Online Meeting</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Just three days before meeting in Incheon, we held our last WhatsApp call. It was a moment filled with anticipation for our offline reunion.</p>
+						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/16.jpg' %}"><img src="{% static 'c3/images/thumbs/16.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Reunion in Korea</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">Finally meeting again in Incheon. After months of online work, it was heartwarming to laugh together in person.</p>
+						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/17.jpg' %}"><img src="{% static 'c3/images/thumbs/17.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Joyful Memories on the Street</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">A group photo taken while walking along the streets near our hotel. Beyond the project, it was a time to share genuine friendship.</p>
+						</article>
+
+						<article>
+							<a class="thumbnail" href="{% static 'c3/images/fulls/18.jpg' %}"><img src="{% static 'c3/images/thumbs/18.jpg' %}" alt="" /></a>
+							<h2 style="font-family: 'Alkatra', sans-serif;">Laughter at the Photo Booth</h2>
+							<p style="font-family: 'Alkatra', sans-serif;">A fun set of pictures taken at a Korean photo booth, with props and playful poses. After all the serious meetings and presentations, this was a moment of pure joy and celebration.</p>
+						</article>
+
+
 					</section>
 
 				<!-- Footer -->
