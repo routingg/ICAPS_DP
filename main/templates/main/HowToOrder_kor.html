@@ -2,302 +2,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>자무 자판기 사용법</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>How to Order Jamu</title>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
-	<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
-
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+  <noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
 
   <style>
-/* 공통 스타일 */
-body {
-  font-family: 'Playfair Display', serif;
-  margin: 0;
-  background-color: #fdfcf8;
-  color: #333;
-}
+    :root{
+      --bg:#fdfcf8;
+      --ink:#333;
+      --muted:#666;
+      --card:#fff;
+      --radius:16px;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+    }
 
-/* 전체 섹션 */
-section#ai-recommendation{
-  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
-  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
-  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
-  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:var(--bg);
+      font-family:'Pretendard', sans-serif;
+    }
 
-h2 {
-  text-align: center;
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 화면에 따라 글자 크기 자동조절 */
-  margin-bottom: 1em;
-}
+    .howto-wrap{
+      max-width:min(960px, 92vw);
+      margin:64px auto;
+      padding:0 clamp(8px, 2vw, 12px);
+    }
 
-p {
-  text-align: center;
-  margin-bottom: 2em;
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-}
+    .howto-header{ text-align:center; margin-bottom:28px; }
+    .howto-title{
+      font-family:'Alkatra', cursive;
+      font-size: clamp(26px, 5vw, 40px);
+      margin:0 0 6px;
+      line-height:1.2;
+    }
+    .howto-sub{
+      font-family:'Alkatra', cursive;
+      font-size: clamp(14px, 2.6vw, 18px);
+      color: var(--muted);
+      margin:0;
+    }
 
-/* 태그 선택 그룹 */
-.tag-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6em;
-}
+    .howto-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding: clamp(16px, 3.5vw, 24px);
+      max-width: 760px;
+      margin: 0 auto;
+    }
 
-.tag {
-  flex: 0 0 auto; /* 자동 크기 조정 */
-  text-align: center;
-  padding: 0.6em 1em;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #f8f8f8;
-  color: #333;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  max-width: 100%;
-  white-space: nowrap;         /* 한 줄로 */
-  text-overflow: ellipsis;     /* 너무 길면 … */
-  overflow: hidden;
-}
+    .hero-img{
+      display:block;
+      width:100%;
+      max-width: 460px;
+      margin: clamp(16px, 3vw, 28px) auto;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,.06);
+      height:auto;
+    }
 
+    /* 항상 세로 나열 */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 24px;
+    }
 
-.tag.selected {
-  background-color: #ffa500;
-  color: white;
-  border-color: #ffa500;
-}
+    .step{
+      display:grid;
+      grid-template-columns: 72px 1fr;
+      align-items:center;
+      gap:16px;
+      background:#fff;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.05);
+    }
 
-/* 버튼 */
-button {
-  margin-top: 1em;
-  padding: 1em;
-  background-color: #ffa500;
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 10px;
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-}
+    .step img{
+      width:60px;
+      height:60px;
+      object-fit: contain;
+      border-radius:10px;
+      background:#f3f3f3;
+      justify-self:center;
+    }
 
-button:hover {
-  background-color: #e59400;
-}
+    .step h3{
+      margin:0;
+      font-size: clamp(16px, 2.6vw, 20px);
+      font-weight:700;
+      line-height:1.25;
+    }
+    .step p{
+      margin:4px 0 0;
+      color:#555;
+      font-size: clamp(13px, 2.4vw, 15px);
+      line-height:1.5;
+    }
 
-/* 결과창 */
-#jamu-result {
-  margin-top: 2em;
-  text-align: center;
-  padding: 1.5em;
-  border-radius: 12px;
-  background-color: #fff9e8;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-#jamu-result img {
-  max-width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1em;
-}
-
-/* 로딩 애니메이션 */
-.loader {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #ffa500;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin: 2em auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* 반응형 미디어 쿼리 */
-@media (max-width: 768px) {
-  section#ai-recommendation {
-    padding: 1.5em;
-  }
-
-.tag-container {
-  display: flex;
-  flex-wrap: wrap;      /* 가로로 나열 + 줄바꿈 */
-  gap: 0.5em;
-}
-
-.tag {
-  flex: 0 0 auto;       /* 글자 길이만큼 */
-  padding: 0.6em 1em;
-  border-radius: 999px;
-  font-size: clamp(0.9rem, 2.5vw, 1rem); /* 화면 줄어들면 글자도 살짝 줄임 */
-  white-space: nowrap;  /* 줄바꿈 방지 */
-}
-}
-
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    /* 모바일에서는 이미지 위로 */
+    @media (max-width: 560px){
+      .step{ grid-template-columns: 1fr; text-align:center; }
+      .step img{ margin: 0 auto; }
     }
   </style>
 </head>
-
 <body>
-  
-  <!-- Nav -->
-						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+  <main class="howto-wrap">
+
+    <!-- Nav -->
+						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
 							<ul>
-								<li><a href="/">Home</a></li>
+								<li><a href="/home_kor">홈</a></li>
 								<li>
-									<a href="/order">Order</a>
-									
+									<a href="/order_kor">주문하기</a>
+
 								</li>
-								<li><a href="/info">About Jamu</a></li>
-								<li><a href="/ourstory">Our Story</a></li>
-								<li><a href="#">Language</a>
+								<li><a href="/info_kor">자무 소개</a></li>
+								<li><a href="/ourstory_kor">우리의 이야기</a></li>
+								<li><a href="#">언어</a>
 									<ul>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI">English</a></li>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI_kor">한국어</a></li>
+										<li style="font-family: Pretendard;"><a href="/">English</a></li>
+										<li style="font-family: Pretendard;"><a href="/HowToOrder_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Pretendard;"><a href="/HowToOrder_kor/">한국어</a></li>
 									</ul>
 								</li>
 							</ul>
 						</nav>
+    <br><br><br>
 
-  <!-- Jamu by AI Section --> 
-   <br><br><br><br>
-    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu by AI</h2>
-    <p style="font-family: 'Alkatra', sans-serif;">Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
+    <header class="howto-header" style="font-family: 'Pretendard', sans-serif;">
+      <h1 class="howto-title" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">자무 자판기 사용방법</h1>
+      <p class="howto-sub" style="font-family: 'Pretendard', sans-serif;">다음 단계를 따라 자무 자판기를 사용하세요.</p>
+    </header> 
+    <br>
 
-  <section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
-    <form id="jamu-form">
-      <div class="field-group">
-        <label>How do you feel today?</label>
-        <div class="tag-container" data-name="mood">
-          <div class="tag">Tired</div>
-          <div class="tag">Too Hot</div>
-          <div class="tag">A bit Sick</div>
-          <div class="tag">Energized</div>
-        </div>
-      </div>
-<br>
-      <div class="field-group">
-        <label>What's your travel style?</label>
-        <div class="tag-container" data-name="style">
-          <div class="tag">Relaxing</div>
-          <div class="tag">Adventurous</div>
-          <div class="tag">Cultural</div>
-        </div>
-      </div>
-<br>
-      <div class="field-group">
-        <label>What's the weather like?</label>
-        <div class="tag-container" data-name="weather">
-          <div class="tag">Hot</div>
-          <div class="tag">Cool</div>
-          <div class="tag">Rainy</div>
-        </div>
-      </div>
-<br>
-      <div class="field-group">
-        <label>Symptoms or Interests</label>
-        <div class="tag-container" data-name="symptom">
-          <div class="tag">Cold Symptoms</div>
-          <div class="tag">Low Energy</div>
-          <div class="tag">Women's Health</div>
-          <div class="tag">Better Sleep</div>
-          <div class="tag">Indigestion</div>
-          <div class="tag">Stress Relief</div>
-          <div class="tag">Jamu History</div>
-          <div class="tag">Beras Kencur</div>
-        </div>
-      </div>
-<br>
-      <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Jamu</button>
-    </form>
+    <!-- 하나의 컨테이너 카드 -->
+    <div class="howto-card">
+      <!-- 디스펜서 사진 -->
+      <img class="hero-img"
+           src="{% static 'c2/images/dispenser.jpg' %}"
+           alt="Jamu Dispenser"/>
 
-    <div id="jamu-result"></div>
-  </section>
+      <!-- 3 Steps -->
+      <section class="steps">
+  <div class="step">
+    <img src="{% static 'c2/images/step1_button.png' %}" alt="버튼 누르기" loading="lazy" decoding="async">
+    <div>
+      <h3 style="font-family: 'Pretendard', sans-serif;">1단계 – 버튼 누르기</h3>
+      <p style="font-family: 'Pretendard', sans-serif;">디스펜서의 시작 버튼을 눌러 주문을 시작하세요.</p>
+    </div>
+  </div>
 
-  <!-- JavaScript -->
-  <script>
-    document.querySelectorAll('.tag-container').forEach(container => {
-    const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+  <div class="step" style="font-family: 'Pretendard', sans-serif;">
+    <img src="{% static 'c2/images/step2_menu.png' %}" alt="자무 선택하기" loading="lazy" decoding="async">
+    <div>
+      <h3>2단계 – 자무 선택하기</h3>
+      <p>제공된 옵션 중에서 원하는 자무 맛을 선택하세요.</p>
+    </div>
+  </div>
 
-    container.querySelectorAll('.tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        if (isSingleChoice) {
-          // 이미 선택된 걸 다시 클릭한 경우 → 해제
-          if (tag.classList.contains('selected')) {
-            tag.classList.remove('selected');
-          } else {
-            // 새 선택 → 나머지 해제 후 본인만 선택
-            container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
-            tag.classList.add('selected');
-          }
-        } else {
-          // 다중 선택 허용 (symptom 그룹)
-          tag.classList.toggle('selected');
-        }
-      });
-    });
-  });
+  <div class="step">
+    <img src="{% static 'c2/images/step3_drink.png' %}" alt="자무 즐기기" loading="lazy" decoding="async">
+    <div>
+      <h3>3단계 – 즐기기!</h3>
+      <p>컵을 올바르게 놓고, 자무가 나올 때까지 기다린 후 건강한 자무를 즐기세요.</p>
+    </div>
+  </div>
+</section>
 
-    function recommendJamu() {
-      const resultDiv = document.getElementById("jamu-result");
-      resultDiv.innerHTML = `<div class="loader"></div>`;
 
-      setTimeout(() => {
-        const jamuList = [
-          {
-            name: "Beras Kencur",
-            desc: "Boost your energy with this sweet and spicy rice-herb jamu.",
-            img: "{% static 'c2/images/BerasKencur.jpg' %}"
-          },
-          {
-            name: "Kunyit Asam",
-            desc: "Turmeric & tamarind jamu to refresh your body and mind.",
-            img: "{% static 'c2/images/KunyitAsem.png' %}"
-          },
-          {
-            name: "Temulawak",
-            desc: "A classic jamu for digestion and immunity.",
-            img: "{% static 'c2/images/Temulawak.jpg' %}"
-          }
-        ];
+    </div>
 
-        const randomIndex = Math.floor(Math.random() * jamuList.length);
-        const jamu = jamuList[randomIndex];
+  </main>
 
-        resultDiv.innerHTML = `
-          <img src="${jamu.img}" alt="${jamu.name}">
-          <h3>✨ Your Recommended Jamu: ${jamu.name}</h3>
-          <p>${jamu.desc}</p>
-          <button style="font-family: 'Alkatra', cursive;">Order Now</button>
-        `;
-      }, 1000);
-    }
-
-  </script>
-
-    <!-- Scripts -->
+  <!-- Scripts -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
