@@ -77,6 +77,14 @@ def CreateYourBlend_kor(request):
 def CreateYourBlend_ind(request):
     return render(request, 'main/CreateYourBlend_ind.html') # Create Your Blend page in Indonesian
 
+#----------
+
+def HowToOrder(request):
+    return render(request, 'main/HowToOrder.html') # How to Order page
+def HowToOrder_kor(request):
+    return render(request, 'main/HowToOrder_kor.html') # How to Order page in Korean
+def HowToOrder_ind(request):
+    return render(request, 'main/HowToOrder_ind.html') # How to Order page in Indonesian
 
 JAMU_KNOWLEDGE_BASE = """
 === JAMU Basic Knowledge ===

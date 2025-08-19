@@ -1,5 +1,329 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-    <head>
-        <title>home - Kor</title>
-    </head>
+	<head>
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    	<link
+      		rel="stylesheet"
+      		as="style"
+      		onload="this.rel='stylesheet'"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+      		<!-- href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"/>  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+
+			<title>2025 iCaps Team.16</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+		<style>
+  			.custom-jamu-btn {
+  			  font-family: 'Pretendard', sans-serif;
+  			  font-weight: bold;
+  			  background-color: #EB6E12;
+  			  color: white;
+  			  transition: background-color 0.3s ease;
+  		}
+	
+  			.custom-jamu-btn:hover {
+  			  background-color: #0C1214;
+  			  color: #EB6E12;
+  			  text-decoration: none;
+  			
+  		}
+		</style>
+
+		<style>
+
+			/* 카드 자체를 클릭 영역으로 */
+.grid-item{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;         /* 손가락 커서 */
+}
+
+    section#order {
+      text-align: center;
+      padding: 3em 1em;
+	  background-color: #fdfcf8;
+    }
+
+    section#order h2 {
+      font-size: 2.5em;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .grid-item.full {
+      background: #fff;
+      border-radius: 16px;
+      padding: 6em;
+      font-size: 1.3em;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .grid-item.full:hover {
+      transform: scale(1.02);
+      background-color: #f7f3ed;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+    }
+
+    .grid-item {
+      background: #fff;
+      border-radius: 16px;
+      padding: 4em;
+      font-size: 1.1em;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+	  position: relative;       /* 오버레이 위치 기준 */
+  	  overflow: hidden;         /* 이미지 넘침 방지 */
+  	  z-index: 0;               /* 텍스트가 위로 오도록 */
+  	  color: white;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.03);
+      background-color: #f7f3ed;
+    }
+
+	.grid-item::before {
+ 	 content: '';
+ 	 position: absolute;
+ 	 inset: 0;
+ 	 background-color: rgba(0, 0, 0, 0.4); /* 어둡게 덮는 투명 검정 */
+ 	 z-index: -1; /* 텍스트보다 아래 */
+	}
+
+
+	.grid-item:hover::before {
+	  background-color: rgba(0, 0, 0, 0.6); /* 호버 시 더 어둡게 */
+	}
+    @media (max-width: 768px) {
+      .row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+	.grid-item.full {
+	  background-image: url('{% static "c2/images/jamu2.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-recommend {
+	  background-image: url('{% static "c2/images/recommend.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-custom {
+	  background-image: url('{% static "c2/images/custom.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	.card-fortune {
+	  background-image: url('{% static "c2/images/fortune.jpg" %}');
+	  background-size: cover;
+	  background-position: center;
+	}
+
+	/* 푸터 위의 회색 띠 제거 */
+#footer::before,
+#footer:before {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 푸터 내부 상단 보더/패딩도 제거(테마에 따라 있는 경우) */
+#footer,
+#footer .container {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 바로 윗 섹션이 남기는 여백/라인 제거(안전망) */
+#order::after,
+#order::before {
+  content: none !important;
+}
+#order {
+  margin-bottom: 0 !important;
+  padding-bottom: 0; /* 필요 시 */
+}
+
+  </style>
+
+
+		
+		
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper"
+		>
+
+			<!-- Header -->
+				<div id="header"
+				style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url('{% static "c2/images/jamuup.png" %}');">
+
+					<!-- Inner -->
+						<div class="inner">
+
+							
+							<header>
+								<h1 style="font-family: 'Pretendard', sans-serif; font-weight: bold;"><a id="logo">안녕하세요!<br>
+									자무 주문하시겠어요?</a></h1> <br>
+								<hr/>
+								<p style="font-family: 'Pretendard', sans-serif;">2025 iCaps Team.16</p>
+							</header>
+							<footer>
+								<br><a href="#order" class="button circled scrolly custom-jamu-btn">시작하기</a>
+							</footer>
+
+						</div>
+
+
+
+					<!-- Nav -->
+						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/home_kor">홈</a></li>
+								<li>
+									<a href="/order_kor">주문하기</a>
+
+								</li>
+								<li><a href="/info_kor">자무 소개</a></li>
+								<li><a href="/ourstory_kor">우리의 이야기</a></li>
+								<li><a href="#">언어</a>
+									<ul>
+										<li style="font-family: Pretendard;"><a href="/">English</a></li>
+										<li style="font-family: Pretendard;"><a href="/home_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Pretendard;"><a href="/home_kor/">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+				</div>
+
+			
+
+				
+			<section id="order">
+
+               <br><br><br>
+
+
+               
+
+          <h2 style="font-family: 'Pretendard', sans-serif; font-weight: bold;" >주문하기</h2><br>
+         
+
+          <div class="grid-container" style="font-family: 'Pretendard', sans-serif;">
+           <a class="grid-item full" href="/HowToOrder_kor">주문 방법</a>
+
+           <div class="row-3">
+             <a class="grid-item card-recommend" href="/JamubyAI_kor">AI 추천 자무</a>
+             <a class="grid-item card-custom" href="/CreateYourBlend_kor">나만의 자무 만들기</a>
+             <a class="grid-item card-fortune" href="/chatbot_kor">자무 챗봇</a>
+           </div>
+		   <br>
+         </div>
+         
+      </section>
+
+		
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+
+						<div class="row">
+							<div class="col-12">
+
+								<!-- Contact -->
+								 <br><br><br><br>
+                           <section class="contact">
+                              <header>
+                                 <h3>저희 제품에 관심 있으신가요?</h3>
+                              </header>
+                              <p>자세한 안내가 필요하시면 문의해 주세요.</p>
+                              <ul class="icons">
+								<li><a href="#" class="icon brands fa-instagram"><span class="label">인스타그램</span></a></li>
+								<li><a href="#" class="icon brands fa-github"><span class="label">깃허브</span></a></li>
+								<li><a href="#" class="icon fa-envelope"><span class="label">이메일</span></a></li>
+                              </ul>
+                           </section>
+
+
+                        <!-- Copyright -->
+                           <div class="copyright">
+                              <ul class="menu">
+                                 <li>&copy; All rights reserved.</li><li>Design: <a href="#">2025 ICaps Team.16</a></li>
+                              </ul>
+                           </div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/util.js' %}"></script>
+			<script src="{% static 'c2/assets/js/main.js' %}"></script>
+
+
+			<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"
+    />
+
+    
+</html>
+
+
+	</body>
 </html>

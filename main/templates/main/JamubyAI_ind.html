@@ -1,5 +1,317 @@
-<html>
-    <head>
-        <title>Jamuby AI - Ind</title>
-    </head>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌿 Jamu oleh AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+	<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
+  <style>
+/* 공통 스타일 */
+body {
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  background-color: #fdfcf8;
+  color: #333;
+}
+
+/* 전체 섹션 */
+section#ai-recommendation{
+  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
+  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
+  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
+  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 화면에 따라 글자 크기 자동조절 */
+  margin-bottom: 1em;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 2em;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+}
+
+/* 태그 선택 그룹 */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+
+.tag {
+  flex: 0 0 auto; /* 자동 크기 조정 */
+  text-align: center;
+  padding: 0.6em 1em;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  max-width: 100%;
+  white-space: nowrap;         /* 한 줄로 */
+  text-overflow: ellipsis;     /* 너무 길면 … */
+  overflow: hidden;
+}
+
+
+.tag.selected {
+  background-color: #ffa500;
+  color: white;
+  border-color: #ffa500;
+}
+
+/* 버튼 */
+button {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #ffa500;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #e59400;
+}
+
+/* 결과창 */
+#jamu-result {
+  margin-top: 2em;
+  text-align: center;
+  padding: 1.5em;
+  border-radius: 12px;
+  background-color: #fff9e8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#jamu-result img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1em;
+}
+
+/* 로딩 애니메이션 */
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #ffa500;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 2em auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+  section#ai-recommendation {
+    padding: 1.5em;
+  }
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;      /* 가로로 나열 + 줄바꿈 */
+  gap: 0.5em;
+}
+
+.tag {
+  flex: 0 0 auto;       /* 글자 길이만큼 */
+  padding: 0.6em 1em;
+  border-radius: 999px;
+  font-size: clamp(0.9rem, 2.5vw, 1rem); /* 화면 줄어들면 글자도 살짝 줄임 */
+  white-space: nowrap;  /* 줄바꿈 방지 */
+}
+}
+
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+    <!-- Nav -->
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/home_ind">Beranda</a></li>
+								<li>
+									<a href="/order_ind">Pesan</a>
+
+								</li>
+								<li><a href="/info_ind">Tentang Jamu</a></li>
+								<li><a href="/ourstory_ind">Kisah Kami</a></li>
+								<li><a href="#">Bahasa</a>
+									<ul>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/jamubyAI_kor/">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+  <!-- Jamu by AI Section --> 
+   <br><br><br><br>
+    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu oleh AI</h2>
+<p style="font-family: 'Alkatra', sans-serif;">
+  Pilih bagaimana perasaan Anda, gaya perjalanan, cuaca, dan minat Anda.<br>
+  AI akan merekomendasikan jamu yang paling cocok untuk Anda.
+</p>
+
+<section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
+  <form id="jamu-form">
+    <div class="field-group">
+      <label>Bagaimana perasaan Anda hari ini?</label>
+      <div class="tag-container" data-name="mood">
+        <div class="tag">Lelah</div>
+        <div class="tag">Kepanasan</div>
+        <div class="tag">Kurang Sehat</div>
+        <div class="tag">Berenergi</div>
+      </div>
+    </div>
+<br>
+    <div class="field-group">
+      <label>Apa gaya perjalanan Anda?</label>
+      <div class="tag-container" data-name="style">
+        <div class="tag">Santai</div>
+        <div class="tag">Petualangan</div>
+        <div class="tag">Budaya</div>
+      </div>
+    </div>
+<br>
+    <div class="field-group">
+      <label>Bagaimana cuacanya?</label>
+      <div class="tag-container" data-name="weather">
+        <div class="tag">Panas</div>
+        <div class="tag">Sejuk</div>
+        <div class="tag">Hujan</div>
+      </div>
+    </div>
+<br>
+    <div class="field-group">
+      <label>Gejala atau Minat</label>
+      <div class="tag-container" data-name="symptom">
+        <div class="tag">Gejala Masuk Angin</div>
+        <div class="tag">Kurang Energi</div>
+        <div class="tag">Kesehatan Wanita</div>
+        <div class="tag">Tidur Lebih Nyenyak</div>
+        <div class="tag">Gangguan Pencernaan</div>
+        <div class="tag">Pereda Stres</div>
+        <div class="tag">Sejarah Jamu</div>
+        <div class="tag">Beras Kencur</div>
+      </div>
+    </div>
+<br>
+    <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">
+      Dapatkan Jamu Anda
+    </button>
+  </form>
+
+  <div id="jamu-result"></div>
+</section>
+
+
+  <!-- JavaScript -->
+  <script>
+    document.querySelectorAll('.tag-container').forEach(container => {
+    const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+
+    container.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        if (isSingleChoice) {
+          // 이미 선택된 걸 다시 클릭한 경우 → 해제
+          if (tag.classList.contains('selected')) {
+            tag.classList.remove('selected');
+          } else {
+            // 새 선택 → 나머지 해제 후 본인만 선택
+            container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+            tag.classList.add('selected');
+          }
+        } else {
+          // 다중 선택 허용 (symptom 그룹)
+          tag.classList.toggle('selected');
+        }
+      });
+    });
+  });
+
+    function recommendJamu() {
+  const resultDiv = document.getElementById("jamu-result");
+  resultDiv.innerHTML = `<div class="loader"></div>`;
+
+  setTimeout(() => {
+    const jamuList = [
+      {
+        name: "Beras Kencur",
+        desc: "Tambahkan energi Anda dengan jamu beras-herbal yang manis dan sedikit pedas ini.",
+        img: "{% static 'c2/images/BerasKencur.jpg' %}"
+      },
+      {
+        name: "Kunyit Asam",
+        desc: "Jamu kunyit dan asam jawa untuk menyegarkan tubuh dan pikiran.",
+        img: "{% static 'c2/images/KunyitAsem.png' %}"
+      },
+      {
+        name: "Temulawak",
+        desc: "Jamu klasik untuk pencernaan dan meningkatkan daya tahan tubuh.",
+        img: "{% static 'c2/images/Temulawak.jpg' %}"
+      }
+    ];
+
+    const randomIndex = Math.floor(Math.random() * jamuList.length);
+    const jamu = jamuList[randomIndex];
+
+    resultDiv.innerHTML = `
+      <img src="${jamu.img}" alt="${jamu.name}">
+      <h3>✨ Rekomendasi Jamu Anda: ${jamu.name}</h3>
+      <p>${jamu.desc}</p>
+      <button style="font-family: 'Alkatra', cursive;">Pesan Sekarang</button>
+    `;
+  }, 1000);
+}
+
+
+  </script>
+
+    <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
+</body>
 </html>

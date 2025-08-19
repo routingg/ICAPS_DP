@@ -1,5 +1,234 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Lens by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-    <head>
-        <title>our story - Kor</title>
-    </head>
+	<head>
+		<title>우리의 이야기</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c3/assets/css/main.css' %}" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+		<noscript><link rel="stylesheet" href="{% static 'c3/assets/css/noscript.css' %}" /></noscript>
+
+		<style>
+
+
+			#nav ul {
+			  list-style: none;  /* 동그라미 제거 */
+			  margin: 0;
+			  padding: 0;
+			  color: black;
+			}
+
+			
+
+			/* 썸네일은 일정한 높이에 맞춰서 cover */
+			#thumbnails article .thumbnail img {
+			  width: 100%;
+			  height: 220px;       /* 원하는 고정 높이 */
+			  object-fit: cover;   /* 꽉 채우되 비율 유지 (잘릴 수 있음) */
+			  border-radius: 6px;  /* 선택: 모서리 둥글게 */
+			}
+
+			/* 풀 이미지 (fulls) 는 contain 으로 전체 보이게 */
+			#main .viewer img,
+			#viewer .inner img {
+			  max-width: 95%;
+			  max-height: 85vh;
+			  width: auto;
+			  height: auto;
+			  margin: 0 auto;
+			  display: block;
+			}
+
+
+		
+
+
+			
+		</style>
+	</head>
+	<body class="is-preload-0 is-preload-1 is-preload-2">
+
+<!-- Main -->
+<div id="main">
+
+  <!-- Header -->
+  <header id="header">
+
+    <nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
+      <ul>
+        <li><a href="/home_kor">홈</a></li>
+        <li><a href="/order_kor">주문하기</a></li>
+        <li><a href="/info_kor">자무 소개</a></li>
+        <li><a href="/ourstory_kor">우리의 이야기</a></li>
+        <li>
+          <a href="/ourstory">English</a> |
+          <a href="/ourstory_ind">Bahasa Indonesia</a> |
+          <a href="/ourstory_kor">한국어</a>
+        </li>
+      </ul>
+    </nav><br><br>
+
+    <h1 style="font-family: 'Pretendard', sans-serif;">우리의 이야기</h1>
+
+    <p style="font-family: 'Pretendard', sans-serif;">
+      안녕하세요, 우리는 <strong>Team.16</strong>입니다.
+      <a href="https://sites.google.com/view/2025dcamp-hustvietnam/home">iCaps</a> 국제 캡스톤 프로그램에서 활동하고 있어요.<br>
+      우리는 베트남 하노이에서 열린 <strong>DCamp (2월 9–15일)</strong>에서 처음 만나,
+      한국과 인도네시아의 열정적인 학생들로 구성된 다문화 팀을 꾸렸습니다.<br>
+      함께 인도네시아의 전통 허브 웰니스 음료인 <strong style="color: #EB6E12;">자무</strong>에
+      AI 기반 개인화를 더한 공동 프로젝트를 통해 전통과 기술의 교차점을 탐구했습니다.<br>
+      밤늦은 브레인스토밍부터 국경을 넘는 줌 회의까지, 의미 있는 해결책을 만들기 위해 꾸준히 협력했고
+      그 과정에서 더 끈끈한 우정도 쌓았습니다.
+    </p>
+
+    <ul class="icons">
+      <!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
+      <li><a href="#" class="icon brands fa-instagram"><span class="label">인스타그램</span></a></li>
+      <li><a href="#" class="icon brands fa-github"><span class="label">깃허브</span></a></li>
+      <li><a href="#" class="icon fa-envelope"><span class="label">이메일</span></a></li>
+    </ul>
+  </header>
+
+  <!-- Thumbnail -->
+  <section id="thumbnails" style="font-family: 'Pretendard', sans-serif;">
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/01.jpg' %}"><img src="{% static 'c3/images/thumbs/01.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">하노이에서의 첫 만남</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">하노이에서 찍은 우리의 첫 단체 사진. 프로젝트의 시작을 알린 소중한 순간입니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/02.jpg' %}"><img src="{% static 'c3/images/thumbs/02.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">열정 가득한 협업</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">캠프 동안 함께 모여 아이디어를 구체화하며, 에너지가 넘치는 협업을 이어갔습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/03.jpg' %}"><img src="{% static 'c3/images/thumbs/03.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">팀워크에 대한 자신감</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">캠프 건물 앞에서 찍은 단체 사진으로, 커져 가는 신뢰와 팀의 힘을 보여 줍니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/04.jpg' %}"><img src="{% static 'c3/images/thumbs/04.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">우정과 협력의 기록</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">하노이 캠프 마지막에 찍은 단체 사진. 일주일 동안 쌓은 유대와 협력을 담았습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/05.jpg' %}"><img src="{% static 'c3/images/thumbs/05.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">하노이 카페에서의 추억</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">카페 지앙에서 함께 에그커피를 즐기며, 프로젝트를 넘어선 즐거운 기억을 만들었습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/06.jpg' %}"><img src="{% static 'c3/images/thumbs/06.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">호안끼엠 호수에서</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">하노이의 랜드마크 앞에서 찍은 야간 사진으로, 우리가 공유한 문화 경험을 상징합니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/07.jpg' %}"><img src="{% static 'c3/images/thumbs/07.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">활기찬 프로젝트 미팅</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">아이디어를 나누고 프로젝트 진행을 적극적으로 논의하던 즐거운 순간입니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/08.jpg' %}"><img src="{% static 'c3/images/thumbs/08.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">끝까지 흔들림 없는 몰입</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">긴 회의 속에서도 미소를 잃지 않고, 끝까지 열정적으로 임했습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/09.jpg' %}"><img src="{% static 'c3/images/thumbs/09.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">첫 온라인 미팅</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">하노이 캠프 이후 첫 줌 세션. 원격 협업의 시작을 알렸습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/10.jpg' %}"><img src="{% static 'c3/images/thumbs/10.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">발표 준비</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">중간 발표를 위해 세부 사항을 다듬는 진지하고 집중된 회의. 프로젝트의 완성도를 한 걸음씩 높였습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/11.jpg' %}"><img src="{% static 'c3/images/thumbs/11.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">자발적 소통</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">줌 외에도 언제 어디서나 연결되기 위해 왓츠앱을 자주 활용했습니다. 떨어져 있어도 팀워크는 견고했습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/12.jpg' %}"><img src="{% static 'c3/images/thumbs/12.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">우리가 쌓아 올린 유대</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">바쁜 일정 속에서도 웃음을 잃지 않았고, 함께라는 사실만으로 큰 힘이 됐습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/13.jpg' %}"><img src="{% static 'c3/images/thumbs/13.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">협업 도구 활용</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">회의 내내 캔바로 적극 협업하며 인터페이스 디자인과 스토리텔링을 함께 다듬었습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/14.jpg' %}"><img src="{% static 'c3/images/thumbs/14.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">아이디어 다듬기</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">활발한 토론으로 의견을 나누고 프로젝트 주제를 정교하게 다듬었습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/15.jpg' %}"><img src="{% static 'c3/images/thumbs/15.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">마지막 온라인 미팅</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">인천에서 다시 만나기 3일 전, 마지막 왓츠앱 통화를 했습니다. 오프라인 재회의 설렘이 가득했죠.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/16.jpg' %}"><img src="{% static 'c3/images/thumbs/16.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">한국에서의 재회</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">인천에서 마침내 다시 만난 날. 몇 달간의 온라인 협업 끝에 직접 만나 웃을 수 있어 더없이 따뜻했습니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/17.jpg' %}"><img src="{% static 'c3/images/thumbs/17.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">거리에서의 즐거운 추억</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">숙소 근처 거리를 함께 걸으며 찍은 단체 사진. 프로젝트를 넘어 진정한 우정을 나눈 시간입니다.</p>
+    </article>
+
+    <article>
+      <a class="thumbnail" href="{% static 'c3/images/fulls/18.jpg' %}"><img src="{% static 'c3/images/thumbs/18.jpg' %}" alt="" /></a>
+      <h2 style="font-family: 'Pretendard', sans-serif;">포토부스에서의 웃음</h2>
+      <p style="font-family: 'Pretendard', sans-serif;">한국의 포토부스에서 소품과 유쾌한 포즈로 남긴 사진들. 진지한 회의와 발표를 마치고 맞이한 순수한 기쁨과 축하의 순간이었습니다.</p>
+    </article>
+
+  </section>
+</div>
+
+
+
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li style="font-family: 'Pretendard', sans-serif;"><strong>&copy; Team.16.</strong></li>
+							<!-- <li>Design: <a href="https://sites.google.com/view/2025dcamp-hustvietnam/home">ICaps in Team.16</a>.</li> -->
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'c3/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'c3/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'c3/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'c3/assets/js/main.js' %}"></script>
+
+	</body>
 </html>

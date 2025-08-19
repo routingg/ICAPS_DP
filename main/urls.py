@@ -13,7 +13,7 @@ urlpatterns = [
     path('order_ind/', views.order_ind, name='order_ind'),
 
     path('JamubyAI/', views.JamubyAI, name='Jamu by AI'), # Jamu by AI page
-    path('JamubyAI_kor/', views.JamubyAI_kor, name='Jamu by AI'),
+    path('JamubyAI_kor/', views.JamubyAI_kor, name='Jamu by AI_kor'),
     path('JamubyAI_ind/', views.JamubyAI_ind, name='Jamu by AI_ind'),
 
     path('CreateYourBlend/', views.CreateYourBlend, name='Create Your Blend'),
@@ -36,5 +36,7 @@ urlpatterns = [
     path('api/chatbot/', views.chatbot_api, name='chatbot_api'),
     path('api/order-status/', views.order_status_api, name='order_status_api'),
 
-    
+    path('HowToOrder/', views.HowToOrder, name='How to Order'), # How to Order page
+    path('HowToOrder_kor/', views.HowToOrder_kor, name='How to Order_kor'), # How to Order page in Korean
+    path('HowToOrder_ind/', views.HowToOrder_ind, name='How to Order_ind'), # How to Order page in Indonesian
 ]

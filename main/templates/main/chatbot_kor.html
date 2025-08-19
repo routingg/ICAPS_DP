@@ -1,5 +1,647 @@
-<html>
-    <head>
-        <title>Chatbot - Kor</title>
-    </head>
-</html>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>🤖 자무 AI 챗봇</title>
+ <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  
+
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
+        
+<style>
+body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: #fdfcf8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+section#jamu-chatbot {
+    max-width: 700px;
+    margin: 3em auto;
+    padding: 2em;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 2em;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Welcome Message */
+.welcome-message {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #fff9e8 0%, #ffeaa7 100%);
+    border: 1px solid #ffa500;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ffa500, #e59400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.welcome-content {
+    flex: 1;
+}
+
+.welcome-content strong {
+    font-size: 16px;
+    color: #333;
+}
+
+.welcome-content p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+}
+
+/* Chat Area */
+.chat-area {
+    background-color: #fff9e8;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 2em;
+    height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.message {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.user-message {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.bot-message {
+    justify-content: flex-start;
+}
+
+.message-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    flex-shrink: 0;
+    background: linear-gradient(135px, #ffa500, #e59400);
+    color: white;
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(135deg, #ffa500, #ffd78b);
+}
+
+.user-message .message-avatar::after {
+    content: 'ME';
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.bot-message .message-content {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #333;
+}
+
+.user-message .message-content {
+    background-color: #ffa500;
+    color: white;
+}
+
+/* Quick Questions */
+.quick-questions {
+    margin-bottom: 2em;
+}
+
+.quick-questions label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+}
+
+.tag {
+    padding: 0.6em 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tag:hover {
+    background-color: #ffa500;
+    color: white;
+    border-color: #ffa500;
+    transform: translateY(-1px);
+}
+
+/* Input Section */
+.input-section {
+    margin-bottom: 2em;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    background-color: #f8f8f8;
+    border-radius: 25px;
+    padding: 5px;
+    border: 2px solid #e0e0e0;
+    transition: border-color 0.3s ease;
+}
+
+.input-container:focus-within {
+    border-color: #ffa500;
+}
+
+#user-input {
+    flex: 1;
+    border: none;
+    background: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+}
+
+#user-input::placeholder {
+    color: #999;
+}
+
+.send-button {
+    padding: 12px 24px;
+    background-color: #ffa500;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #e59400;
+    transform: translateY(-1px);
+}
+
+/* Loading */
+.loading-container {
+    display: none;
+    text-align: center;
+    margin: 2em 0;
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #ffa500;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1em auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+    color: #666;
+    font-style: italic;
+}
+
+/* Navigation */
+.navigation-section {
+    text-align: center;
+    margin-top: 2em;
+    padding-top: 1.5em;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 0.8em 1.5em;
+    margin: 0 0.5em;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav-button.primary {
+    background-color: #ffa500;
+    color: white;
+}
+
+.nav-button.primary:hover {
+    background-color: #e59400;
+    transform: translateY(-2px);
+}
+
+.nav-button.secondary {
+    background-color: #f8f8f8;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.nav-button.secondary:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    section#jamu-chatbot {
+        margin: 1em;
+        padding: 1.5em;
+    }
+    
+    .chat-area {
+        height: 350px;
+        padding: 15px;
+    }
+    
+    .welcome-message {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .welcome-content p {
+        text-align: center;
+    }
+    
+    .tag-container {
+        justify-content: center;
+    }
+    
+    .tag {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+    }
+    
+    #user-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+}
+
+
+
+/* 데스크탑/태블릿: 채팅창을 뷰포트 기반으로 유연하게 */
+#jamu-chatbot .chat-area{
+  height: clamp(420px, 58vh, 700px); /* 화면 크기에 따라 420~700px로 */
+}
+
+/* ===== 모바일 최적화 ===== */
+@media (max-width: 768px){
+  section#jamu-chatbot{
+    margin: 12px;
+    padding: 14px;
+  }
+
+  /* 채팅창 크게 확보 */
+  #jamu-chatbot .chat-area{
+    height: 68vh;        /* 화면의 약 2/3을 채팅에 할당 */
+    min-height: 360px;   /* 너무 작아지지 않게 하한 */
+    padding: 15px;
+  }
+
+  /* 웰컴 배너 컴팩트 (혹은 숨김 옵션은 아래 480px에서) */
+  #jamu-chatbot .welcome-message{
+    gap: 10px;
+    padding: 14px;
+  }
+  #jamu-chatbot .welcome-content strong{ font-size: 14px; }
+  #jamu-chatbot .welcome-content p{ font-size: 12px; }
+
+  /* Quick Questions: 가로 스크롤 칩으로 작게 */
+  #jamu-chatbot .quick-questions{ margin: 10px 0 12px; }
+  #jamu-chatbot .quick-questions label{
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  #jamu-chatbot .tag-container{
+    display: flex;
+    flex-wrap: nowrap;              /* 한 줄로 */
+    gap: 8px;
+    overflow-x: auto;               /* 좌우 스크롤 */
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+  #jamu-chatbot .tag{
+    flex: 0 0 auto;                 /* 줄바꿈 방지 */
+    font-size: 13px;
+    padding: 0.45em 0.9em;
+    border-radius: 16px;
+  }
+
+  /* 입력 영역도 약간 컴팩트 */
+  #jamu-chatbot .input-container{ padding: 4px; }
+  #user-input{ font-size: 16px; }   /* iOS 확대 방지 */
+  .send-button{
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px){
+  /* 아주 작은 화면에서는 웰컴 배너를 숨겨서 공간 확보 */
+  #jamu-chatbot .welcome-message{ display: none; }
+
+  /* 채팅창을 더 크게 */
+  #jamu-chatbot .chat-area{
+    height: 72vh;
+    min-height: 380px;
+  }
+
+  /* 태그 더 작게 */
+  #jamu-chatbot .tag{
+    font-size: 12.5px;
+    padding: 0.4em 0.8em;
+  }
+}
+
+
+/* 채팅창: 자동 확장 → 한계 도달 시 스크롤 */
+#jamu-chatbot .chat-area{
+  height: auto !important;                       /* 고정 높이 제거 */
+  min-height: 220px;                             /* 시작 최소 높이 */
+  max-height: clamp(360px, 70vh, 800px);         /* 화면 높이 기준 상한 */
+  overflow-y: auto;                               /* 넘치면 내부 스크롤 */
+  overscroll-behavior: contain;                   /* 모바일 바운스 방지 */
+  padding: 20px;                                  /* 필요시 유지/조절 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
+}
+
+/* 태블릿/모바일: 상한을 조금 더 느슨하게 */
+@media (max-width: 768px){
+  #jamu-chatbot .chat-area{
+    min-height: 200px;
+    max-height: clamp(300px, 68vh, 640px);
+    padding: 15px;
+  }
+}
+
+/* 아주 작은 기기 */
+@media (max-width: 480px){
+  #jamu-chatbot .chat-area{
+    min-height: 190px;
+    max-height: clamp(280px, 72vh, 560px);
+  }
+}
+
+
+
+
+</style>
+
+ </head>
+
+<body>
+
+      <!-- Nav -->
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/home_kor">홈</a></li>
+								<li>
+									<a href="/order_kor">주문하기</a>
+
+								</li>
+								<li><a href="/info_kor">자무 소개</a></li>
+								<li><a href="/ourstory_kor">우리의 이야기</a></li>
+								<li><a href="#">언어</a>
+									<ul>
+										<li style="font-family: Alkatra;"><a href="/chatbot">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/chatbot_ind/">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/chatbot_kor/">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+<br><br><br><br>
+
+<h2 style="font-family: 'Alkatra', sans-serif;">🤖 자무 챗봇</h2>
+    <p style="font-family: 'Alkatra', sans-serif;">대화를 통해 전통 인도네시아 허브 지혜를 발견해 보세요.<br>자무의 치유 효능에 대해 AI 전문가와 이야기할 수 있습니다.</p>
+
+<section id="jamu-chatbot">
+    
+    
+
+    <!-- 채팅 영역 -->
+    <div id="chat-container" class="chat-area">
+        <div class="welcome-message">
+            <div class="bot-avatar">🤖</div>
+            <div class="welcome-content">
+                <strong>자무 전문가</strong>가 여러분을 도와드립니다
+                <p>전통 인도네시아 약초(자무)에 대해 무엇이든 물어보세요!</p>
+            </div>
+        </div>
+        
+        <div class="message bot-message">
+            <div class="message-avatar">🤖</div>
+            <div class="message-content">
+                안녕하세요! 저는 자무 전문가로서 여러분의 건강을 돕기 위해 여기 있습니다. 궁금한 점을 편하게 물어보세요!
+            </div>
+        </div>
+    </div>
+
+    <!-- 빠른 질문 태그 -->
+    <div class="quick-questions">
+        <label>빠른 질문</label>
+        <div class="tag-container">
+            <div class="tag" onclick="sendQuickMessage('감기 증상에 좋은 자무를 추천해 주세요')">감기 증상</div>
+            <div class="tag" onclick="sendQuickMessage('기운이 없을 때 좋은 자무는 무엇인가요?')">기운 없을 때</div>
+            <div class="tag" onclick="sendQuickMessage('여성 건강에 도움이 되는 자무에 대해 알려주세요')">여성 건강</div>
+            <div class="tag" onclick="sendQuickMessage('숙면에 도움이 되는 자무가 있나요?')">숙면 도움</div>
+            <div class="tag" onclick="sendQuickMessage('소화 불량에 좋은 자무 레시피를 알려주세요')">소화 불량</div>
+            <div class="tag" onclick="sendQuickMessage('스트레스 완화에 도움이 되는 자무')">스트레스 완화</div>
+            <div class="tag" onclick="sendQuickMessage('자무의 역사와 문화적 의미를 알려주세요')">자무 역사</div>
+            <div class="tag" onclick="sendQuickMessage('Beras Kencur 만드는 방법 알려주세요')">브라스 켄쿠르</div>
+        </div>
+    </div>
+
+    <!-- 입력 영역 -->
+    <div class="input-section">
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="자무에 대해 물어보세요...">
+            <button onclick="sendMessage()" class="send-button">보내기</button>
+        </div>
+    </div>
+
+    <!-- 로딩 표시 -->
+    <div id="loading" class="loading-container">
+        <div class="loader"></div>
+        <p>자무 전문가가 생각 중...</p>
+    </div>
+
+    <!-- 네비게이션 -->
+    <div class="navigation-section">
+        <a href="{% url 'main:home' %}" class="nav-button primary">홈</a>
+    </div>
+</section>
+
+
+<script>
+function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const chatContainer = document.getElementById('chat-container');
+    const loading = document.getElementById('loading');
+    const message = userInput.value.trim();
+    
+    if (message === '') return;
+    
+    // 사용자 메시지 추가
+    const userMessageDiv = document.createElement('div');
+    userMessageDiv.className = 'message user-message';
+    userMessageDiv.innerHTML = `
+        <div class="message-avatar"></div>
+        <div class="message-content">${message}</div>
+    `;
+    chatContainer.appendChild(userMessageDiv);
+    
+    // 입력창 초기화
+    userInput.value = '';
+    
+    // 스크롤을 맨 아래로
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    
+    // 로딩 표시
+    loading.style.display = 'block';
+    
+    // API 호출
+    fetch('{% url "main:chatbot_api" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'message': message
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        loading.style.display = 'none';
+        
+        // 챗봇 응답 추가
+        const botMessageDiv = document.createElement('div');
+        botMessageDiv.className = 'message bot-message';
+        botMessageDiv.innerHTML = `
+            <div class="message-avatar">JB</div>
+            <div class="message-content">${data.response}</div>
+        `;
+        chatContainer.appendChild(botMessageDiv);
+        
+        // 스크롤을 맨 아래로
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    })
+    .catch(error => {
+        loading.style.display = 'none';
+        console.error('Error:', error);
+        
+        // 에러 메시지 표시
+        const errorMessageDiv = document.createElement('div');
+        errorMessageDiv.className = 'message bot-message';
+        errorMessageDiv.innerHTML = `
+            <div class="message-avatar">JB</div>
+            <div class="message-content">Sorry, there was a temporary issue. Please try again in a moment.</div>
+        `;
+        chatContainer.appendChild(errorMessageDiv);
+        
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+}
+
+function sendQuickMessage(message) {
+    document.getElementById('user-input').value = message;
+    sendMessage();
+}
+
+// 엔터 키로 메시지 전송
+document.getElementById('user-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+</script>
+
+<!-- Scripts -->
+			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'c2/assets/js/util.js' %}"></script>
+			<script src="{% static 'c2/assets/js/main.js' %}"></script>
+
+ </body>
+ </html>   

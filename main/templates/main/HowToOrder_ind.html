@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 AI 자무 추천</title>
+  <title>Cara menggunakan mesin penjual jamu</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
@@ -162,20 +162,20 @@ button:hover {
 <body>
   
   <!-- Nav -->
-						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
+						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
 							<ul>
-								<li><a href="/home_kor">홈</a></li>
+								<li><a href="/">Home</a></li>
 								<li>
-									<a href="/order_kor">주문하기</a>
-
+									<a href="/order">Order</a>
+									
 								</li>
-								<li><a href="/info_kor">자무 소개</a></li>
-								<li><a href="/ourstory_kor">우리의 이야기</a></li>
-								<li><a href="#">언어</a>
+								<li><a href="/info">About Jamu</a></li>
+								<li><a href="/ourstory">Our Story</a></li>
+								<li><a href="#">Language</a>
 									<ul>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI">English</a></li>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI_kor">한국어</a></li>
+										<li style="font-family: Alkatra;"><a href="/JamubyAI">English</a></li>
+										<li style="font-family: Alkatra;"><a href="/JamubyAI_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Alkatra;"><a href="/JamubyAI_kor">한국어</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -183,54 +183,54 @@ button:hover {
 
   <!-- Jamu by AI Section --> 
    <br><br><br><br>
-    <h2 style="font-family: 'Pretendard', sans-serif;">🌿 AI 자무 추천</h2>
-    <p style="font-family: 'Pretendard', sans-serif;">현재 컨디션, 여행 스타일, 날씨, 관심사를 선택하세요.<br>AI가 당신에게 딱 맞는 자무를 추천해 드립니다.</p>
+    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu by AI</h2>
+    <p style="font-family: 'Alkatra', sans-serif;">Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
 
-  <section id="ai-recommendation" style="font-family: 'Pretendard', cursive;">
+  <section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
     <form id="jamu-form">
       <div class="field-group">
-        <label>오늘 기분이 어떠신가요?</label>
+        <label>How do you feel today?</label>
         <div class="tag-container" data-name="mood">
-          <div class="tag">피곤함</div>
-          <div class="tag">너무 더움</div>
-          <div class="tag">조금 아픔</div>
-          <div class="tag">에너지가 넘침</div>
+          <div class="tag">Tired</div>
+          <div class="tag">Too Hot</div>
+          <div class="tag">A bit Sick</div>
+          <div class="tag">Energized</div>
         </div>
       </div>
 <br>
       <div class="field-group">
-        <label>여행 스타일은 무엇인가요?</label>
+        <label>What's your travel style?</label>
         <div class="tag-container" data-name="style">
-          <div class="tag">휴식형</div>
-          <div class="tag">모험형</div>
-          <div class="tag">문화 체험</div>
+          <div class="tag">Relaxing</div>
+          <div class="tag">Adventurous</div>
+          <div class="tag">Cultural</div>
         </div>
       </div>
 <br>
       <div class="field-group">
-        <label>날씨는 어떤가요?</label>
+        <label>What's the weather like?</label>
         <div class="tag-container" data-name="weather">
-          <div class="tag">더움</div>
-          <div class="tag">선선함</div>
-          <div class="tag">비옴</div>
+          <div class="tag">Hot</div>
+          <div class="tag">Cool</div>
+          <div class="tag">Rainy</div>
         </div>
       </div>
 <br>
       <div class="field-group">
-        <label>증상 또는 관심사</label>
+        <label>Symptoms or Interests</label>
         <div class="tag-container" data-name="symptom">
-          <div class="tag">감기 증상</div>
-          <div class="tag">기운 없음</div>
-          <div class="tag">여성 건강</div>
-          <div class="tag">숙면</div>
-          <div class="tag">소화 불량</div>
-          <div class="tag">스트레스 완화</div>
-          <div class="tag">자무 역사</div>
-          <div class="tag">브라스 켄쿠르</div>
+          <div class="tag">Cold Symptoms</div>
+          <div class="tag">Low Energy</div>
+          <div class="tag">Women's Health</div>
+          <div class="tag">Better Sleep</div>
+          <div class="tag">Indigestion</div>
+          <div class="tag">Stress Relief</div>
+          <div class="tag">Jamu History</div>
+          <div class="tag">Beras Kencur</div>
         </div>
       </div>
 <br>
-      <button type="button" style="font-family: 'Pretendard', cursive;" onclick="recommendJamu()">내 자무 추천 받기</button>
+      <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Jamu</button>
     </form>
 
     <div id="jamu-result"></div>
@@ -267,18 +267,18 @@ button:hover {
       setTimeout(() => {
         const jamuList = [
           {
-            name: "브라스 켄쿠르 (Beras Kencur)",
-            desc: "달콤하고 은은한 매운맛의 쌀·약초 자무로 에너지를 충전해 보세요.",
+            name: "Beras Kencur",
+            desc: "Boost your energy with this sweet and spicy rice-herb jamu.",
             img: "{% static 'c2/images/BerasKencur.jpg' %}"
           },
           {
-            name: "쿠닛 아셈 (Kunyit Asem)",
-            desc: "강황과 타마린드가 어우러져 몸과 마음을 상쾌하게 해 줍니다.",
+            name: "Kunyit Asam",
+            desc: "Turmeric & tamarind jamu to refresh your body and mind.",
             img: "{% static 'c2/images/KunyitAsem.png' %}"
           },
           {
-            name: "테물라왁 (Temulawak)",
-            desc: "소화와 면역에 도움을 주는 클래식 자무입니다.",
+            name: "Temulawak",
+            desc: "A classic jamu for digestion and immunity.",
             img: "{% static 'c2/images/Temulawak.jpg' %}"
           }
         ];
@@ -288,15 +288,14 @@ button:hover {
 
         resultDiv.innerHTML = `
           <img src="${jamu.img}" alt="${jamu.name}">
-          <h3>✨ 추천 자무: ${jamu.name}</h3>
+          <h3>✨ Your Recommended Jamu: ${jamu.name}</h3>
           <p>${jamu.desc}</p>
-          <button style="font-family: 'Pretendard', cursive;">지금 주문하기</button>
+          <button style="font-family: 'Alkatra', cursive;">Order Now</button>
         `;
       }, 1000);
     }
 
   </script>
-
 
     <!-- Scripts -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
