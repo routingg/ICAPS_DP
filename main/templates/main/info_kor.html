@@ -1,5 +1,587 @@
-<html>
-    <head>
-        <title>info - Kor</title>
-    </head>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>자무 소개</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+  
+
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
+
+
+  <!-- Style -->
+  <style>
+    body {
+      font-family: 'Pretendard', serif;
+      margin: 0;
+      background-color: #fdfcf8;
+      color: #333;
+    }
+
+    
+
+    section {
+      padding: 4em 2em;
+    }
+
+    /* 모든 섹션 제목을 통일된 크기로 설정 */
+    h2, h3, h4 {
+      font-family: 'Pretendard', cursive;
+      color: #0C1214;
+    }
+
+    /* 메인 섹션 제목들 통일 */
+    #main h2,
+    .carousel h2,
+    .top-drinks-header h2 {
+      font-family: 'Pretendard', cursive;
+      font-size: 2.5em;
+      color: #0C1214;
+      margin-bottom: 0.5em;
+    }
+
+    .wrapper {
+      background-color: #ffffff;
+      border-radius: 16px;
+      margin: 2em auto;
+      padding: 2em;
+      max-width: 1000px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .image.featured img {
+      border-radius: 20px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    a.button {
+      background-color: #ffa500;
+      color: white;
+      padding: 0.8em 1.4em;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    a.button:hover {
+      background-color: #e59400;
+    }
+
+    footer {
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    /* 캐러셀 스타일 */
+    .carousel {
+      position: relative;
+      padding: 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .carousel .reel {
+      display: flex;
+      gap: 1.5em;
+      padding: 1em 0;
+      transition: transform 0.5s ease;
+      width: max-content;
+    }
+
+    .carousel article {
+      background-color: #ffffff;
+      border-radius: 16px;
+      min-width: 260px;
+      max-width: 260px;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 1.2em;
+      text-align: center;
+    }
+
+    .carousel article img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1em;
+    }
+
+    .carousel article h3 {
+      font-family: 'Pretendard', cursive;
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+      color: #0C1214;
+    }
+
+    .carousel article p {
+      font-size: 0.95em;
+      line-height: 1.5em;
+      color: #666;
+    }
+
+    .carousel-wrapper button.prev,
+    .carousel-wrapper button.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 0.8em 1em;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-wrapper button.prev:hover,
+    .carousel-wrapper button.next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .carousel-wrapper button.prev {
+      left: 10px;
+    }
+
+    .carousel-wrapper button.next {
+      right: 10px;
+    }
+
+    
+
+    /* Top 3 Representative Jamu Drinks 새로운 스타일 */
+    .top-drinks-section {
+      padding: 4em 2em;
+      background-color: #fdfcf8;
+    }
+
+    .top-drinks-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .top-drinks-header {
+      margin-bottom: 3em;
+    }
+
+    .top-drinks-header p {
+      font-size: 1.2em;
+      color: #666;
+      font-style: italic;
+    }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2em;
+      margin-top: 3em;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(12px, 3vw, 24px);
+          
+      /* 좌우 대칭 패딩 + 가운데 정렬 */
+      max-width: 1500px;
+      margin-inline: auto;                  /* 수평 중앙 */
+      padding-inline: clamp(16px, 4vw, 24px);
+    }
+
+    /* .drink-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    } */
+
+    .drink-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+    
+      width: 100%;
+      max-width: 360px;                     /* 상한만 주고 */
+      margin-inline: auto;                  /* 단일 컬럼일 때도 가운데 */
+    }
+
+    .drink-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .drink-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .drink-card:hover .drink-image {
+      transform: scale(1.05);
+    }
+
+    .drink-info {
+      padding: 2em;
+      text-align: left;
+    }
+
+    .drink-info h3 {
+      font-family: 'Pretendard', cursive;
+      font-size: 1.8em;
+      color: #0C1214;
+      margin-bottom: 1em;
+    }
+
+    .drink-info p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 1.5em;
+    }
+
+    .drink-benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+      margin-bottom: 1.5em;
+    }
+
+    .benefit-tag {
+      background-color: #ffa500;
+      color: white;
+      padding: 0.3em 0.8em;
+      border-radius: 15px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    .drink-description {
+      font-size: 1em;
+      line-height: 1.5;
+      color: #666;
+      text-align: justify;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      .drinks-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5em;
+      }
+      
+      .drink-card {
+        margin: 0 1em;
+      }
+      
+      /* 모바일에서 제목 크기 조정 */
+      #main h2,
+      .carousel h2,
+      .top-drinks-header h2 {
+        font-size: 2em;
+      }
+      
+      .carousel article {
+        min-width: 220px;
+        max-width: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Nav -->
+						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
+							<ul>
+								<li><a href="/home_kor">홈</a></li>
+								<li>
+									<a href="/order_kor">주문하기</a>
+
+								</li>
+								<li><a href="/info_kor">자무 소개</a></li>
+								<li><a href="/ourstory_kor">우리의 이야기</a></li>
+								<li><a href="#">언어</a>
+									<ul>
+										<li style="font-family: Pretendard;"><a href="/info">English</a></li>
+										<li style="font-family: Pretendard;"><a href="/info_ind">Bahasa Indonesia</a></li>
+										<li style="font-family: Pretendard;"><a href="/info_kor">한국어</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+  <!-- Banner -->
+  <section style="text-align:center; margin: 0 0;">
+    <header>
+      <br><br>
+      <h2 style="font-size: 2.5em;"><br>안녕하세요. <br> <strong>자무</strong>에 대해 알아볼까요?</h2>
+      <p>자무에 대해 더 알아보세요</p>
+    </header>
+  </section>
+
+  <!-- Main: Introduction -->
+  <div class="wrapper" style="margin-top: 1px;">
+    <article id="main" class="container special" style="text-align:center;">
+      <a href="#" class="image featured">
+        <img src="{% static 'c2/images/jamu_main.png' %}" alt="자무 메인 이미지" width="300" height="200"/>
+      </a>
+      <header>
+        <h2>인도네시아 전통 의학: 자무</h2>
+        <p>자무 문화는 할머니에서 어머니로, 어머니에서 딸로 이어지는 소중한 가족의 유산을 의미합니다.</p>
+      </header>
+      <p>
+        자무는 8세기부터 인도네시아에서 전해 내려온 약초 기반의 의학 및 치료법으로,
+        2023년 유네스코 인류무형문화유산 대표목록에 등재되었습니다.
+        자무는 ‘열성 질환은 서늘한 성질의 약으로, 한성 질환은 따뜻한 성질의 약으로 다스린다’는 믿음에 바탕을 두며,
+        건강한 상태란 몸속의 열과 냉이 균형을 이루는 것이라고 봅니다.
+        자무의 목적은 면역력을 높이고 건강을 유지하는 데 있습니다.
+      </p>
+      <footer>
+        <a href="/order" class="button">자무 주문하기</a>
+      </footer>
+    </article>
+  </div>
+
+  <!-- Carousel: Jamu Components -->
+  <section class="carousel">
+    <header>
+      <h2 style="text-align:center;">자연의 약국: 자무 재료</h2>
+    </header>
+    <div class="carousel-wrapper">
+      <button class="prev">&#10094;</button>
+      <div class="reel">
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Turmeric.png' %}" alt="강황" /></a>
+          <header><h3>강황 (Kunyit)</h3></header>
+          <p>자무의 핵심 재료인 황금빛 뿌리줄기로, 뛰어난 항염·항산화 효과를 지녔습니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/ginger.jpg' %}" alt="생강" /></a>
+          <header><h3>생강 (Jahe)</h3></header>
+          <p>감기 완화, 소화 촉진, 체온 조절에 효과적인 따뜻한 향신료입니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Galangal.jpg' %}" alt="갈랑갈" /></a>
+          <header><h3>갈랑갈 (Kencur)</h3></header>
+          <p>기침과 몸살 완화에 뛰어난 효과를 보이는 인도네시아 전통 약초입니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Tamarind.jpg' %}" alt="타마린드" /></a>
+          <header><h3>타마린드 (Asem)</h3></header>
+          <p>소화를 돕고 상큼한 산미를 더해 자무의 풍미 균형을 잡아주는 열대 과일입니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Temulawak_low.jpg' %}" alt="테물라왁" /></a>
+          <header><h3>테물라왁</h3></header>
+          <p>자바 전통 강황의 한 종류로, 간 건강과 면역 증진에 도움을 줍니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/PalmSugar.png' %}" alt="야자당" /></a>
+          <header><h3>야자당 (Gula Merah)</h3></header>
+          <p>자연 유래 감미료이자 미네랄 공급원으로, 자무에 깊은 단맛을 더합니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Lime.jpg' %}" alt="라임" /></a>
+          <header><h3>라임 (Jeruk Nipis)</h3></header>
+          <p>비타민 C와 상큼함을 더해 자무의 맛과 영양을 완성합니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Lemongrass.jpg' %}" alt="레몬그라스" /></a>
+          <header><h3>레몬그라스 (Serai)</h3></header>
+          <p>은은한 향과 소화에 도움을 주어 깔끔하고 상쾌한 여운을 남깁니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cinnamon.jpg' %}" alt="계피" /></a>
+          <header><h3>계피 (Kayu Manis)</h3></header>
+          <p>혈당 조절과 항산화 효과를 제공하며, 따뜻하고 달콤한 향을 더합니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cardamom.jpg' %}" alt="카다멈" /></a>
+          <header><h3>카다멈 (Kapulaga)</h3></header>
+          <p>소화를 돕고 입안을 상쾌하게 하는 향신료로, 자무 블렌드에 고급스러운 향을 더합니다.</p>
+        </article>
+      </div>
+      <button class="next">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Top 3 Representative Jamu Drinks - 새로운 스타일 -->
+  <section class="top-drinks-section">
+    <div class="top-drinks-container">
+      <div class="top-drinks-header">
+        <h2>대표 자무 음료 TOP 3</h2>
+        <p>자연의 치유력으로 몸과 마음의 균형을 찾아보세요</p>
+      </div>
+      
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="브라스 켄쿠르" class="drink-image" />
+          <div class="drink-info">
+            <h3>브라스 켄쿠르 (Beras Kencur)</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">에너지 충전</span>
+              <span class="benefit-tag">피로 회복</span>
+              <span class="benefit-tag">통증 완화</span>
+            </div>
+            <p class="drink-description">브라스 켄쿠르는 쌀, 켄쿠르(갈랑갈), 생강, 강황으로 만드는 인도네시아 허브 음료로, 상쾌한 단맛과 은은한 매운맛이 조화를 이루며 자연스러운 에너지 충전과 함께 피로·기침·몸살 완화에 도움을 줍니다.</p>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="쿠닛 아셈" class="drink-image" />
+          <div class="drink-info">
+            <h3>쿠닛 아셈 (Kunyit Asem)</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">소화 건강</span>
+              <span class="benefit-tag">생리 통증 완화</span>
+              <span class="benefit-tag">해독</span>
+            </div>
+            <p class="drink-description">쿠닛 아셈은 강황, 타마린드, 야자당으로 만든 소화 조화 음료로, 소화를 개선하고 월경 주기 조절과 위장 불편 완화에 도움을 주며, 균형 잡힌 새콤달콤한 맛에 은은한 강황 향이 더해집니다.</p>
+          </div>
+        </div>
+
+        <div class="drink-card">
+          <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="테물라왁" class="drink-image" />
+          <div class="drink-info">
+            <h3>테물라왁 (Temulawak)</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">간 건강</span>
+              <span class="benefit-tag">면역 강화</span>
+              <span class="benefit-tag">휴식</span>
+            </div>
+            <p class="drink-description">테물라왁은 자바 강황, 일반 강황, 생강으로 만든 휴식·회복 음료로, 스트레스 완화와 숙면, 면역 강화에 도움을 주며 자연의 치유력을 담은 복합적인 씁쓸·달콤한 풍미가 특징입니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const reel = document.querySelector('.carousel .reel');
+      const prevBtn = document.querySelector('.carousel-wrapper .prev');
+      const nextBtn = document.querySelector('.carousel-wrapper .next');
+      
+      let currentIndex = 0;
+      const itemWidth = 280; // 카드 너비 + 여백
+      const itemsToShow = Math.floor(window.innerWidth / itemWidth);
+      const totalItems = reel.children.length;
+      const maxIndex = Math.max(0, totalItems - itemsToShow);
+
+      function updateCarousel() {
+        const translateX = -currentIndex * itemWidth;
+        reel.style.transform = `translateX(${translateX}px)`;
+        
+        // 버튼 상태 업데이트
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+      }
+
+      // 이전 버튼 클릭
+      prevBtn.addEventListener("click", function () {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      // 다음 버튼 클릭
+      nextBtn.addEventListener("click", function () {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      // 자동 슬라이드
+      let autoSlideInterval = setInterval(function() {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+        } else {
+          currentIndex = 0;
+        }
+        updateCarousel();
+      }, 3000);
+
+      // 마우스 hover 시 자동 슬라이드 정지
+      reel.addEventListener("mouseenter", () => {
+        clearInterval(autoSlideInterval);
+      });
+
+      reel.addEventListener("mouseleave", () => {
+        autoSlideInterval = setInterval(function() {
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+          } else {
+            currentIndex = 0;
+          }
+          updateCarousel();
+        }, 3000);
+      });
+
+      // 반응형 대응
+      window.addEventListener('resize', function() {
+        currentIndex = 0;
+        updateCarousel();
+      });
+
+      // 초기 설정
+      updateCarousel();
+    });
+  </script>
+
+  <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
+
+</body>
 </html>
