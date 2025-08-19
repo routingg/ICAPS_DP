@@ -1,25 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 AI 자무 추천</title>
+  <title>🌿 자무 추천</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
 	<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
 
-
   <style>
 /* 공통 스타일 */
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Pretendard', sans-serif;
   margin: 0;
   background-color: #fdfcf8;
   color: #333;
@@ -27,17 +26,17 @@ body {
 
 /* 전체 섹션 */
 section#ai-recommendation{
-  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
-  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
-  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
-  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
+  width: min(1000px, 92vw);
+  margin: clamp(24px, 6vw, 64px) auto;
+  padding: clamp(16px, 3vw, 32px);
+  border-radius: clamp(10px, 1.8vw, 16px);
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
 }
 
 h2 {
   text-align: center;
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 화면에 따라 글자 크기 자동조절 */
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   margin-bottom: 1em;
 }
 
@@ -55,7 +54,7 @@ p {
 }
 
 .tag {
-  flex: 0 0 auto; /* 자동 크기 조정 */
+  flex: 0 0 auto;
   text-align: center;
   padding: 0.6em 1em;
   border: 1px solid #ccc;
@@ -67,11 +66,10 @@ p {
   transition: all 0.2s ease;
   user-select: none;
   max-width: 100%;
-  white-space: nowrap;         /* 한 줄로 */
-  text-overflow: ellipsis;     /* 너무 길면 … */
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
 }
-
 
 .tag.selected {
   background-color: #ffa500;
@@ -114,6 +112,69 @@ button:hover {
   margin-bottom: 1em;
 }
 
+/* 추가된 스타일들 */
+.ingredient-tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  border-radius: 12px;
+  font-size: 0.85em;
+}
+
+.benefit-tag {
+  display: inline-block;
+  background-color: #e8f5e8;
+  color: #2d5a2d;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  border-radius: 12px;
+  font-size: 0.85em;
+}
+
+.jamu-details {
+  text-align: left;
+  margin: 1em 0;
+}
+
+.jamu-prep-box {
+  background-color: #f8f8f8;
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em 0;
+  text-align: left;
+}
+
+.error-message {
+  background-color: #ffe6e6;
+  color: #d63031;
+  padding: 1em;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ai-insight {
+  background: linear-gradient(135deg, #fff2e6 0%, #ffe8d1 100%);
+  border-left: 4px solid #ffa500;
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em 0;
+  text-align: left;
+}
+
+.ai-insight h4 {
+  color: #d4730a;
+  margin-bottom: 0.5em;
+}
+
+.ai-insight p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #b8600a;
+  text-align: left;
+}
+
 /* 로딩 애니메이션 */
 .loader {
   border: 6px solid #f3f3f3;
@@ -136,101 +197,97 @@ button:hover {
     padding: 1.5em;
   }
 
-.tag-container {
-  display: flex;
-  flex-wrap: wrap;      /* 가로로 나열 + 줄바꿈 */
-  gap: 0.5em;
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  .tag {
+    flex: 0 0 auto;
+    padding: 0.6em 1em;
+    border-radius: 999px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    white-space: nowrap;
+  }
 }
 
-.tag {
-  flex: 0 0 auto;       /* 글자 길이만큼 */
-  padding: 0.6em 1em;
-  border-radius: 999px;
-  font-size: clamp(0.9rem, 2.5vw, 1rem); /* 화면 줄어들면 글자도 살짝 줄임 */
-  white-space: nowrap;  /* 줄바꿈 방지 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-}
-
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
   </style>
 </head>
 
 <body>
   
   <!-- Nav -->
-						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
-							<ul>
-								<li><a href="/home_kor">홈</a></li>
-								<li>
-									<a href="/order_kor">주문하기</a>
-
-								</li>
-								<li><a href="/info_kor">자무 소개</a></li>
-								<li><a href="/ourstory_kor">우리의 이야기</a></li>
-								<li><a href="#">언어</a>
-									<ul>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI">English</a></li>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Pretendard;"><a href="/jamubyAI_kor">한국어</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
+  <nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
+    <ul>
+      <li><a href="/home_kor">홈</a></li>
+      <li>
+        <a href="/order_kor">주문하기</a>
+      </li>
+      <li><a href="/info_kor">자무 소개</a></li>
+      <li><a href="/ourstory_kor">우리의 이야기</a></li>
+      <li><a href="#">언어</a>
+        <ul>
+          <li style="font-family: Pretendard;"><a href="/JamubyAI">English</a></li>
+          <li style="font-family: Pretendard;"><a href="/JamubyAI_ind">Bahasa Indonesia</a></li>
+          <li style="font-family: Pretendard;"><a href="/JamubyAI_kor">한국어</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Jamu by AI Section --> 
    <br><br><br><br>
-    <h2 style="font-family: 'Pretendard', sans-serif;">🌿 AI 자무 추천</h2>
-    <p style="font-family: 'Pretendard', sans-serif;">현재 컨디션, 여행 스타일, 날씨, 관심사를 선택하세요.<br>AI가 당신에게 딱 맞는 자무를 추천해 드립니다.</p>
+    <h2 style="font-family: 'Pretendard', sans-serif;">🌿 자무 추천</h2>
+    <p style="font-family: 'Pretendard', sans-serif;">오늘의 기분, 여행 스타일, 날씨, 관심사를 선택하세요.<br>AI가 당신에게 딱 맞는 전통 자무를 추천해 드립니다.</p>
 
   <section id="ai-recommendation" style="font-family: 'Pretendard', cursive;">
     <form id="jamu-form">
       <div class="field-group">
-        <label>오늘 기분이 어떠신가요?</label>
+        <label>오늘 기분은 어떠신가요?</label>
         <div class="tag-container" data-name="mood">
-          <div class="tag">피곤함</div>
-          <div class="tag">너무 더움</div>
-          <div class="tag">조금 아픔</div>
-          <div class="tag">에너지가 넘침</div>
+          <div class="tag" data-value="Tired">피곤함</div>
+          <div class="tag" data-value="Too Hot">너무 더움</div>
+          <div class="tag" data-value="A bit Sick">조금 아픔</div>
+          <div class="tag" data-value="Energized">에너지가 넘침</div>
         </div>
       </div>
 <br>
       <div class="field-group">
         <label>여행 스타일은 무엇인가요?</label>
         <div class="tag-container" data-name="style">
-          <div class="tag">휴식형</div>
-          <div class="tag">모험형</div>
-          <div class="tag">문화 체험</div>
+          <div class="tag" data-value="Relaxing">휴식형</div>
+          <div class="tag" data-value="Adventurous">모험형</div>
+          <div class="tag" data-value="Cultural">문화 체험</div>
         </div>
       </div>
 <br>
       <div class="field-group">
         <label>날씨는 어떤가요?</label>
         <div class="tag-container" data-name="weather">
-          <div class="tag">더움</div>
-          <div class="tag">선선함</div>
-          <div class="tag">비옴</div>
+          <div class="tag" data-value="Hot">더움</div>
+          <div class="tag" data-value="Cool">선선함</div>
+          <div class="tag" data-value="Rainy">비옴</div>
         </div>
       </div>
 <br>
       <div class="field-group">
         <label>증상 또는 관심사</label>
         <div class="tag-container" data-name="symptom">
-          <div class="tag">감기 증상</div>
-          <div class="tag">기운 없음</div>
-          <div class="tag">여성 건강</div>
-          <div class="tag">숙면</div>
-          <div class="tag">소화 불량</div>
-          <div class="tag">스트레스 완화</div>
-          <div class="tag">자무 역사</div>
-          <div class="tag">브라스 켄쿠르</div>
+          <div class="tag" data-value="Cold Symptoms">감기 증상</div>
+          <div class="tag" data-value="Low Energy">기운 없음</div>
+          <div class="tag" data-value="Women's Health">여성 건강</div>
+          <div class="tag" data-value="Better Sleep">숙면</div>
+          <div class="tag" data-value="Indigestion">소화 불량</div>
+          <div class="tag" data-value="Stress Relief">스트레스 완화</div>
         </div>
       </div>
 <br>
-      <button type="button" style="font-family: 'Pretendard', cursive;" onclick="recommendJamu()">내 자무 추천 받기</button>
+      <button type="button" style="font-family: 'Pretendard', cursive;" onclick="recommendJamu()">내게 맞는 자무 추천 받기 🌿</button>
     </form>
 
     <div id="jamu-result"></div>
@@ -238,67 +295,266 @@ button:hover {
 
   <!-- JavaScript -->
   <script>
-    document.querySelectorAll('.tag-container').forEach(container => {
-    const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+    // 6가지 전통 자무 데이터베이스 (표시는 한국어, 내부 키는 그대로)
+    const jamuDatabase = {
+      'beras-kencur': {
+        name: "브라스 켄쿠르 (Beras Kencur)",
+        desc: "쌀과 켄쿠르(향 생강)로 만든 전통 자무. 기력 회복과 집중력 향상에 도움을 줍니다.",
+        img: "{% static 'c2/images/BerasKencur.jpg' %}",
+        ingredients: ['쌀 (Beras)', '켄쿠르/향 생강 (Kencur)', '타마린드 (Asam)', '야자당 (Gula Merah)'],
+        benefits: ['에너지 회복', '다리 통증 완화', '정신 맑음', '체중 관리'],
+        prep: '쌀을 3–6시간 불린 뒤 볶아 갈아 둡니다. 켄쿠르와 생강을 찧어 향수를 우린 물과 섞고, 갈아 둔 쌀을 더해 마십니다.',
+        aiReason: '여행 중 피로가 쌓였고 자연스러운 에너지 부스트가 필요할 때 잘 맞아요.'
+      },
+      'kunyit-asem': {
+        name: "쿠닛 아셈 (Kunyit Asam)",
+        desc: "강황과 타마린드로 만든 상큼한 자무. 더위 해소와 소화에 도움을 줍니다.",
+        img: "{% static 'c2/images/KunyitAsem.png' %}",
+        ingredients: ['생강황 (Kunyit)', '타마린드 (Asam Jawa)', '야자당 (Gula Merah)', '켄쿠르'],
+        benefits: ['소화 개선', '멀미 예방', '위장 진정', '생리 통증 완화'],
+        prep: '생강황을 갈아 뜨거운 물에 우리고, 타마린드 물과 야자당을 더해 새콤달콤하게 맞춥니다.',
+        aiReason: '더운 날씨나 소화 불편이 있을 때 특히 인기 있는 인도네시아 대표 자무예요.'
+      },
+      'temulawak': {
+        name: "테물라왁 (Temulawak)",
+        desc: "자바 강황 중심의 자무. 간 건강과 스트레스 완화에 도움을 줍니다.",
+        img: "{% static 'c2/images/Temulawak.jpg' %}",
+        ingredients: ['테물라왁 (자바 강황)', '타마린드', '야자당'],
+        benefits: ['간 건강', '스트레스 완화', '숙면', '혈당 균형'],
+        prep: '테물라왁을 갈아 10–15분 달인 뒤, 타마린드 물과 야자당으로 맛을 냅니다.',
+        aiReason: '휴식이 필요하고 긴장을 풀고 싶을 때 잘 어울립니다.'
+      },
+      'empon-empon': {
+        name: "엠폰엠폰 (Empon-Empon)",
+        desc: "여러 약초를 고루 섞은 종합 자무. 전반적인 건강 증진에 좋습니다.",
+        img: "{% static 'c2/images/EmponEmpon.jpg' %}",
+        ingredients: ['테물라왁', '강황 (Kunyit)', '적생강 (Jahe Merah)', '레몬그라스 (Serai)', '카다멈 (Kapulaga)', '정향 (Cengkeh)', '계피 (Kayu Manis)'],
+        benefits: ['면역 강화', '전신 건강', '항산화', '항염'],
+        prep: '모든 재료를 깨끗이 손질해 1.5L 물에 15–20분 끓여 우린 뒤, 기호에 따라 당을 더합니다.',
+        aiReason: '면역과 활력 등 다방면의 효과가 필요할 때 “만능형” 선택지입니다.'
+      },
+      'wedang-uwuh': {
+        name: "웨당 우우 (Wedang Uwuh)",
+        desc: "욕야카르타 전통의 따뜻한 향신 음료. 체온 유지와 순환 개선에 도움을 줍니다.",
+        img: "{% static 'c2/images/WedangUwuh.jpg' %}",
+        ingredients: ['세짱나무 (Kayu Secang)', '레몬그라스', '카다멈', '정향', '블랙 커민', '계피', '생강'],
+        benefits: ['체온 유지', '혈액순환', '감기 예방', '호흡기 건강'],
+        prep: '모든 향신료를 함께 10분 끓여 붉은 기가 돌면, 암석당을 넣어 따뜻하게 즐깁니다.',
+        aiReason: '선선하거나 비 오는 날씨에 몸을 데우고 컨디션을 끌어올리기에 좋아요.'
+      },
+      'temu-ireng': {
+        name: "테무 이렝 (Temu Ireng)",
+        desc: "드문 흑강황 자무. 해독과 혈액 정화에 도움을 줍니다.",
+        img: "{% static 'c2/images/TemuIreng.jpg' %}",
+        ingredients: ['흑강황 (Temu Ireng)', '생강', '월계수잎 (Daun Salam)', '세짱', '블랙 커민'],
+        benefits: ['혈액 정화', '콜레스테롤 개선', '해독', '요산 조절'],
+        prep: '흑강황과 생강을 갈아 다른 재료와 함께 10–15분 달이고, 거른 뒤 기호에 맞게 단맛을 더합니다.',
+        aiReason: '콜레스테롤·요산 등 특정 건강 고민에 초점을 둔 전문 자무예요.'
+      }
+    };
 
-    container.querySelectorAll('.tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        if (isSingleChoice) {
-          // 이미 선택된 걸 다시 클릭한 경우 → 해제
-          if (tag.classList.contains('selected')) {
-            tag.classList.remove('selected');
+    // 기존 태그 선택 기능 유지
+    document.querySelectorAll('.tag-container').forEach(container => {
+      const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+
+      container.querySelectorAll('.tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          if (isSingleChoice) {
+            // 이미 선택된 걸 다시 클릭한 경우 → 해제
+            if (tag.classList.contains('selected')) {
+              tag.classList.remove('selected');
+            } else {
+              // 새 선택 → 나머지 해제 후 본인만 선택
+              container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+              tag.classList.add('selected');
+            }
           } else {
-            // 새 선택 → 나머지 해제 후 본인만 선택
-            container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
-            tag.classList.add('selected');
+            // 다중 선택 허용 (symptom 그룹)
+            tag.classList.toggle('selected');
           }
-        } else {
-          // 다중 선택 허용 (symptom 그룹)
-          tag.classList.toggle('selected');
-        }
+        });
       });
     });
-  });
+
+    // 선택값 가져오기 (표시는 한글, 내부 값은 data-value의 영문을 사용)
+    function getSelectedValues() {
+      const selections = {
+        mood: '',
+        style: '',
+        weather: '',
+        symptoms: []
+      };
+
+      // 단일 선택 항목들
+      ['mood', 'style', 'weather'].forEach(category => {
+        const selected = document.querySelector(`[data-name="${category}"] .tag.selected`);
+        if (selected) {
+          selections[category] = selected.dataset.value; // ✅ 영문 값 유지
+        }
+      });
+
+      // 다중 선택 항목 (symptoms)
+      document.querySelectorAll('[data-name="symptom"] .tag.selected').forEach(tag => {
+        selections.symptoms.push(tag.dataset.value); // ✅ 영문 값 유지
+      });
+
+      return selections;
+    }
+
+    // 고도화된 AI 추천 로직 (그대로)
+    function calculateJamuScore(selections) {
+      let scores = {
+        'beras-kencur': 0,
+        'kunyit-asem': 0,
+        'temulawak': 0,
+        'empon-empon': 0,
+        'wedang-uwuh': 0,
+        'temu-ireng': 0
+      };
+
+      // 기분에 따른 정밀 점수 배정
+      if (selections.mood === 'Tired') {
+        scores['beras-kencur'] += 5;
+        scores['empon-empon'] += 4;
+        scores['wedang-uwuh'] += 2;
+      } else if (selections.mood === 'Too Hot') {
+        scores['kunyit-asem'] += 5;
+        scores['temulawak'] += 3;
+        scores['temu-ireng'] += 2;
+      } else if (selections.mood === 'A bit Sick') {
+        scores['empon-empon'] += 5;
+        scores['wedang-uwuh'] += 4;
+        scores['beras-kencur'] += 3;
+      } else if (selections.mood === 'Energized') {
+        scores['kunyit-asem'] += 3;
+        scores['temulawak'] += 2;
+        scores['empon-empon'] += 2;
+      }
+
+      // 여행 스타일별 최적화
+      if (selections.style === 'Relaxing') {
+        scores['temulawak'] += 4;
+        scores['kunyit-asem'] += 3;
+        scores['temu-ireng'] += 2;
+      } else if (selections.style === 'Adventurous') {
+        scores['beras-kencur'] += 4;
+        scores['empon-empon'] += 3;
+        scores['wedang-uwuh'] += 2;
+      } else if (selections.style === 'Cultural') {
+        scores['kunyit-asem'] += 4;
+        scores['temulawak'] += 3;
+        scores['wedang-uwuh'] += 3;
+      }
+
+      // 날씨별 맞춤 추천
+      if (selections.weather === 'Hot') {
+        scores['kunyit-asem'] += 4;
+        scores['temulawak'] += 2;
+        scores['temu-ireng'] += 2;
+      } else if (selections.weather === 'Cool') {
+        scores['wedang-uwuh'] += 5;
+        scores['empon-empon'] += 3;
+        scores['beras-kencur'] += 2;
+      } else if (selections.weather === 'Rainy') {
+        scores['wedang-uwuh'] += 4;
+        scores['empon-empon'] += 3;
+        scores['beras-kencur'] += 2;
+      }
+
+      // 증상별 전문 매칭
+      selections.symptoms.forEach(symptom => {
+        if (symptom === 'Cold Symptoms') {
+          scores['empon-empon'] += 5;
+          scores['wedang-uwuh'] += 4;
+        } else if (symptom === 'Low Energy') {
+          scores['beras-kencur'] += 5;
+          scores['empon-empon'] += 3;
+        } else if (symptom === 'Women\'s Health') {
+          scores['kunyit-asem'] += 5;
+          scores['temulawak'] += 3;
+        } else if (symptom === 'Better Sleep') {
+          scores['temulawak'] += 5;
+          scores['temu-ireng'] += 2;
+        } else if (symptom === 'Indigestion') {
+          scores['kunyit-asem'] += 5;
+          scores['temulawak'] += 3;
+        } else if (symptom === 'Stress Relief') {
+          scores['temulawak'] += 5;
+          scores['wedang-uwuh'] += 2;
+        } else if (symptom === 'Beras Kencur') {
+          scores['beras-kencur'] += 6;
+        }
+      });
+
+      const bestMatch = Object.keys(scores).reduce((a, b) => 
+        scores[a] > scores[b] ? a : b
+      );
+
+      return {
+        jamu: jamuDatabase[bestMatch],
+        confidence: Math.min(scores[bestMatch] * 10, 95)
+      };
+    }
 
     function recommendJamu() {
       const resultDiv = document.getElementById("jamu-result");
+      const selections = getSelectedValues();
+      
+      // 선택 검증 - 최소 하나는 선택되어야 함
+      const hasSelection = selections.mood || selections.style || selections.weather || selections.symptoms.length > 0;
+      
+      if (!hasSelection) {
+        resultDiv.innerHTML = `
+          <div class="error-message">
+            🌿 개인화된 자무 추천을 받으려면 최소 한 가지 옵션을 선택해 주세요!
+          </div>
+        `;
+        return;
+      }
+
+      // 로딩 표시
       resultDiv.innerHTML = `<div class="loader"></div>`;
 
       setTimeout(() => {
-        const jamuList = [
-          {
-            name: "브라스 켄쿠르 (Beras Kencur)",
-            desc: "달콤하고 은은한 매운맛의 쌀·약초 자무로 에너지를 충전해 보세요.",
-            img: "{% static 'c2/images/BerasKencur.jpg' %}"
-          },
-          {
-            name: "쿠닛 아셈 (Kunyit Asem)",
-            desc: "강황과 타마린드가 어우러져 몸과 마음을 상쾌하게 해 줍니다.",
-            img: "{% static 'c2/images/KunyitAsem.png' %}"
-          },
-          {
-            name: "테물라왁 (Temulawak)",
-            desc: "소화와 면역에 도움을 주는 클래식 자무입니다.",
-            img: "{% static 'c2/images/Temulawak.jpg' %}"
-          }
-        ];
+        // AI 추천 실행
+        const result = calculateJamuScore(selections);
+        const jamu = result.jamu;
+        const confidence = result.confidence;
 
-        const randomIndex = Math.floor(Math.random() * jamuList.length);
-        const jamu = jamuList[randomIndex];
-
+        // 결과 표시
         resultDiv.innerHTML = `
-          <img src="${jamu.img}" alt="${jamu.name}">
-          <h3>✨ 추천 자무: ${jamu.name}</h3>
-          <p>${jamu.desc}</p>
-          <button style="font-family: 'Pretendard', cursive;">지금 주문하기</button>
+          <img src="${jamu.img}" alt="${jamu.name}" onerror="this.style.display='none'">
+          <h3>✨ AI가 추천한 자무: ${jamu.name}</h3>
+          <p style="font-size: 1.1em; margin: 1em 0;">${jamu.desc}</p>
+          
+          <div class="ai-insight">
+            <h4>🤖 이 자무를 추천한 이유</h4>
+            <p>${jamu.aiReason}</p>
+            <p style="margin-top: 0.5em;"><strong>적합도: ${confidence}%</strong></p>
+          </div>
+          
+          <div class="jamu-details">
+            <h4>🌿 전통 재료</h4>
+            ${jamu.ingredients.map(ingredient => `<span class="ingredient-tag">${ingredient}</span>`).join('')}
+            
+            <h4 style="margin-top: 1em;">✨ 효능</h4>
+            ${jamu.benefits.map(benefit => `<span class="benefit-tag">${benefit}</span>`).join('')}
+            
+            <div class="jamu-prep-box">
+              <h4>🥤 전통 제조법</h4>
+              <p style="margin: 0.5em 0 0 0; font-size: 0.9em; line-height: 1.5;">${jamu.prep}</p>
+            </div>
+          </div>
+          
+          <button style="font-family: 'Pretendard', cursive; margin-top: 1em;" onclick="window.location.href='/order'">
+            이 자무 주문하기 ✨
+          </button>
         `;
-      }, 1000);
+      }, 1500); // AI 처리 시간 시뮬레이션
     }
-
   </script>
 
-
-    <!-- Scripts -->
+  <!-- 기존 Scripts 모두 유지 -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>

@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🌺 Create Your Blend</title>
 
-
    <!-- Fonts -->
    
     <!-- Fonts (중복 제거 후 단일 링크 유지) -->
@@ -19,7 +18,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
-
 
     
     
@@ -35,8 +33,6 @@
       display: flex;
       justify-content: center;
     }
-
-
 
     section#custom-blend {
       max-width: 1000px;
@@ -103,6 +99,29 @@
       display: inline-block;
     }
 
+    .new-ingredient {
+      position: relative;
+    }
+
+    .new-ingredient::after {
+      content: "NEW!";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: linear-gradient(45deg, #ff6b6b, #ffa500);
+      color: white;
+      padding: 0.3em 0.6em;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
     #blend-name-input {
       margin-top: 2em;
       text-align: center;
@@ -132,8 +151,6 @@
       text-align: center;
       margin-top: 2.5em;
     }
-
-
 
 /* ===== Section 컨테이너: 완전 반응형 ===== */
 #custom-blend{
@@ -248,12 +265,6 @@ button{
   border-radius: 12px;
 }
 
-
-
-
-
-
-
   </style>
 </head>
 
@@ -279,23 +290,18 @@ button{
 							</ul>
 						</nav>
 
-
-
   <!-- Create Your Blend Section -->
    <br><br><br><br>
 
    <h2 style="font-family: 'Alkatra', sans-serif;">🌺 Create Your Blend</h2>
-    <p style="font-family: 'Alkatra', sans-serif;">Choose your favorite Jamu ingredients and name your own travel-inspired blend.</p>
-
+    <p style="font-family: 'Alkatra', sans-serif;">Choose your favorite Jamu ingredients and name your own travel-inspired blend.<br>
 
   <section id="custom-blend">
 
     <div id="ingredient-list"></div>
 
-    
-
     <div>
-      <button onclick="createBlend()">Create Your Own Jamu</button>
+      <button onclick="createBlend()">Create Your Jamu</button>
     </div>
 
     <div id="blend-result"></div>
@@ -303,16 +309,24 @@ button{
 
   <script style="font-family: 'Playfair Display', serif;">
     const ingredients = [
-      { name: "Turmeric", desc: "Anti-inflammatory and antioxidant.", img: "{% static 'c2/images/Turmeric.png' %}" },
-      { name: "Ginger", desc: "Cold relief and digestive aid.", img: "{% static 'c2/images/ginger.jpg' %}" },
-      { name: "Galangal", desc: "Relieves cough and body aches.", img: "{% static 'c2/images/Galangal.jpg' %}" },
-      { name: "Tamarind", desc: "Sourness & digestive help.", img: "{% static 'c2/images/Tamarind.jpg' %}" },
-      { name: "Temulawak", desc: "Liver and immunity support.", img: "{% static 'c2/images/Temulawak_low.jpg' %}" },
-      { name: "Palm Sugar", desc: "Natural sweetness & minerals.", img: "{% static 'c2/images/PalmSugar.png' %}" },
-      { name: "Lime", desc: "Vitamin C & freshness.", img: "{% static 'c2/images/Lime.jpg' %}" },
-      { name: "Lemongrass", desc: "Aroma and digestion benefits.", img: "{% static 'c2/images/Lemongrass.jpg' %}" },
-      { name: "Cinnamon", desc: "Regulates sugar, adds warmth.", img: "{% static 'c2/images/Cinnamon.jpg' %}" },
-      { name: "Cardamom", desc: "Digestive spice with rich aroma.", img: "{% static 'c2/images/Cardamom.jpg' %}" },
+      // 기존 10개 재료
+      { name: "Turmeric", desc: "Anti-inflammatory and antioxidant.", img: "{% static 'c2/images/Turmeric.png' %}", isNew: false },
+      { name: "Ginger", desc: "Cold relief and digestive aid.", img: "{% static 'c2/images/ginger.jpg' %}", isNew: false },
+      { name: "Galangal", desc: "Relieves cough and body aches.", img: "{% static 'c2/images/Galangal.jpg' %}", isNew: false },
+      { name: "Tamarind", desc: "Sourness & digestive help.", img: "{% static 'c2/images/Tamarind.jpg' %}", isNew: false },
+      { name: "Temulawak", desc: "Liver and immunity support.", img: "{% static 'c2/images/Temulawak_low.jpg' %}", isNew: false },
+      { name: "Palm Sugar", desc: "Natural sweetness & minerals.", img: "{% static 'c2/images/PalmSugar.png' %}", isNew: false },
+      { name: "Lime", desc: "Vitamin C & freshness.", img: "{% static 'c2/images/Lime.jpg' %}", isNew: false },
+      { name: "Lemongrass", desc: "Aroma and digestion benefits.", img: "{% static 'c2/images/Lemongrass.jpg' %}", isNew: false },
+      { name: "Cinnamon", desc: "Regulates sugar, adds warmth.", img: "{% static 'c2/images/Cinnamon.jpg' %}", isNew: false },
+      { name: "Cardamom", desc: "Digestive spice with rich aroma.", img: "{% static 'c2/images/Cardamom.jpg' %}", isNew: false },
+      
+      // 새로 추가되는 5개 재료
+      { name: "Cloves", desc: "Antibacterial, oral health & digestion.", img: "{% static 'c2/images/Cloves.jpg' %}", isNew: false },
+      { name: "Sappan Wood", desc: "Blood circulation & antioxidant.", img: "{% static 'c2/images/SappanWood.jpg' %}", isNew: false },
+      { name: "Black Cumin", desc: "Immunity boost & respiratory health.", img: "{% static 'c2/images/BlackCumin.jpg' %}", isNew: false },
+      { name: "Black Turmeric", desc: "Blood purification & cholesterol control.", img: "{% static 'c2/images/BlackTurmeric.jpg' %}", isNew: false },
+      { name: "Bay Leaves", desc: "Blood sugar control & digestion aid.", img: "{% static 'c2/images/BayLeaves.jpg' %}", isNew: false }
     ];
 
     const selected = [];
@@ -322,11 +336,11 @@ button{
       container.innerHTML = "";
       ingredients.forEach((item, index) => {
         const card = document.createElement("div");
-        card.className = "ingredient-card";
+        card.className = `ingredient-card ${item.isNew ? 'new-ingredient' : ''}`;
         card.setAttribute("data-name", item.name);
         card.innerHTML = `
           <div class="blend-label">${item.name}</div>
-          <img src="${item.img}" alt="${item.name}">
+          <img src="${item.img}" alt="${item.name}" onerror="this.src='{% static 'c2/images/default-ingredient.jpg' %}'">
           <div class="content">
             <h4>${item.name}</h4>
             <p>${item.desc}</p>
@@ -343,8 +357,8 @@ button{
         selected.splice(index, 1);
         card.classList.remove("selected");
       } else {
-        if (selected.length >= 5) {
-          alert("You can select up to 5 ingredients only.");
+        if (selected.length >= 7) {
+          alert("You can select up to 7 ingredients for the perfect blend! 🌿");
           return;
         }
         selected.push(name);
@@ -352,25 +366,154 @@ button{
       }
     }
 
+    // 선택된 재료에 따른 자무 타입과 이미지 결정
+    function determineJamuType(selectedIngredients) {
+      const ingredients = selectedIngredients.map(name => name.toLowerCase());
+      
+      // 각 자무 타입별 주요 재료들 정의
+      const jamuTypes = {
+        'kunyit-asem': {
+          keywords: ['turmeric', 'tamarind', 'lime'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: 'Kunyit Asam Style',
+          description: 'Golden turmeric blend with refreshing sourness',
+          color: '#FF8C00'
+        },
+        'temulawak': {
+          keywords: ['temulawak', 'bay leaves'],
+          image: "{% static 'c2/images/Temulawak.jpg' %}",
+          name: 'Temulawak Blend',
+          description: 'Liver-supporting Javanese turmeric blend',
+          color: '#DAA520'
+        },
+        'temu-ireng': {
+          keywords: ['black turmeric', 'black cumin', 'sappan wood'],
+          image: "{% static 'c2/images/TemuIreng.jpg' %}",
+          name: 'Black Turmeric Blend',
+          description: 'Rare black turmeric for blood purification',
+          color: '#B22222'
+        },
+        'wedang-uwuh': {
+          keywords: ['cinnamon', 'cardamom', 'cloves', 'sappan wood', 'lemongrass'],
+          image: "{% static 'c2/images/WedangUwuh.jpg' %}",
+          name: 'Warm Spice Blend',
+          description: 'Traditional warming spices for circulation',
+          color: '#8B4513'
+        },
+        'empon-empon': {
+          keywords: ['ginger', 'galangal', 'turmeric', 'temulawak'],
+          image: "{% static 'c2/images/EmponEmpon.jpg' %}",
+          name: 'Complete Herbal Blend',
+          description: 'Comprehensive immunity-boosting blend',
+          color: '#D2691E'
+        },
+        'fresh-blend': {
+          keywords: ['lime', 'lemongrass', 'palm sugar'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: 'Fresh Citrus Blend',
+          description: 'Refreshing and energizing citrus blend',
+          color: '#32CD32'
+        }
+      };
+
+      // 점수 계산
+      let scores = {};
+      Object.keys(jamuTypes).forEach(type => {
+        scores[type] = 0;
+        jamuTypes[type].keywords.forEach(keyword => {
+          if (ingredients.some(ingredient => ingredient.includes(keyword))) {
+            scores[type] += 1;
+          }
+        });
+      });
+
+      // 가장 높은 점수의 타입 선택
+      const bestType = Object.keys(scores).reduce((a, b) => 
+        scores[a] > scores[b] ? a : b
+      );
+
+      // 점수가 0이면 기본 empon-empon 스타일
+      if (scores[bestType] === 0) {
+        return jamuTypes['empon-empon'];
+      }
+
+      return jamuTypes[bestType];
+    }
+
     function createBlend() {
       const result = document.getElementById("blend-result");
       if (selected.length === 0) {
-        result.innerHTML = "<p>Please select at least one ingredient.</p>";
+        result.innerHTML = `
+          <div style="background: #ffe6e6; color: #d63031; padding: 1em; border-radius: 8px;">
+            <p>🌿 Please select at least one ingredient to create your custom jamu!</p>
+          </div>
+        `;
         return;
       }
+
+      // 선택된 재료 중 새로운 재료가 있는지 확인
+      const newIngredients = selected.filter(name => 
+        ingredients.find(ing => ing.name === name && ing.isNew)
+      );
+      
+      const hasNewIngredients = newIngredients.length > 0;
+
+      // 자무 타입 결정
+      const jamuType = determineJamuType(selected);
+
       result.innerHTML = `
-        <h3>🌸 Your Signature Jamu</h3>
-        <p>Includes: <strong>${selected.join(", ")}</strong></p>
-        <p>Enjoy your personalized Jamu for your next journey!</p>
-        <img src="{% static 'c2/images/jamuup.png' %}" alt="Your Jamu" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
+        <div style="background: linear-gradient(135deg, #fff9e6, #ffe8d1); padding: 2em; border-radius: 16px; border-left: 4px solid ${jamuType.color};">
+          <h3>🌸 Your ${jamuType.name}</h3>
+          <p style="color: #666; font-style: italic; margin: 0.5em 0 1.5em;">${jamuType.description}</p>
+          
+          <img src="${jamuType.image}" alt="${jamuType.name}" 
+               style="max-width: 300px; width: 100%; border-radius: 12px; margin: 1em 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+               onerror="this.src='{% static 'c2/images/jamuup.png' %}'" />
+          
+          <p style="font-size: 1.1em; margin: 1em 0;"><strong>Selected Ingredients (${selected.length}):</strong></p>
+          <p style="background: #f8f8f8; padding: 1em; border-radius: 8px; font-weight: bold; color: #333;">
+            ${selected.join(" • ")}
+          </p>
+          
+          ${hasNewIngredients ? `
+            <div style="background: #e8f5e8; color: #2d5a2d; padding: 1em; border-radius: 8px; margin: 1em 0;">
+              <strong>✨ Special Blend!</strong> Your jamu includes ${newIngredients.length} new traditional ingredient${newIngredients.length > 1 ? 's' : ''}: 
+              <strong>${newIngredients.join(", ")}</strong>
+            </div>
+          ` : ''}
+          
+          <div style="background: rgba(255,255,255,0.7); padding: 1em; border-radius: 8px; margin: 1em 0;">
+            <h4 style="margin: 0 0 0.5em; color: ${jamuType.color};">🌿 Blend Profile:</h4>
+            <p style="margin: 0; font-size: 0.95em;">This custom blend combines traditional Indonesian healing wisdom with your personal ingredient preferences, creating a unique jamu perfect for your travel wellness journey.</p>
+          </div>
+        
+        </div>
       `;
     }
 
+    function orderBlend() {
+      alert("🌿 Thank you! Your custom jamu blend will be prepared with traditional Indonesian methods. Redirecting to order page...");
+      // window.location.href = '/order';
+    }
+
+    function shareBlend() {
+      const recipe = `My Custom Jamu Recipe: ${selected.join(", ")} - Perfect for travel wellness! 🌿✈️`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'My Custom Jamu Blend',
+          text: recipe,
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(recipe).then(() => {
+          alert("Recipe copied to clipboard! Share with your friends! 📋✨");
+        });
+      }
+    }
 
     renderIngredients();
       
   </script>
-
 
 <!-- Scripts -->
 			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>

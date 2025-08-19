@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 Jamu by AI</title>
+  <title>🌿 Jamu Recommendation</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
 	<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
-
 
   <style>
 /* 공통 스타일 */
@@ -72,7 +71,6 @@ p {
   overflow: hidden;
 }
 
-
 .tag.selected {
   background-color: #ffa500;
   color: white;
@@ -114,6 +112,69 @@ button:hover {
   margin-bottom: 1em;
 }
 
+/* 추가된 스타일들 */
+.ingredient-tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  border-radius: 12px;
+  font-size: 0.85em;
+}
+
+.benefit-tag {
+  display: inline-block;
+  background-color: #e8f5e8;
+  color: #2d5a2d;
+  padding: 0.3em 0.6em;
+  margin: 0.2em;
+  border-radius: 12px;
+  font-size: 0.85em;
+}
+
+.jamu-details {
+  text-align: left;
+  margin: 1em 0;
+}
+
+.jamu-prep-box {
+  background-color: #f8f8f8;
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em 0;
+  text-align: left;
+}
+
+.error-message {
+  background-color: #ffe6e6;
+  color: #d63031;
+  padding: 1em;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ai-insight {
+  background: linear-gradient(135deg, #fff2e6 0%, #ffe8d1 100%);
+  border-left: 4px solid #ffa500;
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em 0;
+  text-align: left;
+}
+
+.ai-insight h4 {
+  color: #d4730a;
+  margin-bottom: 0.5em;
+}
+
+.ai-insight p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #b8600a;
+  text-align: left;
+}
+
 /* 로딩 애니메이션 */
 .loader {
   border: 6px solid #f3f3f3;
@@ -151,40 +212,38 @@ button:hover {
 }
 }
 
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   </style>
 </head>
 
 <body>
   
   <!-- Nav -->
-						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
-							<ul>
-								<li><a href="/">Home</a></li>
-								<li>
-									<a href="/order">Order</a>
-									
-								</li>
-								<li><a href="/info">About Jamu</a></li>
-								<li><a href="/ourstory">Our Story</a></li>
-								<li><a href="#">Language</a>
-									<ul>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI">English</a></li>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Alkatra;"><a href="/JamubyAI_kor">한국어</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
+  <nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>
+        <a href="/order">Order</a>
+      </li>
+      <li><a href="/info">About Jamu</a></li>
+      <li><a href="/ourstory">Our Story</a></li>
+      <li><a href="#">Language</a>
+        <ul>
+          <li style="font-family: Alkatra;"><a href="/JamubyAI">English</a></li>
+          <li style="font-family: Alkatra;"><a href="/JamubyAI_ind">Bahasa Indonesia</a></li>
+          <li style="font-family: Alkatra;"><a href="/JamubyAI_kor">한국어</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Jamu by AI Section --> 
    <br><br><br><br>
-    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu by AI</h2>
-    <p style="font-family: 'Alkatra', sans-serif;">Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect jamu for you.</p>
+    <h2 style="font-family: 'Alkatra', sans-serif;">🌿 Jamu Recommendation</h2>
+    <p style="font-family: 'Alkatra', sans-serif;">Select how you feel, your travel style, the weather, and your interests.<br>AI will recommend the perfect traditional jamu for you.</p>
 
   <section id="ai-recommendation" style="font-family: 'Alkatra', cursive;">
     <form id="jamu-form">
@@ -225,12 +284,10 @@ button:hover {
           <div class="tag">Better Sleep</div>
           <div class="tag">Indigestion</div>
           <div class="tag">Stress Relief</div>
-          <div class="tag">Jamu History</div>
-          <div class="tag">Beras Kencur</div>
         </div>
       </div>
 <br>
-      <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Jamu</button>
+      <button type="button" style="font-family: 'Alkatra', cursive;" onclick="recommendJamu()">Get Your Perfect Jamu 🌿</button>
     </form>
 
     <div id="jamu-result"></div>
@@ -238,66 +295,270 @@ button:hover {
 
   <!-- JavaScript -->
   <script>
-    document.querySelectorAll('.tag-container').forEach(container => {
-    const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+    // 완전한 6가지 전통 자무 데이터베이스
+    const jamuDatabase = {
+      'beras-kencur': {
+        name: "Jamu Beras Kencur",
+        desc: "Traditional rice and aromatic ginger jamu for energy recovery and mental clarity.",
+        img: "{% static 'c2/images/BerasKencur.jpg' %}",
+        ingredients: ['Beras (Rice)', 'Kencur (Aromatic Ginger)', 'Asam (Tamarind)', 'Gula Merah (Palm Sugar)'],
+        benefits: ['Energy Recovery', 'Leg Pain Relief', 'Mental Clarity', 'Weight Management'],
+        prep: 'Soak rice for 3-6 hours, roast until brown, grind. Pound kencur and ginger, mix with spiced water and ground rice.',
+        aiReason: 'Perfect for travelers experiencing fatigue and needing energy boost with traditional Indonesian taste.'
+      },
+      'kunyit-asem': {
+        name: "Jamu Kunyit Asam",
+        desc: "Golden turmeric & tamarind jamu to refresh your body and aid digestion.",
+        img: "{% static 'c2/images/KunyitAsem.png' %}",
+        ingredients: ['Kunyit (Fresh Turmeric)', 'Asam Jawa (Tamarind)', 'Gula Merah', 'Kencur'],
+        benefits: ['Digestive Relief', 'Motion Sickness Prevention', 'Stomach Soothing', 'Menstrual Pain Relief'],
+        prep: 'Grind fresh turmeric, brew in hot water, add tamarind water and palm sugar for refreshing sweet-sour taste.',
+        aiReason: 'Ideal for hot weather and digestive issues, this is the most popular traditional jamu in Indonesia.'
+      },
+      'temulawak': {
+        name: "Jamu Temulawak",
+        desc: "Javanese turmeric jamu for liver health and stress relief.",
+        img: "{% static 'c2/images/Temulawak.jpg' %}",
+        ingredients: ['Temulawak (Javanese Turmeric)', 'Asam Jawa', 'Gula Merah'],
+        benefits: ['Liver Health', 'Stress Reduction', 'Better Sleep', 'Blood Sugar Control'],
+        prep: 'Grate temulawak, boil in water for 10-15 minutes, add tamarind water and palm sugar to taste.',
+        aiReason: 'Excellent for relaxation and stress relief, especially beneficial for busy travelers needing to unwind.'
+      },
+      'empon-empon': {
+        name: "Jamu Empon-Empon",
+        desc: "Complete mixed herbs jamu with comprehensive health benefits.",
+        img: "{% static 'c2/images/EmponEmpon.jpg' %}",
+        ingredients: ['Temulawak', 'Kunyit', 'Jahe Merah', 'Serai', 'Kapulaga', 'Cengkeh', 'Kayu Manis'],
+        benefits: ['Immunity Boost', 'Overall Health', 'Antioxidant Rich', 'Anti-inflammatory'],
+        prep: 'Clean and slice all herbs, boil in 1.5L water for 15-20 minutes until essences are extracted, add sugar.',
+        aiReason: 'The ultimate comprehensive jamu when you need maximum health benefits and immune system support.'
+      },
+      'wedang-uwuh': {
+        name: "Wedang Uwuh",
+        desc: "Traditional Yogyakarta warm spice drink for circulation and warmth.",
+        img: "{% static 'c2/images/WedangUwuh.jpg' %}",
+        ingredients: ['Kayu Secang', 'Sereh', 'Kapulaga', 'Cengkeh', 'Jinten Hitam', 'Kayu Manis', 'Jahe'],
+        benefits: ['Body Warming', 'Blood Circulation', 'Cold Prevention', 'Respiratory Health'],
+        prep: 'Boil all spices in water for 10 minutes until water turns deep red, add rock sugar, serve warm.',
+        aiReason: 'Perfect for cool or rainy weather, this Yogyakarta specialty warms the body and improves circulation.'
+      },
+      'temu-ireng': {
+        name: "Jamu Temu Ireng",
+        desc: "Rare black turmeric jamu for blood purification and detox.",
+        img: "{% static 'c2/images/TemuIreng.jpg' %}",
+        ingredients: ['Temu Ireng (Black Turmeric)', 'Jahe', 'Daun Salam', 'Secang', 'Jinten Hitam'],
+        benefits: ['Blood Purification', 'Cholesterol Reduction', 'Detoxification', 'Uric Acid Control'],
+        prep: 'Grate black turmeric and ginger, boil with other ingredients for 10-15 minutes, strain and sweeten.',
+        aiReason: 'Specialized for health issues like high cholesterol and uric acid, using rare black turmeric with powerful healing properties.'
+      }
+    };
 
-    container.querySelectorAll('.tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        if (isSingleChoice) {
-          // 이미 선택된 걸 다시 클릭한 경우 → 해제
-          if (tag.classList.contains('selected')) {
-            tag.classList.remove('selected');
+    // 기존 태그 선택 기능 유지
+    document.querySelectorAll('.tag-container').forEach(container => {
+      const isSingleChoice = ['mood', 'style', 'weather'].includes(container.dataset.name);
+
+      container.querySelectorAll('.tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          if (isSingleChoice) {
+            // 이미 선택된 걸 다시 클릭한 경우 → 해제
+            if (tag.classList.contains('selected')) {
+              tag.classList.remove('selected');
+            } else {
+              // 새 선택 → 나머지 해제 후 본인만 선택
+              container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+              tag.classList.add('selected');
+            }
           } else {
-            // 새 선택 → 나머지 해제 후 본인만 선택
-            container.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
-            tag.classList.add('selected');
+            // 다중 선택 허용 (symptom 그룹)
+            tag.classList.toggle('selected');
           }
-        } else {
-          // 다중 선택 허용 (symptom 그룹)
-          tag.classList.toggle('selected');
-        }
+        });
       });
     });
-  });
+
+    // 선택값 가져오기
+    function getSelectedValues() {
+      const selections = {
+        mood: '',
+        style: '',
+        weather: '',
+        symptoms: []
+      };
+
+      // 단일 선택 항목들
+      ['mood', 'style', 'weather'].forEach(category => {
+        const selected = document.querySelector(`[data-name="${category}"] .tag.selected`);
+        if (selected) {
+          selections[category] = selected.textContent;
+        }
+      });
+
+      // 다중 선택 항목 (symptoms)
+      document.querySelectorAll('[data-name="symptom"] .tag.selected').forEach(tag => {
+        selections.symptoms.push(tag.textContent);
+      });
+
+      return selections;
+    }
+
+    // 고도화된 AI 추천 로직
+    function calculateJamuScore(selections) {
+      let scores = {
+        'beras-kencur': 0,
+        'kunyit-asem': 0,
+        'temulawak': 0,
+        'empon-empon': 0,
+        'wedang-uwuh': 0,
+        'temu-ireng': 0
+      };
+
+      // 기분에 따른 정밀 점수 배정
+      if (selections.mood === 'Tired') {
+        scores['beras-kencur'] += 5; // 피로회복 전문
+        scores['empon-empon'] += 4; // 종합 영양
+        scores['wedang-uwuh'] += 2; // 혈액순환으로 활력
+      } else if (selections.mood === 'Too Hot') {
+        scores['kunyit-asem'] += 5; // 시원한 타마린드
+        scores['temulawak'] += 3; // 진정 효과
+        scores['temu-ireng'] += 2; // 혈액 정화
+      } else if (selections.mood === 'A bit Sick') {
+        scores['empon-empon'] += 5; // 면역력 최강
+        scores['wedang-uwuh'] += 4; // 감기 예방
+        scores['beras-kencur'] += 3; // 기력 회복
+      } else if (selections.mood === 'Energized') {
+        scores['kunyit-asem'] += 3; // 소화 촉진
+        scores['temulawak'] += 2; // 균형 유지
+        scores['empon-empon'] += 2; // 전반적 건강
+      }
+
+      // 여행 스타일별 최적화
+      if (selections.style === 'Relaxing') {
+        scores['temulawak'] += 4; // 스트레스 완화
+        scores['kunyit-asem'] += 3; // 편안한 소화
+        scores['temu-ireng'] += 2; // 해독 효과
+      } else if (selections.style === 'Adventurous') {
+        scores['beras-kencur'] += 4; // 체력 관리
+        scores['empon-empon'] += 3; // 종합 면역
+        scores['wedang-uwuh'] += 2; // 혈액순환
+      } else if (selections.style === 'Cultural') {
+        scores['kunyit-asem'] += 4; // 가장 전통적
+        scores['temulawak'] += 3; // 자바 전통
+        scores['wedang-uwuh'] += 3; // 욕야카르타 특산
+      }
+
+      // 날씨별 맞춤 추천
+      if (selections.weather === 'Hot') {
+        scores['kunyit-asem'] += 4; // 더위 해소
+        scores['temulawak'] += 2; // 진정
+        scores['temu-ireng'] += 2; // 혈액 순환
+      } else if (selections.weather === 'Cool') {
+        scores['wedang-uwuh'] += 5; // 몸 따뜻하게
+        scores['empon-empon'] += 3; // 종합 영양
+        scores['beras-kencur'] += 2; // 기력 보충
+      } else if (selections.weather === 'Rainy') {
+        scores['wedang-uwuh'] += 4; // 습기 대비
+        scores['empon-empon'] += 3; // 면역력
+        scores['beras-kencur'] += 2; // 활력
+      }
+
+      // 증상별 전문 매칭
+      selections.symptoms.forEach(symptom => {
+        if (symptom === 'Cold Symptoms') {
+          scores['empon-empon'] += 5;
+          scores['wedang-uwuh'] += 4;
+        } else if (symptom === 'Low Energy') {
+          scores['beras-kencur'] += 5;
+          scores['empon-empon'] += 3;
+        } else if (symptom === 'Women\'s Health') {
+          scores['kunyit-asem'] += 5;
+          scores['temulawak'] += 3;
+        } else if (symptom === 'Better Sleep') {
+          scores['temulawak'] += 5;
+          scores['temu-ireng'] += 2;
+        } else if (symptom === 'Indigestion') {
+          scores['kunyit-asem'] += 5;
+          scores['temulawak'] += 3;
+        } else if (symptom === 'Stress Relief') {
+          scores['temulawak'] += 5;
+          scores['wedang-uwuh'] += 2;
+        } else if (symptom === 'Jamu History') {
+          scores['kunyit-asem'] += 4;
+          scores['wedang-uwuh'] += 3;
+        } else if (symptom === 'Beras Kencur') {
+          scores['beras-kencur'] += 6;
+        }
+      });
+
+      // 최고 점수 자무 선택
+      const bestMatch = Object.keys(scores).reduce((a, b) => 
+        scores[a] > scores[b] ? a : b
+      );
+
+      return {
+        jamu: jamuDatabase[bestMatch],
+        confidence: Math.min(scores[bestMatch] * 10, 95) // 신뢰도 계산
+      };
+    }
 
     function recommendJamu() {
       const resultDiv = document.getElementById("jamu-result");
+      const selections = getSelectedValues();
+      
+      // 선택 검증 - 최소 하나는 선택되어야 함
+      const hasSelection = selections.mood || selections.style || selections.weather || selections.symptoms.length > 0;
+      
+      if (!hasSelection) {
+        resultDiv.innerHTML = `
+          <div class="error-message">
+            🌿 Please select at least one option to get your personalized jamu recommendation!
+          </div>
+        `;
+        return;
+      }
+
+      // 로딩 표시
       resultDiv.innerHTML = `<div class="loader"></div>`;
 
       setTimeout(() => {
-        const jamuList = [
-          {
-            name: "Beras Kencur",
-            desc: "Boost your energy with this sweet and spicy rice-herb jamu.",
-            img: "{% static 'c2/images/BerasKencur.jpg' %}"
-          },
-          {
-            name: "Kunyit Asam",
-            desc: "Turmeric & tamarind jamu to refresh your body and mind.",
-            img: "{% static 'c2/images/KunyitAsem.png' %}"
-          },
-          {
-            name: "Temulawak",
-            desc: "A classic jamu for digestion and immunity.",
-            img: "{% static 'c2/images/Temulawak.jpg' %}"
-          }
-        ];
+        // AI 추천 실행
+        const result = calculateJamuScore(selections);
+        const jamu = result.jamu;
+        const confidence = result.confidence;
 
-        const randomIndex = Math.floor(Math.random() * jamuList.length);
-        const jamu = jamuList[randomIndex];
-
+        // 향상된 결과 표시
         resultDiv.innerHTML = `
-          <img src="${jamu.img}" alt="${jamu.name}">
-          <h3>✨ Your Recommended Jamu: ${jamu.name}</h3>
-          <p>${jamu.desc}</p>
-          <button style="font-family: 'Alkatra', cursive;">Order Now</button>
+          <img src="${jamu.img}" alt="${jamu.name}" onerror="this.style.display='none'">
+          <h3>✨ Your AI-Recommended Jamu: ${jamu.name}</h3>
+          <p style="font-size: 1.1em; margin: 1em 0;">${jamu.desc}</p>
+          
+          <div class="ai-insight">
+            <h4>🤖 Why AI chose this for you:</h4>
+            <p>${jamu.aiReason}</p>
+            <p style="margin-top: 0.5em;"><strong>Match Confidence: ${confidence}%</strong></p>
+          </div>
+          
+          <div class="jamu-details">
+            <h4>🌿 Traditional Ingredients:</h4>
+            ${jamu.ingredients.map(ingredient => `<span class="ingredient-tag">${ingredient}</span>`).join('')}
+            
+            <h4 style="margin-top: 1em;">✨ Health Benefits:</h4>
+            ${jamu.benefits.map(benefit => `<span class="benefit-tag">${benefit}</span>`).join('')}
+            
+            <div class="jamu-prep-box">
+              <h4>🥤 Traditional Preparation:</h4>
+              <p style="margin: 0.5em 0 0 0; font-size: 0.9em; line-height: 1.5;">${jamu.prep}</p>
+            </div>
+          </div>
+          
+          <button style="font-family: 'Alkatra', cursive; margin-top: 1em;" onclick="window.location.href='/order'">
+            Order This Jamu Now ✨
+          </button>
         `;
-      }, 1000);
+      }, 1500); // AI 처리 시간 시뮬레이션
     }
-
   </script>
 
-    <!-- Scripts -->
+  <!-- 기존 Scripts 모두 유지 -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
   <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>

@@ -1,30 +1,28 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🌺 나만의 자무 만들기</title>
 
-
-   <!-- Fonts -->
-   
-    <!-- Fonts (중복 제거 후 단일 링크 유지) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin>
 
-    
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+  <noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+
   <style>
     body {
-      font-family: Pretendard, sans-serif;
+      font-family: "Pretendard Variable", Pretendard, "Playfair Display", serif;
       margin: 0;
       background-color: #fdfcf8;
     }
@@ -35,8 +33,6 @@
       justify-content: center;
     }
 
-
-
     section#custom-blend {
       max-width: 1000px;
       margin: 4em auto;
@@ -44,7 +40,7 @@
       background-color: #ffffff;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-family: 'Pretendard', sans-serif;
+      font-family: 'Alkatra', "Pretendard Variable", Pretendard, sans-serif;
       align-items: center;
     }
 
@@ -102,6 +98,29 @@
       display: inline-block;
     }
 
+    .new-ingredient {
+      position: relative;
+    }
+
+    .new-ingredient::after {
+      content: "NEW!";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: linear-gradient(45deg, #ff6b6b, #ffa500);
+      color: white;
+      padding: 0.3em 0.6em;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
     #blend-name-input {
       margin-top: 2em;
       text-align: center;
@@ -112,7 +131,7 @@
       width: 70%;
       border-radius: 10px;
       border: 1px solid #ccc;
-      font-family: 'Playfair Display', serif;
+      font-family: "Pretendard Variable", Pretendard, "Playfair Display", serif;
     }
 
     button {
@@ -124,7 +143,7 @@
       border-radius: 10px;
       font-size: 1.1em;
       cursor: pointer;
-      font-family: 'Pretendard', cursive;
+      font-family: 'Alkatra', "Pretendard Variable", Pretendard, cursive;
     }
 
     #blend-result {
@@ -132,166 +151,143 @@
       margin-top: 2.5em;
     }
 
+    /* ===== Section 컨테이너: 완전 반응형 ===== */
+    #custom-blend{
+      width: min(1000px, 92vw);
+      margin: clamp(24px, 6vw, 64px) auto;
+      padding: clamp(16px, 3vw, 32px);
+      border-radius: clamp(10px, 1.8vw, 16px);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
 
+    /* 제목/설명 유동 타이포 */
+    #custom-blend h2{
+      text-align: center;
+      font-size: clamp(22px, 3.2vw, 34px);
+      margin: 0 0 clamp(8px, 1.6vw, 12px);
+    }
+    #custom-blend > p{
+      text-align: center;
+      font-size: clamp(14px, 1.8vw, 18px);
+      line-height: 1.6;
+      margin: 0;
+    }
 
-/* ===== Section 컨테이너: 완전 반응형 ===== */
-#custom-blend{
-  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
-  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
-  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
-  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-}
+    /* ===== 그리드: 기본 4열 → 화면 줄면 자동 ↓ ===== */
+    #ingredient-list{
+      display: grid;
+      gap: clamp(12px, 2.5vw, 20px);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: clamp(16px, 3vw, 24px);
+    }
+    @media (max-width: 1024px){
+      #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 720px){
+      #ingredient-list{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
 
-/* 제목/설명도 유동 타이포 */
-#custom-blend h2{
-  text-align: center;
-  font-size: clamp(22px, 3.2vw, 34px);
-  margin: 0 0 clamp(8px, 1.6vw, 12px);
-}
-#custom-blend > p{
-  text-align: center;
-  font-size: clamp(14px, 1.8vw, 18px);
-  line-height: 1.6;
-  margin: 0;
-}
+    /* 카드와 이미지도 유동 크기 */
+    .ingredient-card{
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .3s ease;
+      position: relative;
+    }
+    .ingredient-card img{
+      width: 100%;
+      height: clamp(110px, 22vw, 160px);
+      object-fit: cover;
+    }
+    .ingredient-card .content{ padding: clamp(10px, 2.2vw, 16px); }
+    .ingredient-card h4{
+      margin: 0 0 .5em;
+      font-size: clamp(14px, 1.4vw, 18px);
+      line-height: 1.25;
+    }
+    .ingredient-card p{
+      font-size: clamp(12px, 1.2vw, 16px);
+      line-height: 1.55;
+    }
 
-/* ===== 그리드: 기본 4열 → 화면 줄면 자동 ↓ ===== */
-#ingredient-list{
-  display: grid;
-  gap: clamp(12px, 2.5vw, 20px);
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 기본 4열 */
-  margin-top: clamp(16px, 3vw, 24px);
-}
-@media (max-width: 1024px){
-  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); } /* 3열 */
-}
-@media (max-width: 720px){
-  #ingredient-list{ grid-template-columns: repeat(2, minmax(0,1fr)); } /* 2열 */
-}
-/* 필요 시 480px 이하에서 3열 강제하려면 아래 주석 해제
-@media (max-width: 480px){
-  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-*/
+    /* 작은 화면에서 설명 2줄로 고정 */
+    @media (max-width: 720px){
+      .ingredient-card p{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+    }
 
-/* 카드와 이미지도 유동 크기 */
-.ingredient-card{
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .2s ease, border-color .3s ease;
-  position: relative;
-}
-.ingredient-card img{
-  width: 100%;
-  height: clamp(110px, 22vw, 160px);  /* 뷰포트에 따라 이미지 높이 유동 */
-  object-fit: cover;
-}
-.ingredient-card .content{ padding: clamp(10px, 2.2vw, 16px); }
-.ingredient-card h4{
-  margin: 0 0 .5em;
-  font-size: clamp(14px, 1.4vw, 18px);
-  line-height: 1.25;
-}
-.ingredient-card p{
-  font-size: clamp(12px, 1.2vw, 16px);
-  line-height: 1.55;
-}
+    /* 선택 라벨 */
+    .ingredient-card .blend-label{
+      position: absolute; top: 8px; left: 8px;
+      background: #ffa500; color: #fff;
+      padding: .3em .8em; border-radius: 20px;
+      font-size: clamp(11px, 1.1vw, 13px);
+      display: none;
+    }
+    .ingredient-card.selected{ border-color: #ffa500; }
+    .ingredient-card.selected .blend-label{ display: inline-block; }
 
-/* 작은 화면에서 설명 2줄로 고정(레이아웃 안정화) */
-@media (max-width: 720px){
-  .ingredient-card p{
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
+    /* 버튼 중앙 정렬 */
+    #custom-blend .btn-row{ display:flex; justify-content:center; }
+    button{
+      margin-top: 1.2em;
+      padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 28px);
+      background:#ffa500; color:#fff; border:0; border-radius:12px;
+      font-size: clamp(14px, 1.4vw, 18px);
+      cursor:pointer;
+    }
+    /* 폴백 센터링 */
+    #custom-blend > div:nth-of-type(2){ display:flex; justify-content:center; }
+    /* 모바일 버튼 폭 */
+    @media (max-width: 480px){
+      button{ width:100%; max-width: 340px; }
+    }
 
-/* 선택 라벨 */
-.ingredient-card .blend-label{
-  position: absolute; top: 8px; left: 8px;
-  background: #ffa500; color: #fff;
-  padding: .3em .8em; border-radius: 20px;
-  font-size: clamp(11px, 1.1vw, 13px);
-  display: none;
-}
-.ingredient-card.selected{ border-color: #ffa500; }
-.ingredient-card.selected .blend-label{ display: inline-block; }
-
-/* 버튼 중앙 정렬(마크업에 .btn-row 있으면 이게 우선) */
-#custom-blend .btn-row{ display:flex; justify-content:center; }
-button{
-  margin-top: 1.2em;
-  padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 28px);
-  background:#ffa500; color:#fff; border:0; border-radius:12px;
-  font-size: clamp(14px, 1.4vw, 18px);
-  cursor:pointer;
-}
-/* .btn-row가 없다면 기존 div를 대상으로 폴백 센터링 */
-#custom-blend > div:nth-of-type(2){ display:flex; justify-content:center; }
-/* 모바일에선 버튼 폭도 유동 */
-@media (max-width: 480px){
-  button{ width:100%; max-width: 340px; }
-}
-
-/* 결과 이미지도 반응형 */
-#blend-result{ text-align:center; margin-top: clamp(20px, 4vw, 40px); }
-#blend-result img{
-  max-width: min(300px, 80vw);
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-
-
-
-
-
-
+    /* 결과 이미지 반응형 */
+    #blend-result{ text-align:center; margin-top: clamp(20px, 4vw, 40px); }
+    #blend-result img{
+      max-width: min(300px, 80vw);
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
   </style>
 </head>
 
 <body>
-  
   <!-- Nav -->
-						<nav id="nav" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">
-							<ul>
-								<li><a href="/home_kor">홈</a></li>
-								<li>
-									<a href="/order_kor">주문하기</a>
-
-								</li>
-								<li><a href="/info_kor">자무 소개</a></li>
-								<li><a href="/ourstory_kor">우리의 이야기</a></li>
-								<li><a href="#">언어</a>
-									<ul>
-										<li style="font-family: Pretendard;"><a href="/CreateYourBlend">English</a></li>
-										<li style="font-family: Pretendard;"><a href="/CreateYourBlend_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Pretendard;"><a href="/CreateYourBlend_kor">한국어</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
-
-
+  <nav id="nav" style="font-family: 'Alkatra', 'Pretendard Variable', Pretendard, sans-serif; font-weight: bold;">
+    <ul>
+      <li><a href="/home_kor">홈</a></li>
+      <li><a href="/order_kor">주문하기</a></li>
+      <li><a href="/info_kor">자무 소개</a></li>
+      <li><a href="/ourstory_kor">우리의 이야기</a></li>
+      <li><a href="#">언어</a>
+        <ul>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend">English</a></li>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend_ind">Bahasa Indonesia</a></li>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend_kor">한국어</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Create Your Blend Section -->
-   <br><br><br><br>
-
-   <h2 style="font-family: 'Pretendard', sans-serif;">🌺 나만의 자무 만들기</h2>
-    <p style="font-family: 'Pretendard', sans-serif;">좋아하는 자무 재료를 선택하고, 여행에서 영감을 받은 나만의 자무를 만들어 보세요.</p>
-
+  <br><br><br><br>
+  <h2 style="font-family: 'Alkatra', 'Pretendard Variable', Pretendard, sans-serif;">🌺 나만의 자무 만들기</h2>
+  <p style="font-family: 'Alkatra', 'Pretendard Variable', Pretendard, sans-serif;">
+    좋아하는 자무 재료를 선택하고, 여행에서 영감을 받은 나만의 블렌드를 만들어 보세요.
+  </p>
 
   <section id="custom-blend">
-
     <div id="ingredient-list"></div>
-
-    
 
     <div>
       <button onclick="createBlend()">나만의 자무 만들기</button>
@@ -300,18 +296,26 @@ button{
     <div id="blend-result"></div>
   </section>
 
-  <script style="font-family: 'Playfair Display', serif;">
+  <script>
     const ingredients = [
-      { name: "강황", desc: "항염 및 항산화 효과.", img: "{% static 'c2/images/Turmeric.png' %}" },
-      { name: "생강", desc: "감기 완화와 소화에 도움.", img: "{% static 'c2/images/ginger.jpg' %}" },
-      { name: "갈랑갈", desc: "기침과 몸살 완화.", img: "{% static 'c2/images/Galangal.jpg' %}" },
-      { name: "타마린드", desc: "새콤한 맛과 소화에 도움.", img: "{% static 'c2/images/Tamarind.jpg' %}" },
-      { name: "테물라왁", desc: "간 건강과 면역력 강화.", img: "{% static 'c2/images/Temulawak_low.jpg' %}" },
-      { name: "야자당", desc: "자연스러운 단맛과 미네랄.", img: "{% static 'c2/images/PalmSugar.png' %}" },
-      { name: "라임", desc: "비타민 C와 상쾌함.", img: "{% static 'c2/images/Lime.jpg' %}" },
-      { name: "레몬그라스", desc: "향기와 소화에 도움.", img: "{% static 'c2/images/Lemongrass.jpg' %}" },
-      { name: "계피", desc: "혈당 조절, 따뜻함을 더함.", img: "{% static 'c2/images/Cinnamon.jpg' %}" },
-      { name: "카다멈", desc: "소화에 좋은 향신료, 풍부한 향.", img: "{% static 'c2/images/Cardamom.jpg' %}" },
+      // 기존 10개 재료 (name은 로직용 영문, label/desc는 한글 표시용)
+      { name: "Turmeric",     label: "강황 (Turmeric)",       desc: "항염·항산화 효과가 뛰어난 자무의 핵심 재료.", img: "{% static 'c2/images/Turmeric.png' %}", isNew: false },
+      { name: "Ginger",       label: "생강 (Ginger)",          desc: "감기 완화와 소화에 도움을 주는 따뜻한 향신료.", img: "{% static 'c2/images/ginger.jpg' %}", isNew: false },
+      { name: "Galangal",     label: "갈랑갈 (Galangal)",      desc: "기침과 몸살 완화에 효과적인 전통 약초.", img: "{% static 'c2/images/Galangal.jpg' %}", isNew: false },
+      { name: "Tamarind",     label: "타마린드 (Tamarind)",    desc: "상쾌한 산미로 소화를 돕고 풍미를 균형 있게.", img: "{% static 'c2/images/Tamarind.jpg' %}", isNew: false },
+      { name: "Temulawak",    label: "테물라왁 (Temulawak)",   desc: "간 건강과 면역력 강화에 도움.", img: "{% static 'c2/images/Temulawak_low.jpg' %}", isNew: false },
+      { name: "Palm Sugar",   label: "야자당 (Palm Sugar)",    desc: "자연스러운 단맛과 미네랄을 더합니다.", img: "{% static 'c2/images/PalmSugar.png' %}", isNew: false },
+      { name: "Lime",         label: "라임 (Lime)",            desc: "비타민 C와 상쾌함으로 맛과 영양을 완성.", img: "{% static 'c2/images/Lime.jpg' %}", isNew: false },
+      { name: "Lemongrass",   label: "레몬그라스 (Lemongrass)",desc: "은은한 향과 소화에 도움을 주는 허브.", img: "{% static 'c2/images/Lemongrass.jpg' %}", isNew: false },
+      { name: "Cinnamon",     label: "계피 (Cinnamon)",        desc: "혈당 조절과 항산화, 따뜻한 향을 제공합니다.", img: "{% static 'c2/images/Cinnamon.jpg' %}", isNew: false },
+      { name: "Cardamom",     label: "카다멈 (Cardamom)",      desc: "소화에 좋은 향신료로 고급스러운 향을 더합니다.", img: "{% static 'c2/images/Cardamom.jpg' %}", isNew: false },
+
+      // 새로 추가 5개
+      { name: "Cloves",       label: "정향 (Cloves)",          desc: "항균·구강 건강·소화에 도움.", img: "{% static 'c2/images/Cloves.jpg' %}", isNew: false },
+      { name: "Sappan Wood",  label: "세짱나무 (Sappan Wood)", desc: "혈액순환 개선과 항산화에 도움.", img: "{% static 'c2/images/SappanWood.jpg' %}", isNew: false },
+      { name: "Black Cumin",  label: "블랙 커민 (Black Cumin)",desc: "면역 강화와 호흡기 건강에 도움.", img: "{% static 'c2/images/BlackCumin.jpg' %}", isNew: false },
+      { name: "Black Turmeric",label:"흑강황 (Black Turmeric)",desc: "혈액 정화와 콜레스테롤 관리에 도움.", img: "{% static 'c2/images/BlackTurmeric.jpg' %}", isNew: false },
+      { name: "Bay Leaves",   label: "월계수 잎 (Bay Leaves)", desc: "혈당 조절과 소화에 도움.", img: "{% static 'c2/images/BayLeaves.jpg' %}", isNew: false }
     ];
 
     const selected = [];
@@ -319,15 +323,15 @@ button{
     function renderIngredients() {
       const container = document.getElementById("ingredient-list");
       container.innerHTML = "";
-      ingredients.forEach((item, index) => {
+      ingredients.forEach((item) => {
         const card = document.createElement("div");
-        card.className = "ingredient-card";
+        card.className = `ingredient-card ${item.isNew ? 'new-ingredient' : ''}`;
         card.setAttribute("data-name", item.name);
         card.innerHTML = `
-          <div class="blend-label">${item.name}</div>
-          <img src="${item.img}" alt="${item.name}">
+          <div class="blend-label">${item.label}</div>
+          <img src="${item.img}" alt="${item.label}" onerror="this.src='{% static 'c2/images/default-ingredient.jpg' %}'">
           <div class="content">
-            <h4>${item.name}</h4>
+            <h4>${item.label}</h4>
             <p>${item.desc}</p>
           </div>
         `;
@@ -342,8 +346,8 @@ button{
         selected.splice(index, 1);
         card.classList.remove("selected");
       } else {
-        if (selected.length >= 5) {
-          alert("최대 5가지 재료만 선택할 수 있습니다.");
+        if (selected.length >= 7) {
+          alert("최대 7가지 재료까지 선택할 수 있어요! 🌿");
           return;
         }
         selected.push(name);
@@ -351,33 +355,154 @@ button{
       }
     }
 
+    // 선택된 재료에 따른 자무 타입과 이미지 결정 (로직 유지)
+    function determineJamuType(selectedIngredients) {
+      const names = selectedIngredients.map(name => name.toLowerCase());
+      const jamuTypes = {
+        'kunyit-asem': {
+          keywords: ['turmeric', 'tamarind', 'lime'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: '쿠닛 아셈 스타일',
+          description: '강황의 황금빛과 상큼한 산미가 조화로운 블렌드',
+          color: '#FF8C00'
+        },
+        'temulawak': {
+          keywords: ['temulawak', 'bay leaves'],
+          image: "{% static 'c2/images/Temulawak.jpg' %}",
+          name: '테물라왁 블렌드',
+          description: '간 건강을 돕는 자바 강황 기반의 편안한 블렌드',
+          color: '#DAA520'
+        },
+        'temu-ireng': {
+          keywords: ['black turmeric', 'black cumin', 'sappan wood'],
+          image: "{% static 'c2/images/TemuIreng.jpg' %}",
+          name: '흑강황 블렌드',
+          description: '흑강황 중심의 정화·밸런스 케어 블렌드',
+          color: '#B22222'
+        },
+        'wedang-uwuh': {
+          keywords: ['cinnamon', 'cardamom', 'cloves', 'sappan wood', 'lemongrass'],
+          image: "{% static 'c2/images/WedangUwuh.jpg' %}",
+          name: '따뜻한 향신 블렌드',
+          description: '전통 향신료로 몸을 데우고 순환을 돕는 블렌드',
+          color: '#8B4513'
+        },
+        'empon-empon': {
+          keywords: ['ginger', 'galangal', 'turmeric', 'temulawak'],
+          image: "{% static 'c2/images/EmponEmpon.jpg' %}",
+          name: '종합 허브 블렌드',
+          description: '여러 약초를 고루 담은 면역·활력 블렌드',
+          color: '#D2691E'
+        },
+        'fresh-blend': {
+          keywords: ['lime', 'lemongrass', 'palm sugar'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: '상큼한 시트러스 블렌드',
+          description: '상쾌하고 에너제틱한 감각의 블렌드',
+          color: '#32CD32'
+        }
+      };
+
+      let scores = {};
+      Object.keys(jamuTypes).forEach(type => {
+        scores[type] = 0;
+        jamuTypes[type].keywords.forEach(keyword => {
+          if (names.some(n => n.includes(keyword))) scores[type] += 1;
+        });
+      });
+
+      const bestType = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+      if (scores[bestType] === 0) return jamuTypes['empon-empon'];
+      return jamuTypes[bestType];
+    }
+
     function createBlend() {
       const result = document.getElementById("blend-result");
       if (selected.length === 0) {
-        result.innerHTML = "<p>최소 한 가지 재료를 선택해 주세요.</p>";
+        result.innerHTML = `
+          <div style="background: #ffe6e6; color: #d63031; padding: 1em; border-radius: 8px;">
+            <p>🌿 맞춤 자무를 만들려면 최소 한 가지 재료를 선택해 주세요!</p>
+          </div>
+        `;
         return;
       }
+
+      // 새로운 재료 포함 여부
+      const newIngredients = selected.filter(name =>
+        ingredients.find(ing => ing.name === name && ing.isNew)
+      );
+      const hasNewIngredients = newIngredients.length > 0;
+
+      // 자무 타입 결정
+      const jamuType = determineJamuType(selected);
+
+      // 선택 목록은 한글 label로 표시
+      const selectedLabels = selected
+        .map(n => (ingredients.find(i => i.name === n)?.label || n))
+        .join(" • ");
+
       result.innerHTML = `
-        <h3>🌸 나만의 시그니처 자무</h3>
-        <p>포함된 재료: <strong>${selected.join(", ")}</strong></p>
-        <p>여행에서 영감을 받은 나만의 자무를 즐겨 보세요!</p>
-        <img src="{% static 'c2/images/jamuup.png' %}" alt="Your Jamu" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
+        <div style="background: linear-gradient(135deg, #fff9e6, #ffe8d1); padding: 2em; border-radius: 16px; border-left: 4px solid ${jamuType.color};">
+          <h3>🌸 나만의 ${jamuType.name}</h3>
+          <p style="color: #666; font-style: italic; margin: 0.5em 0 1.5em;">${jamuType.description}</p>
+
+          <img src="${jamuType.image}" alt="${jamuType.name}"
+               style="max-width: 300px; width: 100%; border-radius: 12px; margin: 1em 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+               onerror="this.src='{% static 'c2/images/jamuup.png' %}'" />
+
+          <p style="font-size: 1.1em; margin: 1em 0;"><strong>선택한 재료 (${selected.length})</strong></p>
+          <p style="background: #f8f8f8; padding: 1em; border-radius: 8px; font-weight: bold; color: #333;">
+            ${selectedLabels}
+          </p>
+
+          ${hasNewIngredients ? `
+            <div style="background: #e8f5e8; color: #2d5a2d; padding: 1em; border-radius: 8px; margin: 1em 0;">
+              <strong>✨ 스페셜 블렌드!</strong> 새로운 전통 재료 ${newIngredients.length}가지 포함:
+              <strong>${newIngredients.join(", ")}</strong>
+            </div>
+          ` : ''}
+
+          <div style="background: rgba(255,255,255,0.7); padding: 1em; border-radius: 8px; margin: 1em 0;">
+            <h4 style="margin: 0 0 0.5em; color: ${jamuType.color};">🌿 블렌드 프로필</h4>
+            <p style="margin: 0; font-size: 0.95em;">
+              전통 인도네시아 치유 지혜에 당신의 취향을 더해, 여행의 웰니스에 딱 맞는 유니크한 자무가 완성됐어요.
+            </p>
+          </div>
+        </div>
       `;
     }
+
+    function orderBlend() {
+      alert("🌿 감사합니다! 전통 방식으로 맞춤 자무를 준비하겠습니다. 주문 페이지로 이동합니다...");
+      // window.location.href = '/order';
+    }
+
+    function shareBlend() {
+      const recipe = `나만의 자무 레시피: ${selected.join(", ")} - 여행 웰니스에 딱! 🌿✈️`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'My Custom Jamu Blend',
+          text: recipe,
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(recipe).then(() => {
+          alert("레시피가 클립보드에 복사되었습니다! 친구들과 공유해 보세요! 📋✨");
+        });
+      }
+    }
+
     renderIngredients();
-      
   </script>
 
-
-<!-- Scripts -->
-			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/util.js' %}"></script>
-			<script src="{% static 'c2/assets/js/main.js' %}"></script>
-
+  <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
 </body>
 </html>
