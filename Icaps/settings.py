@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # 환경변수에서 설정값 읽기
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'

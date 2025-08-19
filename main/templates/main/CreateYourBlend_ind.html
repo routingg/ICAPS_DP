@@ -1,28 +1,21 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌺 Buat Racikanmu</title>
+  <title>🌺 Buat Racikan Anda</title>
 
-
-   <!-- Fonts -->
-   
-    <!-- Fonts (중복 제거 후 단일 링크 유지) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="{% static 'c2/assets/css/main.css' %}" />
+  <noscript><link rel="stylesheet" href="{% static 'c2/assets/css/noscript.css' %}" /></noscript>
 
-
-    
-    
   <style>
     body {
       font-family: 'Playfair Display', serif;
@@ -35,8 +28,6 @@
       display: flex;
       justify-content: center;
     }
-
-
 
     section#custom-blend {
       max-width: 1000px;
@@ -103,6 +94,29 @@
       display: inline-block;
     }
 
+    .new-ingredient {
+      position: relative;
+    }
+
+    .new-ingredient::after {
+      content: "NEW!";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: linear-gradient(45deg, #ff6b6b, #ffa500);
+      color: white;
+      padding: 0.3em 0.6em;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
     #blend-name-input {
       margin-top: 2em;
       text-align: center;
@@ -133,172 +147,150 @@
       margin-top: 2.5em;
     }
 
+    /* ===== Section 컨테이너: 완전 반응형 ===== */
+    #custom-blend{
+      width: min(1000px, 92vw);
+      margin: clamp(24px, 6vw, 64px) auto;
+      padding: clamp(16px, 3vw, 32px);
+      border-radius: clamp(10px, 1.8vw, 16px);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
 
+    /* 제목/설명도 유동 타이포 */
+    #custom-blend h2{
+      text-align: center;
+      font-size: clamp(22px, 3.2vw, 34px);
+      margin: 0 0 clamp(8px, 1.6vw, 12px);
+    }
+    #custom-blend > p{
+      text-align: center;
+      font-size: clamp(14px, 1.8vw, 18px);
+      line-height: 1.6;
+      margin: 0;
+    }
 
-/* ===== Section 컨테이너: 완전 반응형 ===== */
-#custom-blend{
-  width: min(1000px, 92vw);                        /* 데스크탑에선 1000px, 모바일에선 화면폭 */
-  margin: clamp(24px, 6vw, 64px) auto;             /* 위아래 마진 유동 */
-  padding: clamp(16px, 3vw, 32px);                 /* 패딩 유동 */
-  border-radius: clamp(10px, 1.8vw, 16px);         /* 둥근 모서리 유동 */
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-}
+    /* ===== 그리드: 기본 4열 → 화면 줄면 자동 ↓ ===== */
+    #ingredient-list{
+      display: grid;
+      gap: clamp(12px, 2.5vw, 20px);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: clamp(16px, 3vw, 24px);
+    }
+    @media (max-width: 1024px){
+      #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 720px){
+      #ingredient-list{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
 
-/* 제목/설명도 유동 타이포 */
-#custom-blend h2{
-  text-align: center;
-  font-size: clamp(22px, 3.2vw, 34px);
-  margin: 0 0 clamp(8px, 1.6vw, 12px);
-}
-#custom-blend > p{
-  text-align: center;
-  font-size: clamp(14px, 1.8vw, 18px);
-  line-height: 1.6;
-  margin: 0;
-}
+    /* 카드와 이미지도 유동 크기 */
+    .ingredient-card{
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .3s ease;
+      position: relative;
+    }
+    .ingredient-card img{
+      width: 100%;
+      height: clamp(110px, 22vw, 160px);
+      object-fit: cover;
+    }
+    .ingredient-card .content{ padding: clamp(10px, 2.2vw, 16px); }
+    .ingredient-card h4{
+      margin: 0 0 .5em;
+      font-size: clamp(14px, 1.4vw, 18px);
+      line-height: 1.25;
+    }
+    .ingredient-card p{
+      font-size: clamp(12px, 1.2vw, 16px);
+      line-height: 1.55;
+    }
 
-/* ===== 그리드: 기본 4열 → 화면 줄면 자동 ↓ ===== */
-#ingredient-list{
-  display: grid;
-  gap: clamp(12px, 2.5vw, 20px);
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 기본 4열 */
-  margin-top: clamp(16px, 3vw, 24px);
-}
-@media (max-width: 1024px){
-  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); } /* 3열 */
-}
-@media (max-width: 720px){
-  #ingredient-list{ grid-template-columns: repeat(2, minmax(0,1fr)); } /* 2열 */
-}
-/* 필요 시 480px 이하에서 3열 강제하려면 아래 주석 해제
-@media (max-width: 480px){
-  #ingredient-list{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-*/
+    /* 작은 화면에서 설명 2줄로 고정(레이아웃 안정화) */
+    @media (max-width: 720px){
+      .ingredient-card p{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+    }
 
-/* 카드와 이미지도 유동 크기 */
-.ingredient-card{
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .2s ease, border-color .3s ease;
-  position: relative;
-}
-.ingredient-card img{
-  width: 100%;
-  height: clamp(110px, 22vw, 160px);  /* 뷰포트에 따라 이미지 높이 유동 */
-  object-fit: cover;
-}
-.ingredient-card .content{ padding: clamp(10px, 2.2vw, 16px); }
-.ingredient-card h4{
-  margin: 0 0 .5em;
-  font-size: clamp(14px, 1.4vw, 18px);
-  line-height: 1.25;
-}
-.ingredient-card p{
-  font-size: clamp(12px, 1.2vw, 16px);
-  line-height: 1.55;
-}
+    /* 선택 라벨 */
+    .ingredient-card .blend-label{
+      position: absolute; top: 8px; left: 8px;
+      background: #ffa500; color: #fff;
+      padding: .3em .8em; border-radius: 20px;
+      font-size: clamp(11px, 1.1vw, 13px);
+      display: none;
+    }
+    .ingredient-card.selected{ border-color: #ffa500; }
+    .ingredient-card.selected .blend-label{ display: inline-block; }
 
-/* 작은 화면에서 설명 2줄로 고정(레이아웃 안정화) */
-@media (max-width: 720px){
-  .ingredient-card p{
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
+    /* 버튼 중앙 정렬(마크업에 .btn-row 있으면 이게 우선) */
+    #custom-blend .btn-row{ display:flex; justify-content:center; }
+    button{
+      margin-top: 1.2em;
+      padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 28px);
+      background:#ffa500; color:#fff; border:0; border-radius:12px;
+      font-size: clamp(14px, 1.4vw, 18px);
+      cursor:pointer;
+    }
+    /* .btn-row가 없다면 기존 div를 대상으로 폴백 센터링 */
+    #custom-blend > div:nth-of-type(2){ display:flex; justify-content:center; }
+    /* 모바일에선 버튼 폭도 유동 */
+    @media (max-width: 480px){
+      button{ width:100%; max-width: 340px; }
+    }
 
-/* 선택 라벨 */
-.ingredient-card .blend-label{
-  position: absolute; top: 8px; left: 8px;
-  background: #ffa500; color: #fff;
-  padding: .3em .8em; border-radius: 20px;
-  font-size: clamp(11px, 1.1vw, 13px);
-  display: none;
-}
-.ingredient-card.selected{ border-color: #ffa500; }
-.ingredient-card.selected .blend-label{ display: inline-block; }
-
-/* 버튼 중앙 정렬(마크업에 .btn-row 있으면 이게 우선) */
-#custom-blend .btn-row{ display:flex; justify-content:center; }
-button{
-  margin-top: 1.2em;
-  padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 28px);
-  background:#ffa500; color:#fff; border:0; border-radius:12px;
-  font-size: clamp(14px, 1.4vw, 18px);
-  cursor:pointer;
-}
-/* .btn-row가 없다면 기존 div를 대상으로 폴백 센터링 */
-#custom-blend > div:nth-of-type(2){ display:flex; justify-content:center; }
-/* 모바일에선 버튼 폭도 유동 */
-@media (max-width: 480px){
-  button{ width:100%; max-width: 340px; }
-}
-
-/* 결과 이미지도 반응형 */
-#blend-result{ text-align:center; margin-top: clamp(20px, 4vw, 40px); }
-#blend-result img{
-  max-width: min(300px, 80vw);
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-
-
-
-
-
+    /* 결과 이미지도 반응형 */
+    #blend-result{ text-align:center; margin-top: clamp(20px, 4vw, 40px); }
+    #blend-result img{
+      max-width: min(300px, 80vw);
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
 
   </style>
 </head>
 
 <body>
-
-    <!-- Nav -->
-						<nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
-							<ul>
-								<li><a href="/home_ind">Beranda</a></li>
-								<li>
-									<a href="/order_ind">Pesan</a>
-
-								</li>
-								<li><a href="/info_ind">Tentang Jamu</a></li>
-								<li><a href="/ourstory_ind">Kisah Kami</a></li>
-								<li><a href="#">Bahasa</a>
-									<ul>
-										<li style="font-family: Alkatra;"><a href="/">English</a></li>
-										<li style="font-family: Alkatra;"><a href="/home_ind">Bahasa Indonesia</a></li>
-										<li style="font-family: Alkatra;"><a href="/home_kor/">한국어</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
-
-
+  
+  <!-- Nav -->
+  <nav id="nav" style="font-family: 'Alkatra', sans-serif; font-weight: bold;">
+    <ul>
+      <li><a href="/home_ind">Beranda</a></li>
+      <li><a href="/order_ind">Pesan</a></li>
+      <li><a href="/info_ind">Tentang Jamu</a></li>
+      <li><a href="/ourstory_ind">Kisah Kami</a></li>
+      <li><a href="#">Bahasa</a>
+        <ul>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend">English</a></li>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend_ind">Bahasa Indonesia</a></li>
+          <li style="font-family: Alkatra;"><a href="/CreateYourBlend_kor">한국어</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Create Your Blend Section -->
-   <br><br><br><br>
+  <br><br><br><br>
 
-   <h2 style="font-family: 'Alkatra', sans-serif;">🌺 Buat Racikanmu</h2>
-    <p style="font-family: 'Alkatra', sans-serif;">
-      Pilih bahan jamu favorit Anda dan beri nama racikan unik yang terinspirasi dari perjalanan Anda.
-    </p>
-
-
+  <h2 style="font-family: 'Alkatra', sans-serif;">🌺 Buat Racikan Anda</h2>
+  <p style="font-family: 'Alkatra', sans-serif;">
+    Pilih bahan jamu favorit Anda dan beri nama pada racikan bertema perjalanan Anda.
+  </p>
 
   <section id="custom-blend">
 
     <div id="ingredient-list"></div>
 
-    
-
     <div>
-      <button onclick="createBlend()">Ciptakan Jamu Anda Sendiri</button>
+      <button onclick="createBlend()">Buat Jamu Anda</button>
     </div>
 
     <div id="blend-result"></div>
@@ -306,33 +298,40 @@ button{
 
   <script style="font-family: 'Playfair Display', serif;">
     const ingredients = [
-      { name: "Kunyit", desc: "Antiinflamasi dan antioksidan.", img: "{% static 'c2/images/Turmeric.png' %}" },
-      { name: "Jahe", desc: "Meredakan masuk angin dan membantu pencernaan.", img: "{% static 'c2/images/ginger.jpg' %}" },
-      { name: "Kencur", desc: "Meredakan batuk dan pegal-pegal.", img: "{% static 'c2/images/Galangal.jpg' %}" },
-      { name: "Asam Jawa", desc: "Rasa asam segar & membantu pencernaan.", img: "{% static 'c2/images/Tamarind.jpg' %}" },
-      { name: "Temulawak", desc: "Menyehatkan hati dan meningkatkan imunitas.", img: "{% static 'c2/images/Temulawak_low.jpg' %}" },
-      { name: "Gula Merah", desc: "Pemanis alami & sumber mineral.", img: "{% static 'c2/images/PalmSugar.png' %}" },
-      { name: "Jeruk Nipis", desc: "Vitamin C & kesegaran.", img: "{% static 'c2/images/Lime.jpg' %}" },
-      { name: "Serai", desc: "Memberi aroma & manfaat pencernaan.", img: "{% static 'c2/images/Lemongrass.jpg' %}" },
-      { name: "Kayu Manis", desc: "Mengatur gula darah & memberi rasa hangat.", img: "{% static 'c2/images/Cinnamon.jpg' %}" },
-      { name: "Kapulaga", desc: "Rempah pencernaan dengan aroma khas.", img: "{% static 'c2/images/Cardamom.jpg' %}" },
+      // 10 bahan awal (name untuk logika, label/desc untuk tampilan)
+      { name: "Turmeric",     label: "Kunyit (Turmeric)",         desc: "Antiinflamasi dan antioksidan yang kuat.", img: "{% static 'c2/images/Turmeric.png' %}", isNew: false },
+      { name: "Ginger",       label: "Jahe (Ginger)",              desc: "Membantu meredakan pilek dan pencernaan.", img: "{% static 'c2/images/ginger.jpg' %}", isNew: false },
+      { name: "Galangal",     label: "Kencur/Galangal",            desc: "Efektif untuk batuk dan pegal-pegal.", img: "{% static 'c2/images/Galangal.jpg' %}", isNew: false },
+      { name: "Tamarind",     label: "Asam Jawa (Tamarind)",       desc: "Memberi rasa asam segar & bantu pencernaan.", img: "{% static 'c2/images/Tamarind.jpg' %}", isNew: false },
+      { name: "Temulawak",    label: "Temulawak",                  desc: "Mendukung kesehatan hati & imunitas.", img: "{% static 'c2/images/Temulawak_low.jpg' %}", isNew: false },
+      { name: "Palm Sugar",   label: "Gula Aren (Palm Sugar)",     desc: "Pemanis alami dengan mineral.", img: "{% static 'c2/images/PalmSugar.png' %}", isNew: false },
+      { name: "Lime",         label: "Jeruk Nipis (Lime)",         desc: "Vitamin C & kesegaran.", img: "{% static 'c2/images/Lime.jpg' %}", isNew: false },
+      { name: "Lemongrass",   label: "Serai (Lemongrass)",         desc: "Aroma segar & bantu pencernaan.", img: "{% static 'c2/images/Lemongrass.jpg' %}", isNew: false },
+      { name: "Cinnamon",     label: "Kayu Manis (Cinnamon)",      desc: "Membantu kendalikan gula darah, memberi kehangatan.", img: "{% static 'c2/images/Cinnamon.jpg' %}", isNew: false },
+      { name: "Cardamom",     label: "Kapulaga (Cardamom)",        desc: "Rempah pencernaan dengan aroma khas.", img: "{% static 'c2/images/Cardamom.jpg' %}", isNew: false },
+      
+      // 5 bahan baru
+      { name: "Cloves",       label: "Cengkeh (Cloves)",           desc: "Antibakteri, baik untuk mulut & pencernaan.", img: "{% static 'c2/images/Cloves.jpg' %}", isNew: false },
+      { name: "Sappan Wood",  label: "Kayu Secang (Sappan Wood)",  desc: "Bantu sirkulasi darah & antioksidan.", img: "{% static 'c2/images/SappanWood.jpg' %}", isNew: false },
+      { name: "Black Cumin",  label: "Jinten Hitam (Black Cumin)", desc: "Dukung imunitas & kesehatan pernapasan.", img: "{% static 'c2/images/BlackCumin.jpg' %}", isNew: false },
+      { name: "Black Turmeric",label:"Kunyit Hitam (Black Turmeric)",desc:"Pemurnian darah & kendali kolesterol.", img: "{% static 'c2/images/BlackTurmeric.jpg' %}", isNew: false },
+      { name: "Bay Leaves",   label: "Daun Salam (Bay Leaves)",    desc: "Bantu kendali gula darah & pencernaan.", img: "{% static 'c2/images/BayLeaves.jpg' %}", isNew: false }
     ];
-
 
     const selected = [];
 
     function renderIngredients() {
       const container = document.getElementById("ingredient-list");
       container.innerHTML = "";
-      ingredients.forEach((item, index) => {
+      ingredients.forEach((item) => {
         const card = document.createElement("div");
-        card.className = "ingredient-card";
+        card.className = `ingredient-card ${item.isNew ? 'new-ingredient' : ''}`;
         card.setAttribute("data-name", item.name);
         card.innerHTML = `
-          <div class="blend-label">${item.name}</div>
-          <img src="${item.img}" alt="${item.name}">
+          <div class="blend-label">${item.label || item.name}</div>
+          <img src="${item.img}" alt="${item.label || item.name}" onerror="this.src='{% static 'c2/images/default-ingredient.jpg' %}'">
           <div class="content">
-            <h4>${item.name}</h4>
+            <h4>${item.label || item.name}</h4>
             <p>${item.desc}</p>
           </div>
         `;
@@ -347,8 +346,8 @@ button{
         selected.splice(index, 1);
         card.classList.remove("selected");
       } else {
-        if (selected.length >= 5) {
-          alert("Anda hanya dapat memilih hingga 5 bahan saja.");
+        if (selected.length >= 7) {
+          alert("Anda dapat memilih hingga 7 bahan untuk racikan yang sempurna! 🌿");
           return;
         }
         selected.push(name);
@@ -356,35 +355,168 @@ button{
       }
     }
 
+    // Tentukan tipe jamu berdasarkan bahan terpilih
+    function determineJamuType(selectedIngredients) {
+      const names = selectedIngredients.map(name => name.toLowerCase());
+      
+      const jamuTypes = {
+        'kunyit-asem': {
+          keywords: ['turmeric', 'tamarind', 'lime'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: 'Gaya Kunyit Asam',
+          description: 'Racikan kunyit berwarna keemasan dengan kesegaran asam yang menyeimbangkan.',
+          color: '#FF8C00'
+        },
+        'temulawak': {
+          keywords: ['temulawak', 'bay leaves'],
+          image: "{% static 'c2/images/Temulawak.jpg' %}",
+          name: 'Racikan Temulawak',
+          description: 'Racikan kunyit Jawa yang mendukung kesehatan hati.',
+          color: '#DAA520'
+        },
+        'temu-ireng': {
+          keywords: ['black turmeric', 'black cumin', 'sappan wood'],
+          image: "{% static 'c2/images/TemuIreng.jpg' %}",
+          name: 'Racikan Kunyit Hitam',
+          description: 'Kunyit hitam langka untuk pemurnian darah.',
+          color: '#B22222'
+        },
+        'wedang-uwuh': {
+          keywords: ['cinnamon', 'cardamom', 'cloves', 'sappan wood', 'lemongrass'],
+          image: "{% static 'c2/images/WedangUwuh.jpg' %}",
+          name: 'Racikan Rempah Hangat',
+          description: 'Rempah tradisional untuk kehangatan dan sirkulasi.',
+          color: '#8B4513'
+        },
+        'empon-empon': {
+          keywords: ['ginger', 'galangal', 'turmeric', 'temulawak'],
+          image: "{% static 'c2/images/EmponEmpon.jpg' %}",
+          name: 'Racikan Herbal Lengkap',
+          description: 'Perpaduan rempah menyeluruh untuk dukungan imunitas.',
+          color: '#D2691E'
+        },
+        'fresh-blend': {
+          keywords: ['lime', 'lemongrass', 'palm sugar'],
+          image: "{% static 'c2/images/KunyitAsem.png' %}",
+          name: 'Racikan Sitrus Segar',
+          description: 'Segar dan berenergi, cocok untuk hari yang aktif.',
+          color: '#32CD32'
+        }
+      };
+
+      let scores = {};
+      Object.keys(jamuTypes).forEach(type => {
+        scores[type] = 0;
+        jamuTypes[type].keywords.forEach(keyword => {
+          if (names.some(ing => ing.includes(keyword))) {
+            scores[type] += 1;
+          }
+        });
+      });
+
+      const bestType = Object.keys(scores).reduce((a, b) => 
+        scores[a] > scores[b] ? a : b
+      );
+
+      if (scores[bestType] === 0) {
+        return jamuTypes['empon-empon'];
+      }
+      return jamuTypes[bestType];
+    }
+
     function createBlend() {
       const result = document.getElementById("blend-result");
       if (selected.length === 0) {
-        result.innerHTML = "<p>Silakan pilih setidaknya satu bahan.</p>";
+        result.innerHTML = `
+          <div style="background: #ffe6e6; color: #d63031; padding: 1em; border-radius: 8px;">
+            <p>🌿 Pilih setidaknya satu bahan untuk membuat jamu kustom Anda!</p>
+          </div>
+        `;
         return;
       }
+
+      // Cek apakah ada bahan baru yang dipilih
+      const newIngredients = selected.filter(name => 
+        ingredients.find(ing => ing.name === name && ing.isNew)
+      );
+      const hasNewIngredients = newIngredients.length > 0;
+
+      // Tentukan tipe jamu
+      const jamuType = determineJamuType(selected);
+
+      // Tampilkan label Indonesia untuk daftar pilihan
+      const selectedLabels = selected
+        .map(n => (ingredients.find(i => i.name === n)?.label || n))
+        .join(" • ");
+
+      const newLabels = newIngredients
+        .map(n => (ingredients.find(i => i.name === n)?.label || n))
+        .join(", ");
+
       result.innerHTML = `
-        <h3>🌸 Jamu Khas Anda</h3>
-        <p>Termasuk: <strong>${selected.join(", ")}</strong></p>
-        <p>Nikmati Jamu personal Anda untuk perjalanan berikutnya!</p>
-        <img src="{% static 'c2/images/jamuup.png' %}" alt="Jamu Anda" style="max-width: 300px; width: 100%; border-radius: 12px; margin-top: 1em;" />
-        `;
+        <div style="background: linear-gradient(135deg, #fff9e6, #ffe8d1); padding: 2em; border-radius: 16px; border-left: 4px solid ${jamuType.color};">
+          <h3>🌸 ${jamuType.name} Anda</h3>
+          <p style="color: #666; font-style: italic; margin: 0.5em 0 1.5em;">${jamuType.description}</p>
+          
+          <img src="${jamuType.image}" alt="${jamuType.name}" 
+               style="max-width: 300px; width: 100%; border-radius: 12px; margin: 1em 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+               onerror="this.src='{% static 'c2/images/jamuup.png' %}'" />
+          
+          <p style="font-size: 1.1em; margin: 1em 0;"><strong>Bahan Terpilih (${selected.length}):</strong></p>
+          <p style="background: #f8f8f8; padding: 1em; border-radius: 8px; font-weight: bold; color: #333;">
+            ${selectedLabels}
+          </p>
+          
+          ${hasNewIngredients ? `
+            <div style="background: #e8f5e8; color: #2d5a2d; padding: 1em; border-radius: 8px; margin: 1em 0;">
+              <strong>✨ Racikan Spesial!</strong> Jamu Anda memuat ${newIngredients.length} bahan tradisional baru: 
+              <strong>${newLabels}</strong>
+            </div>
+          ` : ''}
+          
+          <div style="background: rgba(255,255,255,0.7); padding: 1em; border-radius: 8px; margin: 1em 0;">
+            <h4 style="margin: 0 0 0.5em; color: ${jamuType.color};">🌿 Profil Racikan:</h4>
+            <p style="margin: 0; font-size: 0.95em;">
+              Racikan kustom ini memadukan kearifan penyembuhan tradisional Indonesia dengan preferensi bahan pilihan Anda—sempurna untuk perjalanan wellness Anda.
+            </p>
+          </div>
+        </div>
+      `;
     }
 
+    function orderBlend() {
+      alert("🌿 Terima kasih! Racikan jamu kustom Anda akan dibuat dengan metode tradisional Indonesia. Mengalihkan ke halaman pemesanan...");
+      // window.location.href = '/order';
+    }
+
+    function shareBlend() {
+      const recipe = `Resep Jamu Kustomku: ${selected.join(", ")} - Sempurna untuk wellness perjalanan! 🌿✈️`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Jamu Kustom Saya',
+          text: recipe,
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(recipe).then(() => {
+          alert("Resep disalin ke papan klip! Bagikan ke teman-temanmu! 📋✨");
+        });
+      }
+    }
 
     renderIngredients();
       
   </script>
 
-
-<!-- Scripts -->
-			<script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'c2/assets/js/util.js' %}"></script>
-			<script src="{% static 'c2/assets/js/main.js' %}"></script>
+  <!-- Scripts -->
+  <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrolly.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/jquery.scrollex.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'c2/assets/js/util.js' %}"></script>
+  <script src="{% static 'c2/assets/js/main.js' %}"></script>
 
 </body>
 </html>
