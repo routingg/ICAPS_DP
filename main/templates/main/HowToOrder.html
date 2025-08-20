@@ -46,7 +46,7 @@
     }
     .howto-sub{
       font-family:'Alkatra', cursive;
-      font-size: clamp(14px, 2.6vw, 18px);
+      font-size: clamp(24px, 3.5vw, 28px);
       color: var(--muted);
       margin:0;
     }
@@ -80,18 +80,18 @@
 
     .step{
       display:grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 150px 1fr;
       align-items:center;
       gap:16px;
       background:#fff;
       border-radius:12px;
-      padding:16px;
+      padding:20px;
       box-shadow:0 4px 12px rgba(0,0,0,.05);
     }
 
     .step img{
-      width:60px;
-      height:60px;
+      width:120px;
+      height:120px;
       object-fit: contain;
       border-radius:10px;
       background:#f3f3f3;
@@ -100,14 +100,14 @@
 
     .step h3{
       margin:0;
-      font-size: clamp(16px, 2.6vw, 20px);
+      font-size: clamp(20px, 2.6vw, 24px);
       font-weight:700;
       line-height:1.25;
     }
     .step p{
       margin:4px 0 0;
       color:#555;
-      font-size: clamp(13px, 2.4vw, 15px);
+      font-size: clamp(18px, 2.6vw, 18px);
       line-height:1.5;
     }
 
@@ -141,7 +141,7 @@
 
     <header class="howto-header">
       <h1 class="howto-title">How to Order Jamu</h1>
-      <p class="howto-sub">Follow these simple steps to use the Jamu vending machine.</p>
+      <p class="howto-sub">Follow these simple steps to use the Mendjamoo dispenser.</p>
     </header> 
     <br>
 
@@ -155,7 +155,7 @@
       <!-- 3 Steps -->
       <section class="steps">
         <div class="step">
-          <img src="{% static 'c2/images/step2_menu.png' %}" alt="Press Button" loading="lazy" decoding="async">
+          <img src="{% static 'c2/images/step1.jpg' %}" alt="Press Button" loading="lazy" decoding="async">
           <div>
             <h3>Step 1 – Know what you want?</h3>
             <p>If not, scan the QR code for your personalized Jamu recommendation.</p>
@@ -163,7 +163,7 @@
         </div>
 
         <div class="step">
-          <img src="{% static 'c2/images/step2_menu.png' %}" alt="Choose Jamu" loading="lazy" decoding="async">
+          <img src="{% static 'c2/images/step2.jpg' %}" alt="Choose Jamu" loading="lazy" decoding="async">
           <div>
             <h3>Step 2 – Grab a cup and place it on the tray</h3>
             <p>Where your Jamu will be poured.</p>
@@ -171,14 +171,14 @@
         </div>
 
         <div class="step">
-          <img src="{% static 'c2/images/step1_button.png' %}" alt="Enjoy Jamu" loading="lazy" decoding="async">
+          <img src="{% static 'c2/images/step3.jpg' %}" alt="Enjoy Jamu" loading="lazy" decoding="async">
           <div>
             <h3>Step 3 – Choose your Jamu</h3>
             <p>press the left or right button to scroll through options, then press the middle button to start.</p>
           </div>
         </div>
         <div class="step">
-          <img src="{% static 'c2/images/step3_drink.png' %}" alt="Wait" loading="lazy" decoding="async">
+          <img src="{% static 'c2/images/step4.jpg' %}" alt="Wait" loading="lazy" decoding="async">
           <div>
             <h3>Step 4 – Wait a moment</h3>
             <p>your Jamu will be ready soon!</p>
