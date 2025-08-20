@@ -318,6 +318,95 @@
         max-width: 220px;
       }
     }
+
+    /* Carousel card image: unify size */
+.carousel article .image.featured img{
+  width: 100%;
+  height: 180px;        /* 원하는 공통 높이로 조절 가능 */
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* === Top 6 Drinks: Carousel version === */
+.top-drinks-section.carousel { padding: 4em 2em; }
+
+.top-drinks-section.carousel .top-drinks-header { text-align: center; margin-bottom: 2rem; }
+.top-drinks-section.carousel .top-drinks-header p { font-size: 1.1em; color:#666; font-style: italic; }
+
+.top-drinks-section.carousel .carousel-wrapper{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.top-drinks-section.carousel .reel{
+  display: flex;
+  gap: 24px;                 /* 카드 사이 여백 */
+  padding: 8px 8px 8px 8px;  /* 끝부분 잘림 방지용 여유 */
+  transition: transform .5s ease;
+  width: max-content;
+}
+
+.top-drinks-section.carousel .drink-card{
+  flex: 0 0 auto;
+  min-width: 340px;          /* 캐러셀에서 크게 보이도록 */
+  max-width: 340px;
+  background:#fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.top-drinks-section.carousel .drink-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.15);
+}
+
+.top-drinks-section.carousel .drink-image{
+  width:100%;
+  height: 230px;             /* 이미지 크게 */
+  object-fit: cover;
+}
+
+.top-drinks-section.carousel .drink-info{ padding: 18px; text-align: left; }
+.top-drinks-section.carousel .drink-info h3{ font-size:1.6em; margin: .4em 0 .6em; }
+.top-drinks-section.carousel .drink-info p{ font-size:1em; line-height:1.6; color:#555; }
+
+.top-drinks-section.carousel .drink-benefits{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:.8em; }
+.top-drinks-section.carousel .benefit-tag{
+  background:#ffa500; color:#fff; font-weight:700;
+  padding:.28em .7em; border-radius:14px; font-size:.85em;
+}
+
+/* 좌우 버튼 */
+.top-drinks-section.carousel .prev,
+.top-drinks-section.carousel .next{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:48px; height:48px; border:none; border-radius:50%;
+  background:rgba(0,0,0,.6); color:#fff; cursor:pointer; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  transition: background .25s ease;
+}
+.top-drinks-section.carousel .prev:hover,
+.top-drinks-section.carousel .next:hover{ background:rgba(0,0,0,.8); }
+.top-drinks-section.carousel .prev{ left:10px; }
+.top-drinks-section.carousel .next{ right:10px; }
+
+/* 반응형: 모바일에서도 캐러셀 유지 (카드 크기만 살짝 축소) */
+@media (max-width: 768px){
+  .top-drinks-section.carousel { padding: 2em 1em; }
+  .top-drinks-section.carousel .drink-card{ min-width: 300px; max-width: 300px; }
+  .top-drinks-section.carousel .drink-image{ height: 200px; }
+}
+@media (max-width: 380px){
+  .top-drinks-section.carousel .drink-card{ min-width: 270px; max-width: 270px; }
+  .top-drinks-section.carousel .drink-image{ height: 180px; }
+}
+
   </style>
 </head>
 <body>
@@ -442,136 +531,270 @@
           <header><h3>카다멈 (Kapulaga)</h3></header>
           <p>소화를 돕고 입안을 상쾌하게 하는 향신료로, 자무 블렌드에 고급스러운 향을 더합니다.</p>
         </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cloves.jpg' %}" alt="정향" /></a>
+          <header><h3>정향 (Cengkeh)</h3></header>
+          <p>강력한 항균 특성을 지닌 향기로운 꽃봉오리로, 구강 건강 증진과 소화 자극에 탁월합니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/SappanWood.jpg' %}" alt="소목" /></a>
+          <header><h3>소목 (Kayu Secang)</h3></header>
+          <p>혈액순환을 촉진하고 풍부한 항산화 성분을 제공하는 전통의 붉은 목재로, 선명한 붉은 색이 특징입니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackCumin.jpg' %}" alt="블랙 커민" /></a>
+          <header><h3>블랙 커민 (Jinten Hitam)</h3></header>
+          <p>강력한 면역 강화제로 알려져 있으며, 호흡기 건강과 전반적인 웰빙을 두루 지원합니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackTurmeric.jpg' %}" alt="흑강황" /></a>
+          <header><h3>흑강황 (Temu Ireng)</h3></header>
+          <p>혈액 정화, 콜레스테롤 저하, 심층 해독을 돕는 희귀하고 귀한 재료입니다.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BayLeaves.jpg' %}" alt="월계수 잎" /></a>
+          <header><h3>월계수 잎 (Daun Salam)</h3></header>
+          <p>혈당 조절을 돕고 소화 건강을 자연스럽게 향상시키는 인도네시아의 향신 잎입니다.</p>
+        </article>
+
       </div>
       <button class="next">&#10095;</button>
     </div>
   </section>
 
-  <!-- Top 3 Representative Jamu Drinks - 새로운 스타일 -->
-  <section class="top-drinks-section">
-    <div class="top-drinks-container">
-      <div class="top-drinks-header">
-        <h2>대표 자무 음료 TOP 3</h2>
-        <p>자연의 치유력으로 몸과 마음의 균형을 찾아보세요</p>
-      </div>
-      
-      <div class="drinks-grid">
-        <div class="drink-card">
-          <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="브라스 켄쿠르" class="drink-image" />
+<section class="top-drinks-section carousel">
+  <div class="top-drinks-container">
+    <div class="top-drinks-header">
+      <h2>대표적인 자무 음료 6가지</h2>
+      <p>자연의 치유력을 통해 몸과 마음의 균형을 발견하세요</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="prev">&#10094;</button>
+      <div class="reel">
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="Beras Kencur" class="drink-image" />
           <div class="drink-info">
-            <h3>브라스 켄쿠르 (Beras Kencur)</h3>
+            <h3>브라스 켄추르</h3>
             <div class="drink-benefits">
               <span class="benefit-tag">에너지 충전</span>
               <span class="benefit-tag">피로 회복</span>
               <span class="benefit-tag">통증 완화</span>
             </div>
-            <p class="drink-description">브라스 켄쿠르는 쌀, 켄쿠르(갈랑갈), 생강, 강황으로 만드는 인도네시아 허브 음료로, 상쾌한 단맛과 은은한 매운맛이 조화를 이루며 자연스러운 에너지 충전과 함께 피로·기침·몸살 완화에 도움을 줍니다.</p>
+            <p class="drink-description">
+              브라스 켄추르는 쌀, 갈랑갈, 생강, 강황으로 만든 인도네시아 전통 자무 음료로, 자연스러운 에너지 부스터 역할을 하며 피로, 기침, 몸살을 완화해 줍니다. 달콤하면서도 상쾌한 맛에 은은한 매운 향이 더해져 활력을 줍니다.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="drink-card">
-          <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="쿠닛 아셈" class="drink-image" />
+        <article class="drink-card">
+          <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="Kunyit Asem" class="drink-image" />
           <div class="drink-info">
-            <h3>쿠닛 아셈 (Kunyit Asem)</h3>
+            <h3>쿠니트 아셈</h3>
             <div class="drink-benefits">
               <span class="benefit-tag">소화 건강</span>
-              <span class="benefit-tag">생리 통증 완화</span>
-              <span class="benefit-tag">해독</span>
+              <span class="benefit-tag">생리통 완화</span>
+              <span class="benefit-tag">디톡스</span>
             </div>
-            <p class="drink-description">쿠닛 아셈은 강황, 타마린드, 야자당으로 만든 소화 조화 음료로, 소화를 개선하고 월경 주기 조절과 위장 불편 완화에 도움을 주며, 균형 잡힌 새콤달콤한 맛에 은은한 강황 향이 더해집니다.</p>
+            <p class="drink-description">
+              쿠니트 아셈은 강황, 타마린드, 야자당으로 만든 소화에 좋은 음료로, 소화를 돕고 생리 주기를 조절하며 위장 문제를 완화합니다. 새콤달콤한 맛과 은은한 강황 향이 조화를 이룹니다.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="drink-card">
-          <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="테물라왁" class="drink-image" />
+        <article class="drink-card">
+          <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="Temulawak" class="drink-image" />
           <div class="drink-info">
-            <h3>테물라왁 (Temulawak)</h3>
+            <h3>테물라왁</h3>
             <div class="drink-benefits">
               <span class="benefit-tag">간 건강</span>
               <span class="benefit-tag">면역 강화</span>
-              <span class="benefit-tag">휴식</span>
+              <span class="benefit-tag">이완 효과</span>
             </div>
-            <p class="drink-description">테물라왁은 자바 강황, 일반 강황, 생강으로 만든 휴식·회복 음료로, 스트레스 완화와 숙면, 면역 강화에 도움을 주며 자연의 치유력을 담은 복합적인 씁쓸·달콤한 풍미가 특징입니다.</p>
+            <p class="drink-description">
+              테물라왁은 자바산 강황, 일반 강황, 생강으로 만든 음료로 스트레스 완화, 숙면 유도, 면역력 강화에 도움을 줍니다. 쌉싸래하면서도 달콤한 맛이 자연의 치유력을 상징합니다.
+            </p>
           </div>
-        </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/EmponEmpon.jpg' %}" alt="Empon-Empon" class="drink-image" />
+          <div class="drink-info">
+            <h3>엠폰엠폰</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">면역력 종합 강화</span>
+              <span class="benefit-tag">풍부한 항산화</span>
+              <span class="benefit-tag">전신 건강</span>
+            </div>
+            <p class="drink-description">
+              엠폰엠폰은 테물라왁, 강황, 붉은 생강, 레몬그라스, 카다멈, 정향, 계피가 조합된 종합 자무 음료로, 강력한 면역력 강화와 전반적인 건강 증진에 도움을 줍니다. 따뜻하고 복합적인 풍미가 특징입니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/WedangUwuh.jpg' %}" alt="Wedang Uwuh" class="drink-image" />
+          <div class="drink-info">
+            <h3>웨당 우우</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">체온 유지</span>
+              <span class="benefit-tag">혈액순환 촉진</span>
+              <span class="benefit-tag">감기 예방</span>
+            </div>
+            <p class="drink-description">
+              웨당 우우는 욕야카르타 전통 따뜻한 향신료 음료로, 수판나무, 레몬그라스, 카다멈, 정향, 블랙 쿠민, 계피, 생강이 들어갑니다. 혈액순환을 돕고 몸을 따뜻하게 하며, 붉은색의 깊은 색감과 진한 향신료 향이 특징입니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/TemuIreng.jpg' %}" alt="Temu Ireng" class="drink-image" />
+          <div class="drink-info">
+            <h3>자무 테무 이렝</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">혈액 정화</span>
+              <span class="benefit-tag">콜레스테롤 조절</span>
+              <span class="benefit-tag">해독 작용</span>
+            </div>
+            <p class="drink-description">
+              자무 테무 이렝은 희귀한 흑강황, 생강, 월계수 잎, 수판나무, 블랙 쿠민으로 만든 특수 자무 음료로, 혈액을 정화하고 콜레스테롤을 낮추며 깊은 해독 효과를 줍니다. 흙내음 가득한 풍미와 강한 약리 작용이 특징입니다.
+            </p>
+          </div>
+        </article>
+
       </div>
+      <button class="next">&#10095;</button>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const reel = document.querySelector('.carousel .reel');
-      const prevBtn = document.querySelector('.carousel-wrapper .prev');
-      const nextBtn = document.querySelector('.carousel-wrapper .next');
-      
-      let currentIndex = 0;
-      const itemWidth = 280; // 카드 너비 + 여백
-      const itemsToShow = Math.floor(window.innerWidth / itemWidth);
-      const totalItems = reel.children.length;
-      const maxIndex = Math.max(0, totalItems - itemsToShow);
 
-      function updateCarousel() {
-        const translateX = -currentIndex * itemWidth;
-        reel.style.transform = `translateX(${translateX}px)`;
-        
-        // 버튼 상태 업데이트
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-      }
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const reel = document.querySelector('.carousel .reel');
+    const wrapper = document.querySelector('.carousel-wrapper');
+    const prevBtn = document.querySelector('.carousel-wrapper .prev');
+    const nextBtn = document.querySelector('.carousel-wrapper .next');
 
-      // 이전 버튼 클릭
-      prevBtn.addEventListener("click", function () {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
-        }
-      });
+    let offset = 0;           // 현재 이동 픽셀
+    let step = 0;             // 한 번에 이동할 카드 폭
+    let maxOffset = 0;        // 마지막 카드까지 보이도록 허용되는 최대 이동량
 
-      // 다음 버튼 클릭
-      nextBtn.addEventListener("click", function () {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-          updateCarousel();
-        }
-      });
+    function getItemWidth() {
+      const first = reel.children[0];
+      if (!first) return 0;
+      const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
 
-      // 자동 슬라이드
-      let autoSlideInterval = setInterval(function() {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      }, 3000);
+    function recalc() {
+      step = getItemWidth();
+      // 마지막 카드까지 wrapper 안에 딱 맞게 보이도록 최대 이동량 계산
+      maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+      if (offset > maxOffset) offset = maxOffset;
+    }
 
-      // 마우스 hover 시 자동 슬라이드 정지
-      reel.addEventListener("mouseenter", () => {
-        clearInterval(autoSlideInterval);
-      });
+    function update() {
+      reel.style.transform = `translateX(${-offset}px)`;
+      prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+      nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+    }
 
-      reel.addEventListener("mouseleave", () => {
-        autoSlideInterval = setInterval(function() {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-          } else {
-            currentIndex = 0;
-          }
-          updateCarousel();
-        }, 3000);
-      });
-
-      // 반응형 대응
-      window.addEventListener('resize', function() {
-        currentIndex = 0;
-        updateCarousel();
-      });
-
-      // 초기 설정
-      updateCarousel();
+    prevBtn.addEventListener("click", function () {
+      offset = Math.max(0, offset - step);
+      update();
     });
-  </script>
+
+    nextBtn.addEventListener("click", function () {
+      offset = Math.min(maxOffset, offset + step);
+      update();
+    });
+
+    let auto;
+    function startAuto() {
+      stopAuto();
+      auto = setInterval(function () {
+        offset = offset < maxOffset ? Math.min(maxOffset, offset + step) : 0;
+        update();
+      }, 3000);
+    }
+    function stopAuto(){ if (auto) clearInterval(auto); }
+
+    reel.addEventListener("mouseenter", stopAuto);
+    reel.addEventListener("mouseleave", startAuto);
+
+    window.addEventListener('resize', function () {
+      recalc();
+      update();
+    });
+
+    // 초기화
+    recalc();
+    update();
+    startAuto();
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const scope = document.querySelector('.top-drinks-section.carousel');
+  if (!scope) return;
+
+  const reel    = scope.querySelector('.reel');
+  const wrapper = scope.querySelector('.carousel-wrapper');
+  const prevBtn = scope.querySelector('.prev');
+  const nextBtn = scope.querySelector('.next');
+
+  let offset = 0;   // 현재 이동 픽셀
+  let step = 0;     // 클릭 시 이동량(카드 1장의 폭 + gap)
+  let maxOffset = 0;
+
+  function getStep() {
+    const first = reel.querySelector('.drink-card');
+    if (!first) return 0;
+    const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function recalc() {
+    step = getStep();
+    // 마지막 카드가 딱 맞게 보이도록 최대 이동량 계산
+    maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+    if (offset > maxOffset) offset = maxOffset;
+  }
+
+  function update() {
+    reel.style.transform = `translateX(${-offset}px)`;
+    prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+    nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    offset = Math.max(0, offset - step);
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    offset = Math.min(maxOffset, offset + step);
+    update();
+  });
+
+  // 반응형 대응
+  window.addEventListener('resize', () => { recalc(); update(); });
+
+  // 초기화
+  recalc();
+  update();
+});
+</script>
+
 
   <!-- Scripts -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>

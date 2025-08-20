@@ -319,6 +319,95 @@
         max-width: 220px;
       }
     }
+
+    /* Carousel card image: unify size */
+.carousel article .image.featured img{
+  width: 100%;
+  height: 180px;        /* 원하는 공통 높이로 조절 가능 */
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* === Top 6 Drinks: Carousel version === */
+.top-drinks-section.carousel { padding: 4em 2em; }
+
+.top-drinks-section.carousel .top-drinks-header { text-align: center; margin-bottom: 2rem; }
+.top-drinks-section.carousel .top-drinks-header p { font-size: 1.1em; color:#666; font-style: italic; }
+
+.top-drinks-section.carousel .carousel-wrapper{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.top-drinks-section.carousel .reel{
+  display: flex;
+  gap: 24px;                 /* 카드 사이 여백 */
+  padding: 8px 8px 8px 8px;  /* 끝부분 잘림 방지용 여유 */
+  transition: transform .5s ease;
+  width: max-content;
+}
+
+.top-drinks-section.carousel .drink-card{
+  flex: 0 0 auto;
+  min-width: 340px;          /* 캐러셀에서 크게 보이도록 */
+  max-width: 340px;
+  background:#fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.top-drinks-section.carousel .drink-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.15);
+}
+
+.top-drinks-section.carousel .drink-image{
+  width:100%;
+  height: 230px;             /* 이미지 크게 */
+  object-fit: cover;
+}
+
+.top-drinks-section.carousel .drink-info{ padding: 18px; text-align: left; }
+.top-drinks-section.carousel .drink-info h3{ font-size:1.6em; margin: .4em 0 .6em; }
+.top-drinks-section.carousel .drink-info p{ font-size:1em; line-height:1.6; color:#555; }
+
+.top-drinks-section.carousel .drink-benefits{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:.8em; }
+.top-drinks-section.carousel .benefit-tag{
+  background:#ffa500; color:#fff; font-weight:700;
+  padding:.28em .7em; border-radius:14px; font-size:.85em;
+}
+
+/* 좌우 버튼 */
+.top-drinks-section.carousel .prev,
+.top-drinks-section.carousel .next{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:48px; height:48px; border:none; border-radius:50%;
+  background:rgba(0,0,0,.6); color:#fff; cursor:pointer; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  transition: background .25s ease;
+}
+.top-drinks-section.carousel .prev:hover,
+.top-drinks-section.carousel .next:hover{ background:rgba(0,0,0,.8); }
+.top-drinks-section.carousel .prev{ left:10px; }
+.top-drinks-section.carousel .next{ right:10px; }
+
+/* 반응형: 모바일에서도 캐러셀 유지 (카드 크기만 살짝 축소) */
+@media (max-width: 768px){
+  .top-drinks-section.carousel { padding: 2em 1em; }
+  .top-drinks-section.carousel .drink-card{ min-width: 300px; max-width: 300px; }
+  .top-drinks-section.carousel .drink-image{ height: 200px; }
+}
+@media (max-width: 380px){
+  .top-drinks-section.carousel .drink-card{ min-width: 270px; max-width: 270px; }
+  .top-drinks-section.carousel .drink-image{ height: 180px; }
+}
+
   </style>
 </head>
 <body>
@@ -333,7 +422,7 @@
 
 								</li>
 								<li><a href="/info_ind">Tentang Jamu</a></li>
-								<li><a href="/ourstory_ind">Kisah Kami</a></li>
+								<li><a href="/ourstory_ind">Cerita di balik Jamu</a></li>
 								<li><a href="#">Bahasa</a>
 									<ul>
 										<li style="font-family: Alkatra;"><a href="/info">English</a></li>
@@ -444,71 +533,146 @@
           <header><h3>Kapulaga (Cardamom)</h3></header>
           <p>Rempah yang efektif untuk melancarkan pencernaan dan menyegarkan napas, memberi aroma premium pada racikan jamu.</p>
         </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cloves.jpg' %}" alt="Cengkeh" /></a>
+          <header><h3>Cengkeh (Cloves)</h3></header>
+          <p>Kuncup bunga aromatik dengan sifat antibakteri kuat, sangat baik untuk kesehatan mulut dan stimulasi pencernaan.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/SappanWood.jpg' %}" alt="Kayu Secang" /></a>
+          <header><h3>Kayu Secang (Sappan Wood)</h3></header>
+          <p>Kayu merah tradisional yang membantu melancarkan peredaran darah dan kaya antioksidan, dengan warna merah khas.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackCumin.jpg' %}" alt="Jinten Hitam" /></a>
+          <header><h3>Jinten Hitam (Black Cumin)</h3></header>
+          <p>Peningkat imunitas yang ampuh, dikenal mendukung kesehatan pernapasan dan kebugaran menyeluruh.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackTurmeric.jpg' %}" alt="Kunyit Hitam" /></a>
+          <header><h3>Kunyit Hitam (Temu Ireng)</h3></header>
+          <p>Bahan langka dan berharga untuk pemurnian darah, penurunan kolesterol, serta proses detoksifikasi mendalam.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BayLeaves.jpg' %}" alt="Daun Salam" /></a>
+          <header><h3>Daun Salam (Bay Leaves)</h3></header>
+          <p>Daun aromatik Indonesia yang membantu mengontrol gula darah dan secara alami meningkatkan kesehatan pencernaan.</p>
+        </article>
+
       </div>
       <button class="next">&#10095;</button>
     </div>
 </section>
 
 
-  <!-- Top 3 Representative Jamu Drinks - Gaya Baru -->
-<section class="top-drinks-section">
+<section class="top-drinks-section carousel">
   <div class="top-drinks-container">
     <div class="top-drinks-header">
-      <h2>3 Minuman Jamu Paling Populer</h2>
+      <h2>6 Minuman Jamu Perwakilan Teratas</h2>
       <p>Temukan keseimbangan tubuh dan pikiran melalui kekuatan penyembuhan alami</p>
     </div>
-    
-    <div class="drinks-grid">
-      <div class="drink-card">
-        <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="Beras Kencur" class="drink-image" />
-        <div class="drink-info">
-          <h3>Beras Kencur</h3>
-          <div class="drink-benefits">
-            <span class="benefit-tag">Penambah Energi</span>
-            <span class="benefit-tag">Mengurangi Lelah</span>
-            <span class="benefit-tag">Pereda Nyeri</span>
-          </div>
-          <p class="drink-description">
-            Beras Kencur adalah jamu tradisional penyemangat yang dibuat dari beras, kencur, jahe, dan kunyit. 
-            Minuman ini memberi dorongan energi alami, meredakan kelelahan, batuk, dan pegal-pegal dengan rasa manis segar 
-            dan sedikit sensasi pedas yang lembut.
-          </p>
-        </div>
-      </div>
 
-      <div class="drink-card">
-        <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="Kunyit Asem" class="drink-image" />
-        <div class="drink-info">
-          <h3>Kunyit Asem</h3>
-          <div class="drink-benefits">
-            <span class="benefit-tag">Kesehatan Pencernaan</span>
-            <span class="benefit-tag">Meredakan Haid</span>
-            <span class="benefit-tag">Detoks</span>
-          </div>
-          <p class="drink-description">
-            Kunyit Asem adalah jamu penyegar pencernaan berbahan dasar kunyit, asam jawa, dan gula merah. 
-            Minuman ini membantu melancarkan pencernaan, mengatur siklus menstruasi, dan meredakan masalah perut 
-            dengan cita rasa asam-manis yang seimbang serta aroma kunyit yang lembut.
-          </p>
-        </div>
-      </div>
+    <div class="carousel-wrapper">
+      <button class="prev">&#10094;</button>
+      <div class="reel">
 
-      <div class="drink-card">
-        <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="Temulawak" class="drink-image" />
-        <div class="drink-info">
-          <h3>Temulawak</h3>
-          <div class="drink-benefits">
-            <span class="benefit-tag">Kesehatan Hati</span>
-            <span class="benefit-tag">Meningkatkan Imunitas</span>
-            <span class="benefit-tag">Relaksasi</span>
+        <article class="drink-card">
+          <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="Beras Kencur" class="drink-image" />
+          <div class="drink-info">
+            <h3>Beras Kencur</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Peningkat Energi</span>
+              <span class="benefit-tag">Pereda Kelelahan</span>
+              <span class="benefit-tag">Pereda Nyeri</span>
+            </div>
+            <p class="drink-description">
+              Beras Kencur adalah minuman jamu penyegar dari Indonesia yang terbuat dari beras, kencur, jahe, dan kunyit yang memberikan energi alami serta meredakan kelelahan, batuk, dan pegal-pegal dengan rasa manis yang menyegarkan dan sedikit pedas.
+            </p>
           </div>
-          <p class="drink-description">
-            Temulawak adalah jamu relaksasi dan pemulihan yang dibuat dari temulawak, kunyit, dan jahe. 
-            Minuman ini membantu meredakan stres, meningkatkan kualitas tidur, serta memperkuat daya tahan tubuh 
-            dengan cita rasa pahit-manis yang kompleks, mencerminkan kekuatan penyembuhan alami.
-          </p>
-        </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="Kunyit Asem" class="drink-image" />
+          <div class="drink-info">
+            <h3>Kunyit Asem</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Kesehatan Pencernaan</span>
+              <span class="benefit-tag">Pereda Menstruasi</span>
+              <span class="benefit-tag">Detoks</span>
+            </div>
+            <p class="drink-description">
+              Kunyit Asem adalah minuman harmonisasi pencernaan yang menggabungkan kunyit, asam jawa, dan gula aren yang membantu memperlancar pencernaan, mengatur menstruasi, serta meredakan masalah perut dengan rasa asam-manis seimbang yang diperkaya aroma kunyit lembut.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="Temulawak" class="drink-image" />
+          <div class="drink-info">
+            <h3>Temulawak</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Kesehatan Hati</span>
+              <span class="benefit-tag">Peningkat Imunitas</span>
+              <span class="benefit-tag">Relaksasi</span>
+            </div>
+            <p class="drink-description">
+              Temulawak adalah minuman relaksasi dan pemulihan yang terbuat dari temulawak Jawa, kunyit, dan jahe yang membantu meredakan stres, meningkatkan kualitas tidur, serta memperkuat daya tahan tubuh dengan rasa pahit-manis yang kompleks sebagai wujud kekuatan penyembuhan alam.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/EmponEmpon.jpg' %}" alt="Empon-Empon" class="drink-image" />
+          <div class="drink-info">
+            <h3>Empon-Empon</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Imunitas Lengkap</span>
+              <span class="benefit-tag">Kaya Antioksidan</span>
+              <span class="benefit-tag">Kesehatan Menyeluruh</span>
+            </div>
+            <p class="drink-description">
+              Empon-Empon adalah campuran jamu lengkap yang terdiri dari temulawak, kunyit, jahe merah, serai, kapulaga, cengkeh, dan kayu manis yang memberikan dukungan imunitas maksimal serta manfaat kesehatan menyeluruh dengan cita rasa hangat dan kompleks.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/WedangUwuh.jpg' %}" alt="Wedang Uwuh" class="drink-image" />
+          <div class="drink-info">
+            <h3>Wedang Uwuh</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Menghangatkan Tubuh</span>
+              <span class="benefit-tag">Melancarkan Sirkulasi Darah</span>
+              <span class="benefit-tag">Mencegah Masuk Angin</span>
+            </div>
+            <p class="drink-description">
+              Wedang Uwuh adalah minuman rempah hangat tradisional Yogyakarta yang dibuat dari kayu secang, serai, kapulaga, cengkeh, jintan hitam, kayu manis, dan jahe yang membantu melancarkan peredaran darah dan menghangatkan tubuh dengan warna merah pekat khas serta aroma rempah yang kaya.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/TemuIreng.jpg' %}" alt="Temu Ireng" class="drink-image" />
+          <div class="drink-info">
+            <h3>Jamu Temu Ireng</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Pembersih Darah</span>
+              <span class="benefit-tag">Pengendali Kolesterol</span>
+              <span class="benefit-tag">Detoksifikasi</span>
+            </div>
+            <p class="drink-description">
+              Jamu Temu Ireng adalah minuman penyembuhan khusus yang menggunakan kunyit hitam langka, jahe, daun salam, kayu secang, dan jintan hitam yang membantu membersihkan darah, menurunkan kolesterol, serta memberikan detoksifikasi mendalam dengan rasa yang kuat, earthy, dan khasiat terapeutik.
+            </p>
+          </div>
+        </article>
+
       </div>
+      <button class="next">&#10095;</button>
     </div>
   </div>
 </section>
@@ -517,79 +681,126 @@
 
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const reel = document.querySelector('.carousel .reel');
-      const prevBtn = document.querySelector('.carousel-wrapper .prev');
-      const nextBtn = document.querySelector('.carousel-wrapper .next');
-      
-      let currentIndex = 0;
-      const itemWidth = 280; // 카드 너비 + 여백
-      const itemsToShow = Math.floor(window.innerWidth / itemWidth);
-      const totalItems = reel.children.length;
-      const maxIndex = Math.max(0, totalItems - itemsToShow);
 
-      function updateCarousel() {
-        const translateX = -currentIndex * itemWidth;
-        reel.style.transform = `translateX(${translateX}px)`;
-        
-        // 버튼 상태 업데이트
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-      }
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const reel = document.querySelector('.carousel .reel');
+    const wrapper = document.querySelector('.carousel-wrapper');
+    const prevBtn = document.querySelector('.carousel-wrapper .prev');
+    const nextBtn = document.querySelector('.carousel-wrapper .next');
 
-      // 이전 버튼 클릭
-      prevBtn.addEventListener("click", function () {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
-        }
-      });
+    let offset = 0;           // 현재 이동 픽셀
+    let step = 0;             // 한 번에 이동할 카드 폭
+    let maxOffset = 0;        // 마지막 카드까지 보이도록 허용되는 최대 이동량
 
-      // 다음 버튼 클릭
-      nextBtn.addEventListener("click", function () {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-          updateCarousel();
-        }
-      });
+    function getItemWidth() {
+      const first = reel.children[0];
+      if (!first) return 0;
+      const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
 
-      // 자동 슬라이드
-      let autoSlideInterval = setInterval(function() {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      }, 3000);
+    function recalc() {
+      step = getItemWidth();
+      // 마지막 카드까지 wrapper 안에 딱 맞게 보이도록 최대 이동량 계산
+      maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+      if (offset > maxOffset) offset = maxOffset;
+    }
 
-      // 마우스 hover 시 자동 슬라이드 정지
-      reel.addEventListener("mouseenter", () => {
-        clearInterval(autoSlideInterval);
-      });
+    function update() {
+      reel.style.transform = `translateX(${-offset}px)`;
+      prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+      nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+    }
 
-      reel.addEventListener("mouseleave", () => {
-        autoSlideInterval = setInterval(function() {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-          } else {
-            currentIndex = 0;
-          }
-          updateCarousel();
-        }, 3000);
-      });
-
-      // 반응형 대응
-      window.addEventListener('resize', function() {
-        currentIndex = 0;
-        updateCarousel();
-      });
-
-      // 초기 설정
-      updateCarousel();
+    prevBtn.addEventListener("click", function () {
+      offset = Math.max(0, offset - step);
+      update();
     });
-  </script>
+
+    nextBtn.addEventListener("click", function () {
+      offset = Math.min(maxOffset, offset + step);
+      update();
+    });
+
+    let auto;
+    function startAuto() {
+      stopAuto();
+      auto = setInterval(function () {
+        offset = offset < maxOffset ? Math.min(maxOffset, offset + step) : 0;
+        update();
+      }, 3000);
+    }
+    function stopAuto(){ if (auto) clearInterval(auto); }
+
+    reel.addEventListener("mouseenter", stopAuto);
+    reel.addEventListener("mouseleave", startAuto);
+
+    window.addEventListener('resize', function () {
+      recalc();
+      update();
+    });
+
+    // 초기화
+    recalc();
+    update();
+    startAuto();
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const scope = document.querySelector('.top-drinks-section.carousel');
+  if (!scope) return;
+
+  const reel    = scope.querySelector('.reel');
+  const wrapper = scope.querySelector('.carousel-wrapper');
+  const prevBtn = scope.querySelector('.prev');
+  const nextBtn = scope.querySelector('.next');
+
+  let offset = 0;   // 현재 이동 픽셀
+  let step = 0;     // 클릭 시 이동량(카드 1장의 폭 + gap)
+  let maxOffset = 0;
+
+  function getStep() {
+    const first = reel.querySelector('.drink-card');
+    if (!first) return 0;
+    const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function recalc() {
+    step = getStep();
+    // 마지막 카드가 딱 맞게 보이도록 최대 이동량 계산
+    maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+    if (offset > maxOffset) offset = maxOffset;
+  }
+
+  function update() {
+    reel.style.transform = `translateX(${-offset}px)`;
+    prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+    nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    offset = Math.max(0, offset - step);
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    offset = Math.min(maxOffset, offset + step);
+    update();
+  });
+
+  // 반응형 대응
+  window.addEventListener('resize', () => { recalc(); update(); });
+
+  // 초기화
+  recalc();
+  update();
+});
+</script>
+
 
   <!-- Scripts -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>

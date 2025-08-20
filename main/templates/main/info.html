@@ -106,6 +106,7 @@
       padding: 1em 0;
       transition: transform 0.5s ease;
       width: max-content;
+      min-width: 105%;
     }
 
     .carousel article {
@@ -319,6 +320,95 @@
         max-width: 220px;
       }
     }
+
+    /* Carousel card image: unify size */
+.carousel article .image.featured img{
+  width: 100%;
+  height: 180px;        /* 원하는 공통 높이로 조절 가능 */
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* === Top 6 Drinks: Carousel version === */
+.top-drinks-section.carousel { padding: 4em 2em; }
+
+.top-drinks-section.carousel .top-drinks-header { text-align: center; margin-bottom: 2rem; }
+.top-drinks-section.carousel .top-drinks-header p { font-size: 1.1em; color:#666; font-style: italic; }
+
+.top-drinks-section.carousel .carousel-wrapper{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.top-drinks-section.carousel .reel{
+  display: flex;
+  gap: 24px;                 /* 카드 사이 여백 */
+  padding: 8px 8px 8px 8px;  /* 끝부분 잘림 방지용 여유 */
+  transition: transform .5s ease;
+  width: max-content;
+}
+
+.top-drinks-section.carousel .drink-card{
+  flex: 0 0 auto;
+  min-width: 340px;          /* 캐러셀에서 크게 보이도록 */
+  max-width: 340px;
+  background:#fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.top-drinks-section.carousel .drink-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.15);
+}
+
+.top-drinks-section.carousel .drink-image{
+  width:100%;
+  height: 230px;             /* 이미지 크게 */
+  object-fit: cover;
+}
+
+.top-drinks-section.carousel .drink-info{ padding: 18px; text-align: left; }
+.top-drinks-section.carousel .drink-info h3{ font-size:1.6em; margin: .4em 0 .6em; }
+.top-drinks-section.carousel .drink-info p{ font-size:1em; line-height:1.6; color:#555; }
+
+.top-drinks-section.carousel .drink-benefits{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:.8em; }
+.top-drinks-section.carousel .benefit-tag{
+  background:#ffa500; color:#fff; font-weight:700;
+  padding:.28em .7em; border-radius:14px; font-size:.85em;
+}
+
+/* 좌우 버튼 */
+.top-drinks-section.carousel .prev,
+.top-drinks-section.carousel .next{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:48px; height:48px; border:none; border-radius:50%;
+  background:rgba(0,0,0,.6); color:#fff; cursor:pointer; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  transition: background .25s ease;
+}
+.top-drinks-section.carousel .prev:hover,
+.top-drinks-section.carousel .next:hover{ background:rgba(0,0,0,.8); }
+.top-drinks-section.carousel .prev{ left:10px; }
+.top-drinks-section.carousel .next{ right:10px; }
+
+/* 반응형: 모바일에서도 캐러셀 유지 (카드 크기만 살짝 축소) */
+@media (max-width: 768px){
+  .top-drinks-section.carousel { padding: 2em 1em; }
+  .top-drinks-section.carousel .drink-card{ min-width: 300px; max-width: 300px; }
+  .top-drinks-section.carousel .drink-image{ height: 200px; }
+}
+@media (max-width: 380px){
+  .top-drinks-section.carousel .drink-card{ min-width: 270px; max-width: 270px; }
+  .top-drinks-section.carousel .drink-image{ height: 180px; }
+}
+
   </style>
 </head>
 <body>
@@ -443,21 +533,53 @@
           <header><h3>Cardamom (Kapulaga)</h3></header>
           <p>Effective spice for digestive stimulation and breath freshening, providing premium aroma to Jamu blends.</p>
         </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/Cloves.jpg' %}" alt="Cloves" /></a>
+          <header><h3>Cloves (Cengkeh)</h3></header>
+          <p>Aromatic flower buds with powerful antibacterial properties, excellent for oral health and digestive stimulation.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/SappanWood.jpg' %}" alt="Sappan Wood" /></a>
+          <header><h3>Sappan Wood (Kayu Secang)</h3></header>
+          <p>Traditional red wood that enhances blood circulation and provides rich antioxidants with distinctive red coloring.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackCumin.jpg' %}" alt="Black Cumin" /></a>
+          <header><h3>Black Cumin (Jinten Hitam)</h3></header>
+          <p>Powerful immunity booster known for respiratory health benefits and comprehensive wellness support.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BlackTurmeric.jpg' %}" alt="Black Turmeric" /></a>
+          <header><h3>Black Turmeric (Temu Ireng)</h3></header>
+          <p>Rare and precious ingredient for blood purification, cholesterol reduction, and deep detoxification processes.</p>
+        </article>
+
+        <article>
+          <a href="#" class="image featured"><img src="{% static 'c2/images/BayLeaves.jpg' %}" alt="Bay Leaves" /></a>
+          <header><h3>Bay Leaves (Daun Salam)</h3></header>
+          <p>Indonesian aromatic leaves that support blood sugar control and enhance digestive health naturally.</p>
+        </article>
       </div>
       <button class="next">&#10095;</button>
     </div>
   </section>
 
-  <!-- Top 3 Representative Jamu Drinks - 새로운 스타일 -->
-  <section class="top-drinks-section">
-    <div class="top-drinks-container">
-      <div class="top-drinks-header">
-        <h2>Top 3 Representative Jamu Drinks</h2>
-        <p>Discover the balance of body and mind through nature's healing power</p>
-      </div>
-      
-      <div class="drinks-grid">
-        <div class="drink-card">
+  <section class="top-drinks-section carousel">
+  <div class="top-drinks-container">
+    <div class="top-drinks-header">
+      <h2>Top 6 Representative Jamu Drinks</h2>
+      <p>Discover the balance of body and mind through nature's healing power</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="prev">&#10094;</button>
+      <div class="reel">
+
+        <article class="drink-card">
           <img src="{% static 'c2/images/BerasKencur.jpg' %}" alt="Beras Kencur" class="drink-image" />
           <div class="drink-info">
             <h3>Beras Kencur</h3>
@@ -466,11 +588,13 @@
               <span class="benefit-tag">Fatigue Relief</span>
               <span class="benefit-tag">Pain Relief</span>
             </div>
-            <p class="drink-description">Beras Kencur is an energizing Indonesian herbal drink made from rice, galangal, ginger, and turmeric that provides natural energy boost and relieves fatigue, cough, and body aches with its sweet, refreshing taste and mild spicy kick.</p>
+            <p class="drink-description">
+              Beras Kencur is an energizing Indonesian herbal drink made from rice, galangal, ginger, and turmeric that provides natural energy boost and relieves fatigue, cough, and body aches with its sweet, refreshing taste and mild spicy kick.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="drink-card">
+        <article class="drink-card">
           <img src="{% static 'c2/images/KunyitAsem.png' %}" alt="Kunyit Asem" class="drink-image" />
           <div class="drink-info">
             <h3>Kunyit Asem</h3>
@@ -479,11 +603,13 @@
               <span class="benefit-tag">Menstrual Relief</span>
               <span class="benefit-tag">Detox</span>
             </div>
-            <p class="drink-description">Kunyit Asem is a digestive harmony drink featuring turmeric, tamarind, and palm sugar that improves digestion, regulates menstruation, and relieves stomach issues with its perfectly balanced tangy-sweet flavor enhanced by subtle turmeric aroma.</p>
+            <p class="drink-description">
+              Kunyit Asem is a digestive harmony drink featuring turmeric, tamarind, and palm sugar that improves digestion, regulates menstruation, and relieves stomach issues with its perfectly balanced tangy-sweet flavor enhanced by subtle turmeric aroma.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="drink-card">
+        <article class="drink-card">
           <img src="{% static 'c2/images/Temulawak.jpg' %}" alt="Temulawak" class="drink-image" />
           <div class="drink-info">
             <h3>Temulawak</h3>
@@ -492,86 +618,184 @@
               <span class="benefit-tag">Immunity Boost</span>
               <span class="benefit-tag">Relaxation</span>
             </div>
-            <p class="drink-description">Temulawak is a relaxation and recovery drink made from Javanese turmeric, regular turmeric, and ginger that promotes stress relief, better sleep, and immunity boost with its complex bitter-sweet flavor that embodies nature's healing power.</p>
+            <p class="drink-description">
+              Temulawak is a relaxation and recovery drink made from Javanese turmeric, regular turmeric, and ginger that promotes stress relief, better sleep, and immunity boost with its complex bitter-sweet flavor that embodies nature's healing power.
+            </p>
           </div>
-        </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/EmponEmpon.jpg' %}" alt="Empon-Empon" class="drink-image" />
+          <div class="drink-info">
+            <h3>Empon-Empon</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Complete Immunity</span>
+              <span class="benefit-tag">Antioxidant Rich</span>
+              <span class="benefit-tag">Overall Wellness</span>
+            </div>
+            <p class="drink-description">
+              Empon-Empon is the ultimate comprehensive herbal blend featuring temulawak, turmeric, red ginger, lemongrass, cardamom, cloves, and cinnamon that provides maximum immunity support and overall health benefits with its complex, warming flavor profile.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/WedangUwuh.jpg' %}" alt="Wedang Uwuh" class="drink-image" />
+          <div class="drink-info">
+            <h3>Wedang Uwuh</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Body Warming</span>
+              <span class="benefit-tag">Blood Circulation</span>
+              <span class="benefit-tag">Cold Prevention</span>
+            </div>
+            <p class="drink-description">
+              Wedang Uwuh is a traditional Yogyakarta warm spice drink made from sappan wood, lemongrass, cardamom, cloves, black cumin, cinnamon, and ginger that promotes blood circulation and body warmth with its distinctive deep red color and rich spice aroma.
+            </p>
+          </div>
+        </article>
+
+        <article class="drink-card">
+          <img src="{% static 'c2/images/TemuIreng.jpg' %}" alt="Temu Ireng" class="drink-image" />
+          <div class="drink-info">
+            <h3>Jamu Temu Ireng</h3>
+            <div class="drink-benefits">
+              <span class="benefit-tag">Blood Purification</span>
+              <span class="benefit-tag">Cholesterol Control</span>
+              <span class="benefit-tag">Detoxification</span>
+            </div>
+            <p class="drink-description">
+              Jamu Temu Ireng is a specialized healing drink featuring rare black turmeric, ginger, bay leaves, sappan wood, and black cumin that supports blood purification, cholesterol reduction, and deep detoxification with its potent, earthy flavor and therapeutic properties.
+            </p>
+          </div>
+        </article>
+
       </div>
+      <button class="next">&#10095;</button>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const reel = document.querySelector('.carousel .reel');
-      const prevBtn = document.querySelector('.carousel-wrapper .prev');
-      const nextBtn = document.querySelector('.carousel-wrapper .next');
-      
-      let currentIndex = 0;
-      const itemWidth = 280; // 카드 너비 + 여백
-      const itemsToShow = Math.floor(window.innerWidth / itemWidth);
-      const totalItems = reel.children.length;
-      const maxIndex = Math.max(0, totalItems - itemsToShow);
+  document.addEventListener("DOMContentLoaded", function () {
+    const reel = document.querySelector('.carousel .reel');
+    const wrapper = document.querySelector('.carousel-wrapper');
+    const prevBtn = document.querySelector('.carousel-wrapper .prev');
+    const nextBtn = document.querySelector('.carousel-wrapper .next');
 
-      function updateCarousel() {
-        const translateX = -currentIndex * itemWidth;
-        reel.style.transform = `translateX(${translateX}px)`;
-        
-        // 버튼 상태 업데이트
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-      }
+    let offset = 0;           // 현재 이동 픽셀
+    let step = 0;             // 한 번에 이동할 카드 폭
+    let maxOffset = 0;        // 마지막 카드까지 보이도록 허용되는 최대 이동량
 
-      // 이전 버튼 클릭
-      prevBtn.addEventListener("click", function () {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
-        }
-      });
+    function getItemWidth() {
+      const first = reel.children[0];
+      if (!first) return 0;
+      const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
 
-      // 다음 버튼 클릭
-      nextBtn.addEventListener("click", function () {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-          updateCarousel();
-        }
-      });
+    function recalc() {
+      step = getItemWidth();
+      // 마지막 카드까지 wrapper 안에 딱 맞게 보이도록 최대 이동량 계산
+      maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+      if (offset > maxOffset) offset = maxOffset;
+    }
 
-      // 자동 슬라이드
-      let autoSlideInterval = setInterval(function() {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      }, 3000);
+    function update() {
+      reel.style.transform = `translateX(${-offset}px)`;
+      prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+      nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+    }
 
-      // 마우스 hover 시 자동 슬라이드 정지
-      reel.addEventListener("mouseenter", () => {
-        clearInterval(autoSlideInterval);
-      });
-
-      reel.addEventListener("mouseleave", () => {
-        autoSlideInterval = setInterval(function() {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-          } else {
-            currentIndex = 0;
-          }
-          updateCarousel();
-        }, 3000);
-      });
-
-      // 반응형 대응
-      window.addEventListener('resize', function() {
-        currentIndex = 0;
-        updateCarousel();
-      });
-
-      // 초기 설정
-      updateCarousel();
+    prevBtn.addEventListener("click", function () {
+      offset = Math.max(0, offset - step);
+      update();
     });
-  </script>
+
+    nextBtn.addEventListener("click", function () {
+      offset = Math.min(maxOffset, offset + step);
+      update();
+    });
+
+    let auto;
+    function startAuto() {
+      stopAuto();
+      auto = setInterval(function () {
+        offset = offset < maxOffset ? Math.min(maxOffset, offset + step) : 0;
+        update();
+      }, 3000);
+    }
+    function stopAuto(){ if (auto) clearInterval(auto); }
+
+    reel.addEventListener("mouseenter", stopAuto);
+    reel.addEventListener("mouseleave", startAuto);
+
+    window.addEventListener('resize', function () {
+      recalc();
+      update();
+    });
+
+    // 초기화
+    recalc();
+    update();
+    startAuto();
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const scope = document.querySelector('.top-drinks-section.carousel');
+  if (!scope) return;
+
+  const reel    = scope.querySelector('.reel');
+  const wrapper = scope.querySelector('.carousel-wrapper');
+  const prevBtn = scope.querySelector('.prev');
+  const nextBtn = scope.querySelector('.next');
+
+  let offset = 0;   // 현재 이동 픽셀
+  let step = 0;     // 클릭 시 이동량(카드 1장의 폭 + gap)
+  let maxOffset = 0;
+
+  function getStep() {
+    const first = reel.querySelector('.drink-card');
+    if (!first) return 0;
+    const gap = parseFloat(getComputedStyle(reel).gap) || 0;
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function recalc() {
+    step = getStep();
+    // 마지막 카드가 딱 맞게 보이도록 최대 이동량 계산
+    maxOffset = Math.max(0, reel.scrollWidth - wrapper.clientWidth);
+    if (offset > maxOffset) offset = maxOffset;
+  }
+
+  function update() {
+    reel.style.transform = `translateX(${-offset}px)`;
+    prevBtn.style.opacity = offset <= 0 ? '0.5' : '1';
+    nextBtn.style.opacity = offset >= maxOffset ? '0.5' : '1';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    offset = Math.max(0, offset - step);
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    offset = Math.min(maxOffset, offset + step);
+    update();
+  });
+
+  // 반응형 대응
+  window.addEventListener('resize', () => { recalc(); update(); });
+
+  // 초기화
+  recalc();
+  update();
+});
+</script>
+
+
 
   <!-- Scripts -->
   <script src="{% static 'c2/assets/js/jquery.min.js' %}"></script>
