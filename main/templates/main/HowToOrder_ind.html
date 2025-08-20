@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>How to Order Jamu</title>
+  <title>Cara Memesan Jamu</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -46,7 +46,7 @@
     }
     .howto-sub{
       font-family:'Alkatra', cursive;
-      font-size: clamp(14px, 2.6vw, 18px);
+      font-size: clamp(24px, 3.5vw, 28px);
       color: var(--muted);
       margin:0;
     }
@@ -80,18 +80,18 @@
 
     .step{
       display:grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 150px 1fr;
       align-items:center;
       gap:16px;
       background:#fff;
       border-radius:12px;
-      padding:16px;
+      padding:20px;
       box-shadow:0 4px 12px rgba(0,0,0,.05);
     }
 
     .step img{
-      width:60px;
-      height:60px;
+      width:120px;
+      height:120px;
       object-fit: contain;
       border-radius:10px;
       background:#f3f3f3;
@@ -100,14 +100,14 @@
 
     .step h3{
       margin:0;
-      font-size: clamp(16px, 2.6vw, 20px);
+      font-size: clamp(20px, 2.6vw, 24px);
       font-weight:700;
       line-height:1.25;
     }
     .step p{
       margin:4px 0 0;
       color:#555;
-      font-size: clamp(13px, 2.4vw, 15px);
+      font-size: clamp(18px, 2.6vw, 18px);
       line-height:1.5;
     }
 
@@ -139,12 +139,12 @@
 									</ul>
 								</li>
 							</ul>
-						</nav>
+						</nav> 
     <br><br><br>
 
     <header class="howto-header">
       <h1 class="howto-title">Cara Memesan Jamu</h1>
-      <p class="howto-sub">Ikuti langkah-langkah sederhana ini untuk menggunakan mesin penjual Jamu.</p>
+      <p class="howto-sub">Ikuti langkah sederhana ini untuk menggunakan dispenser Mendjamoo.</p>
     </header> 
     <br>
 
@@ -156,32 +156,40 @@
            alt="Jamu Dispenser"/>
 
       <!-- 3 Steps -->
-      <section class="steps">
+      <!-- 3 Steps -->
+<section class="steps">
   <div class="step">
-    <img src="{% static 'c2/images/step1_button.png' %}" alt="Tekan Tombol" loading="lazy" decoding="async">
+    <img src="{% static 'c2/images/step1.jpg' %}" alt="Tekan Tombol" loading="lazy" decoding="async">
     <div>
-      <h3>Langkah 1 – Tekan Tombol</h3>
-      <p>Mulai pesanan Anda dengan menekan tombol start pada dispenser.</p>
+      <h3>Langkah 1 – Sudah tahu apa yang Anda inginkan?</h3>
+      <p>Jika belum, pindai kode QR untuk mendapatkan rekomendasi Jamu pribadi Anda.</p>
     </div>
   </div>
 
   <div class="step">
-    <img src="{% static 'c2/images/step2_menu.png' %}" alt="Pilih Jamu" loading="lazy" decoding="async">
+    <img src="{% static 'c2/images/step2.jpg' %}" alt="Pilih Jamu" loading="lazy" decoding="async">
     <div>
-      <h3>Langkah 2 – Pilih Jamu Anda</h3>
-      <p>Pilih rasa jamu yang Anda sukai dari opsi yang tersedia.</p>
+      <h3>Langkah 2 – Ambil gelas dan letakkan di nampan</h3>
+      <p>Tempat Jamu Anda akan dituangkan.</p>
     </div>
   </div>
 
   <div class="step">
-    <img src="{% static 'c2/images/step3_drink.png' %}" alt="Nikmati Jamu" loading="lazy" decoding="async">
+    <img src="{% static 'c2/images/step3.jpg' %}" alt="Nikmati Jamu" loading="lazy" decoding="async">
     <div>
-      <h3>Langkah 3 – Nikmati!</h3>
-      <p>Letakkan cangkir Anda dengan benar, tunggu hingga jamu keluar, lalu nikmati jamu segar Anda.</p>
+      <h3>Langkah 3 – Pilih Jamu Anda</h3>
+      <p>Tekan tombol kiri atau kanan untuk menggulir pilihan, lalu tekan tombol tengah untuk memulai.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <img src="{% static 'c2/images/step4.jpg' %}" alt="Tunggu" loading="lazy" decoding="async">
+    <div>
+      <h3>Langkah 4 – Tunggu sebentar</h3>
+      <p>Jamu Anda akan segera siap!</p>
     </div>
   </div>
 </section>
-
     </div>
 
   </main>

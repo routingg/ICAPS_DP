@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>How to Order Jamu</title>
+  <title>자무 주문 방법</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -30,7 +30,7 @@
       margin:0;
       color:var(--ink);
       background:var(--bg);
-      font-family:'Pretendard', sans-serif;
+      font-family:'Pretendard', serif;
     }
 
     .howto-wrap{
@@ -41,14 +41,15 @@
 
     .howto-header{ text-align:center; margin-bottom:28px; }
     .howto-title{
-      font-family:'Alkatra', cursive;
+      font-family:'Pretendard', cursive;
+      font-weight: bold;
       font-size: clamp(26px, 5vw, 40px);
       margin:0 0 6px;
       line-height:1.2;
     }
     .howto-sub{
-      font-family:'Alkatra', cursive;
-      font-size: clamp(14px, 2.6vw, 18px);
+      font-family:'Pretendard', cursive;
+      font-size: clamp(24px, 3.5vw, 28px);
       color: var(--muted);
       margin:0;
     }
@@ -82,18 +83,18 @@
 
     .step{
       display:grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 150px 1fr;
       align-items:center;
       gap:16px;
       background:#fff;
       border-radius:12px;
-      padding:16px;
+      padding:20px;
       box-shadow:0 4px 12px rgba(0,0,0,.05);
     }
 
     .step img{
-      width:60px;
-      height:60px;
+      width:120px;
+      height:120px;
       object-fit: contain;
       border-radius:10px;
       background:#f3f3f3;
@@ -102,14 +103,14 @@
 
     .step h3{
       margin:0;
-      font-size: clamp(16px, 2.6vw, 20px);
+      font-size: clamp(20px, 2.6vw, 24px);
       font-weight:700;
       line-height:1.25;
     }
     .step p{
       margin:4px 0 0;
       color:#555;
-      font-size: clamp(13px, 2.4vw, 15px);
+      font-size: clamp(18px, 2.6vw, 18px);
       line-height:1.5;
     }
 
@@ -144,9 +145,9 @@
 						</nav>
     <br><br><br>
 
-    <header class="howto-header" style="font-family: 'Pretendard', sans-serif;">
-      <h1 class="howto-title" style="font-family: 'Pretendard', sans-serif; font-weight: bold;">자무 자판기 사용방법</h1>
-      <p class="howto-sub" style="font-family: 'Pretendard', sans-serif;">다음 단계를 따라 자무 자판기를 사용하세요.</p>
+    <header class="howto-header">
+      <h1 class="howto-title">자무 주문 방법</h1>
+      <p class="howto-sub">다음 간단한 단계를 따라 Mendjamoo 서비스를 이용해보세요!</p>
     </header> 
     <br>
 
@@ -159,32 +160,37 @@
 
       <!-- 3 Steps -->
       <section class="steps">
-  <div class="step">
-    <img src="{% static 'c2/images/step1_button.png' %}" alt="버튼 누르기" loading="lazy" decoding="async">
-    <div>
-      <h3 style="font-family: 'Pretendard', sans-serif;">1단계 – 버튼 누르기</h3>
-      <p style="font-family: 'Pretendard', sans-serif;">디스펜서의 시작 버튼을 눌러 주문을 시작하세요.</p>
-    </div>
-  </div>
+        <div class="step">
+          <img src="{% static 'c2/images/step1.jpg' %}" alt="Press Button" loading="lazy" decoding="async">
+          <div>
+            <h3>1단계 – 원하는 음료가 있나요?</h3>
+            <p>원하는 음료가 없다면 QR 코드를 스캔하여 개인 맞춤형 자무를 추천 받아보세요.</p>
+          </div>
+        </div>
 
-  <div class="step" style="font-family: 'Pretendard', sans-serif;">
-    <img src="{% static 'c2/images/step2_menu.png' %}" alt="자무 선택하기" loading="lazy" decoding="async">
-    <div>
-      <h3>2단계 – 자무 선택하기</h3>
-      <p>제공된 옵션 중에서 원하는 자무 맛을 선택하세요.</p>
-    </div>
-  </div>
+        <div class="step">
+          <img src="{% static 'c2/images/step2.jpg' %}" alt="Choose Jamu" loading="lazy" decoding="async">
+          <div>
+            <h3>2단계 – 자판기 상단 컵을 들어 트레이 위에 올려두세요.</h3>
+            <p>자무가 추출되는 위치입니다.</p>
+          </div>
+        </div>
 
-  <div class="step">
-    <img src="{% static 'c2/images/step3_drink.png' %}" alt="자무 즐기기" loading="lazy" decoding="async">
-    <div>
-      <h3>3단계 – 즐기기!</h3>
-      <p>컵을 올바르게 놓고, 자무가 나올 때까지 기다린 후 건강한 자무를 즐기세요.</p>
-    </div>
-  </div>
-</section>
-
-
+        <div class="step">
+          <img src="{% static 'c2/images/step3.jpg' %}" alt="Enjoy Jamu" loading="lazy" decoding="async">
+          <div>
+            <h3>3단계 – 원하는 자무를 선택하세요.</h3>
+            <p>왼쪽 또는 오른쪽 버튼을 눌러 옵션을 스크롤한 후, 가운데 버튼을 선택하세요.</p>
+          </div>
+        </div>
+        <div class="step">
+          <img src="{% static 'c2/images/step4.jpg' %}" alt="Wait" loading="lazy" decoding="async">
+          <div>
+            <h3>4단계 – 잠시만 기다려주세요.</h3>
+            <p>곧 훌륭한 자무가 준비됩니다!</p>
+          </div>
+        </div>
+      </section>
     </div>
 
   </main>
